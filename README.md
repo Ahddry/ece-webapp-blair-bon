@@ -3,7 +3,7 @@
 ## Contributeurs
 
 - Adrien Blair [@Ahddry](https://github.com/Ahddry)
-- Aurélien Bon [@Aurelien-Bon](https://github.com/Ahddry)
+- Aurélien Bon [@Aurelien-Bon](https://github.com/Aurelien-Bon)
 
 ## Informations générales
 
