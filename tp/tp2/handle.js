@@ -1,6 +1,6 @@
 const url = require('url')
 const qs = require('querystring');
-const { isAbsolute } = require('path');
+
 //* Oui je me suis chauffé pour rien du tout mais c'est joli.
 const debut = '<!DOCTYPE html>' +
         '<html>'+
@@ -31,7 +31,9 @@ const index = 'Cette application veut vous dire <b>BONJOUR</b> !<br>' +
               'Certaines personnes sont assez connues par ici. Allez donc jetter un coup d\'oeil à leurs pages !' +
               '<ul><li><a href="http://localhost:8080/hello?name=Adrien">Adrien</a>' +
               '<li><a href="http://localhost:8080/hello?name=Aurelien">Aurélien</a>' +
-              '<li><a href="http://localhost:8080/hello?name=Tosca">🐶</a></ul>';
+              '<li><a href="http://localhost:8080/hello?name=Tosca">🐶</a></ul><br><br>' +
+              'De plus vous pouvez ouvrir et lire les fichiers <a>.json</a> enregistrés dans le dossier <a>content</a> en rajoutant le nom de votre fichier après l\'adresse <a href="http://localhost:8080/">http://localhost:8080/</a><br>' +
+              'Essayer par exemple avec le fichier <a href="http://localhost:8080/about">about</a> ou <a href="http://localhost:8080/">coccinelle 🐞</a> !';
 
 module.exports =
 {
@@ -68,16 +70,14 @@ module.exports =
         }
         else if (path === '/about')
         {
-          // https://stackoverflow.com/q/7163061/20114541
-
           res.writeHead(200, {'Content-Type': 'application/json'});
           var jsonData = require('./content/about.json')
-          res.write(debut+paragraphe);
+          res.write(debut + 'Contenu du fichier about.json' + paragraphe);
           for(var key in jsonData)
           {
-            res.write(key+': '+jsonData[key]+'<br>');
+            res.write(key + ': ' + jsonData[key] + '<br>');
           }
-
+          res.write(fin);
         }
         else if (path === '/')
         {
@@ -89,7 +89,7 @@ module.exports =
           let jsonData
           try
           {
-            jsonData = require('./content/'+file[1]+'.json')
+            jsonData = require('./content/' + file[1]+ '.json')
           }catch(error)
           {
             console.error(error);
@@ -97,10 +97,10 @@ module.exports =
           console.log(jsonData)
           if(jsonData!=null)
           {
-            res.write(debut+'Conenue du fichier '+file[1]+'.json'+paragraphe);
+            res.write(debut + 'Contenu du fichier ' + file[1] + '.json' + paragraphe);
             for(var key in jsonData)
             {
-              res.write(key+': '+jsonData[key]+'<br>');
+              res.write(key + ': ' + jsonData[key] + '<br>');
             }
             res.write(fin);
           }
