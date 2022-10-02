@@ -70,19 +70,14 @@ module.exports =
         {
           // https://stackoverflow.com/q/7163061/20114541
 
-          res.writeHead(200, {'Content-Type': 'application/json'});
-          /*const contenu = require('./content/about.json');
-          res.write(contenu);
-          */
-          const fs = require('fs')
-          let jsonData = {}
-          fs.readFile('./content/about.json', 'utf-8', (err, data) =>
+          res.writeHead(200, {'Content-Type': 'text/html'});
+          var jsonData = require('./content/about.json')
+          res.write(debut+paragraphe);
+          for(var key in jsonData)
           {
-            if (err) throw err
-            jsonData = JSON.parse(data)
-            console.log(jsonData);
-            res.write(JSON.stringify(jsonData));
-          });
+            res.write(key+': '+jsonData[key]+'<br>');
+          }
+
         }
         else if (path === '/')
         {
@@ -90,7 +85,30 @@ module.exports =
         }
         else
         {
-          res.write(debut + 'Erreur 404.' + paragraphe + 'La page que vous avez demandé n\'existe pas :(' + fin);
+          const file=path.split('/');
+          let jsonData
+          try
+          {
+            jsonData = require('./content/'+file[1]+'.json')
+          }catch(error)
+          {
+            console.error(error);
+          }
+          console.log(jsonData)
+          if(jsonData!=null)
+          {
+            res.write(debut+'Conenue du fichier '+file[1]+'.json'+paragraphe);
+            for(var key in jsonData)
+            {
+              console.log('zz')
+              res.write(key+': '+jsonData[key]+'<br>');
+            }
+            res.write(fin);
+          }
+          else
+          {
+            res.write(debut + 'Erreur 404.' + paragraphe + 'La page que vous avez demandé n\'existe pas :(' + fin);
+          }
         }
         res.end();
     }
