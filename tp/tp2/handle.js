@@ -70,7 +70,7 @@ module.exports =
         {
           // https://stackoverflow.com/q/7163061/20114541
 
-          res.writeHead(200, {'Content-Type': 'text/html'});
+          res.writeHead(200, {'Content-Type': 'application/json'});
           var jsonData = require('./content/about.json')
           res.write(debut+paragraphe);
           for(var key in jsonData)
@@ -100,7 +100,6 @@ module.exports =
             res.write(debut+'Conenue du fichier '+file[1]+'.json'+paragraphe);
             for(var key in jsonData)
             {
-              console.log('zz')
               res.write(key+': '+jsonData[key]+'<br>');
             }
             res.write(fin);
