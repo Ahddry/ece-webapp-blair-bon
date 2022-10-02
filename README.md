@@ -7,8 +7,8 @@
 
 ## Informations générales
 
-|Durée|~30 heure|
-|---|---|
+|Durée|~30 heures|
+|---  |---       |
 
 ### Langages et outils utilisés
 
