@@ -33,7 +33,7 @@ const index = 'Cette application veut vous dire <b>BONJOUR</b> !<br>' +
               '<li><a href="http://localhost:8080/hello?name=Aurelien">Aurélien</a>' +
               '<li><a href="http://localhost:8080/hello?name=Tosca">🐶</a></ul><br><br>' +
               'De plus vous pouvez ouvrir et lire les fichiers <a>.json</a> enregistrés dans le dossier <a>content</a> en rajoutant le nom de votre fichier après l\'adresse <a href="http://localhost:8080/">http://localhost:8080/</a><br>' +
-              'Essayer par exemple avec le fichier <a href="http://localhost:8080/about">about</a> ou <a href="http://localhost:8080/">coccinelle 🐞</a> !';
+              'Essayez par exemple avec le fichier <a href="http://localhost:8080/about">about</a> ou <a href="http://localhost:8080/coccinelle">coccinelle 🐞</a> !';
 
 module.exports =
 {
@@ -70,7 +70,10 @@ module.exports =
         }
         else if (path === '/about')
         {
-          res.writeHead(200, {'Content-Type': 'application/json'});
+          //*Le content type si dessous est celui normalement approprié pour l'affichage brut de fichiers .json,
+          //*cependant nous les affichons dans une page html donc le type html est requis.
+          //res.writeHead(200, {'Content-Type': 'application/json'});
+          res.writeHead(200, {'Content-Type': 'text/html'});
           var jsonData = require('./content/about.json')
           res.write(debut + 'Contenu du fichier about.json' + paragraphe);
           for(var key in jsonData)
