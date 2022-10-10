@@ -20,10 +20,13 @@ const port = normalizePort(process.env.PORT || '8080'); //port par défaut: 8080
 
 // Attribution des routes
 const hello = require('./routes/hello')
+const articles = require('./routes/articles')
 const root = require('./routes/root')
 
+app.use("/articles", articles);
 app.use("/hello", hello);
 app.use("/", root);
+
 
 // Lancement du serveur
 app.listen(port, _ => console.log(`Server running at ${port} - http://localhost:${port}/`))
