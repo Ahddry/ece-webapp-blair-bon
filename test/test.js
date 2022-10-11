@@ -1,6 +1,8 @@
+// Chargement de l'application
 const app = require('../index.js')
 const request = require('supertest')
 
+// Test de la route par défaut
 describe('GET /', _ =>
 {
     it('should return 200 OK', done =>
@@ -11,6 +13,7 @@ describe('GET /', _ =>
     })
 })
 
+// Test de la route /hello
 describe('GET /hello', _ =>
 {
     it('should return 200 OK', done =>
@@ -21,6 +24,7 @@ describe('GET /hello', _ =>
     })
 })
 
+// Test de la route /hello avec paramètre name
 describe('GET /hello/:name', _ =>
 {
     it('should return 200 OK', done =>
@@ -31,7 +35,7 @@ describe('GET /hello/:name', _ =>
     })
 })
 
-
+// Test de la route /articles
 describe('GET /articles', _ =>
 {
     it('should return 200 OK', done =>
@@ -42,6 +46,7 @@ describe('GET /articles', _ =>
     })
 })
 
+// Test de la route /articles avec paramètre id
 describe('GET /articles/:id', _ =>
 {
     it('should return 200 OK', done =>
@@ -52,6 +57,7 @@ describe('GET /articles/:id', _ =>
     })
 })
 
+// Test de post sur la route /articles
 describe('POST /articles', _ =>
 {
     it('should return 201 CREATED', done =>
@@ -63,6 +69,7 @@ describe('POST /articles', _ =>
     })
 })
 
+// Test de la route /comments issue de la route /articles/:id
 describe('GET /articles/:id/comments', _ =>
 {
     it('should return 200 OK', done =>
@@ -73,6 +80,7 @@ describe('GET /articles/:id/comments', _ =>
     })
 })
 
+// Test de post sur la route /comments issue de la route /articles/:id
 describe('POST /articles/:id/comments', _ =>
 {
     it('should return 201 CREATED', done =>
@@ -83,6 +91,7 @@ describe('POST /articles/:id/comments', _ =>
     })
 })
 
+// Test de la route /comments avec paramètre id issue de la route /articles/:id/
 describe('GET /articles/:id/comments/:id', _ =>
 {
     it('should return 200 OK', done =>
@@ -94,6 +103,7 @@ describe('GET /articles/:id/comments/:id', _ =>
 })
 
 //Cas avec des erreurs
+// Test d'une route inexistante
 describe('GET /unknown', _ =>
 {
     it('should return 404 NOT FOUND', done =>
@@ -104,7 +114,7 @@ describe('GET /unknown', _ =>
     })
 })
 
-
+// Test d'une route avec un article inconnu
 describe('GET /articles/:id', _ =>
 {
     it('should return 404 NOT FOUND', done =>
@@ -115,6 +125,7 @@ describe('GET /articles/:id', _ =>
     })
 })
 
+// Test de post sur la route /articles avec un article non conforme
 describe('POST /articles', _ =>
 {
     it('should return 400 BAD REQUEST', done =>
@@ -126,6 +137,7 @@ describe('POST /articles', _ =>
     })
 })
 
+// Test d'une route avec un commentaire inconnu
 describe('GET /articles/:id/comments/:id', _ =>
 {
     it('should return 404 NOT FOUND', done =>
@@ -136,6 +148,7 @@ describe('GET /articles/:id/comments/:id', _ =>
     })
 })
 
+// Test de post sur la route /comments issue de la route /articles/:id avec un commentaire non conforme
 describe('POST /articles/:id/comments', _ =>
 {
     it('should return 400 BAD REQUEST', done =>

@@ -28,13 +28,14 @@ router.route('*').get((req, res) =>
                 {
                     contenu += key + ': ' + jsonData[key] + '<br>'
                 }
-                res.status(200).res.send(components.debut + 'Contenu du fichier ' + filePath[1] + '.json' + components.paragraphe + contenu + components.fin); //affichage du contenu du fichier JSON
+                res.status(200).send(components.debut + 'Contenu du fichier ' + filePath[1] + '.json' + components.paragraphe + contenu + components.fin); //affichage du contenu du fichier JSON
             }
             else
                 res.status(404).send(components.e404); //erreur 404
         }
         catch (e)
         {
+            console.warn('Fichier ' + filePath[1] + '.json non trouvé !');
             console.error(e)
             res.status(404).send(components.e404); //erreur 404
         }
