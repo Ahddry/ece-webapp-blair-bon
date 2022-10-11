@@ -29,4 +29,6 @@ app.use("/", root);
 
 
 // Lancement du serveur
-app.listen(port, _ => console.log(`Server running at ${port} - http://localhost:${port}/`))
+const serveur = app.listen(port, _ => console.log(`Server running at ${port} - http://localhost:${port}/`))
+
+module.exports = serveur

@@ -60,7 +60,7 @@ router.route('/').get((req, res) =>
     {
         liste += `${db.articles[article].title} (${db.articles[article].id})` + '<br>'
     }
-    res.send(components.debut + 'Liste des articles' + components.paragraphe + liste + components.fin);
+    res.status(200).send(components.debut + 'Liste des articles' + components.paragraphe + liste + components.fin);
 }).post((req, res) =>
 {
     //console.log("POST /articles")
@@ -72,10 +72,11 @@ router.route('/').get((req, res) =>
         if (article.id === undefined && article.title === undefined && article.content === undefined && article.date === undefined && article.author === undefined)
             throw "Article invalide";
         db.articles.push(article)
-        res.send('Article ajouté : ' + article.title );
+        res.status(201).send('Article ajouté : ' + article.title );
     }
     catch (e)
     {
+        res.status(400).send('Erreur : ' + e);
         console.error(e)
         console.log("Format incorect.")
     }
@@ -94,12 +95,12 @@ router.route('/:articleId').get((req, res) =>
         {
             contenu += key + ': ' + article[key] + '<br>'
         }
-        res.send(components.debut + 'Contenu de l\'article ' + article.title + components.paragraphe + contenu + components.fin); //affichage du contenu du fichier JSON
+        res.status(200).send(components.debut + 'Contenu de l\'article ' + article.title + components.paragraphe + contenu + components.fin); //affichage du contenu du fichier JSON
     }
     catch (e)
     {
-        console.error(e)
-        res.send(components.e404); //erreur 404
+        console.error(`Article introuvable : ${req.params.articleId}`)
+        res.status(404).send(components.e404); //erreur 404
     }
 });
 
@@ -121,17 +122,17 @@ router.route('/:articleId/comments/').get((req, res) =>
         }
         if (liste === "")
         {
-            res.send(components.debut + 'Aucun commentaire pour l\'article ' + article.title + components.fin);
+            res.status(404).send(components.debut + 'Aucun commentaire pour l\'article ' + article.title + components.fin);
         }
         else
         {
-            res.send(components.debut + 'Commentaires pour l\'article ' + article.title + components.paragraphe + liste + components.fin);
+            res.status(200).send(components.debut + 'Commentaires pour l\'article ' + article.title + components.paragraphe + liste + components.fin);
         }
     }
     catch (e)
     {
         console.error(e)
-        res.send(components.e404); //erreur 404
+        res.status(404).send(components.e404); //erreur 404
     }
 
 }).post((req, res) =>
@@ -147,10 +148,11 @@ router.route('/:articleId/comments/').get((req, res) =>
         if (comment.id === undefined && comment.timestamp === undefined && comment.content === undefined && comment.articleId === undefined && comment.author === undefined)
             throw "Commentaire invalide";
         db.comments.push(comment)
-        res.send('Article ajouté : ' + article.title );
+        res.status(201).send('Article ajouté : ' + article.title );
     }
     catch (e)
     {
+        res.status(400).send('Erreur : ' + e);
         console.error(e)
     }
 });
@@ -165,12 +167,13 @@ router.route('/:articleId/comments/:commentId').get((req, res) =>
         let comments = db.comments.filter(comment => comment.articleId === article.id)
         let comment = comments.find(comment => comment.id === req.params.commentId)
         const date = new Date(comment.timestamp)
-        res.send(components.debut + 'Commentaire ' + comment.id + ' pour l\'article ' + article.title + components.paragraphe + `À ${"Date: "+date.getDate()+"/"+(date.getMonth()+1)+ "/"+date.getFullYear()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()} par ${comment.author} : <br>${comment.content}<br><br>` + components.fin);
+        res.status(200).send(components.debut + 'Commentaire ' + comment.id + ' pour l\'article ' + article.title + components.paragraphe +
+        `À ${"Date: "+date.getDate()+"/"+(date.getMonth()+1)+ "/"+date.getFullYear()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()} par ${comment.author} : <br>${comment.content}<br><br>` + components.fin);
     }
     catch (e)
     {
         //console.error(e)
-        res.send(components.e404); //erreur 404
+        res.status(404).send(components.e404); //erreur 404
     }
 });
 
@@ -178,7 +181,7 @@ router.route('/:articleId/comments/:commentId').get((req, res) =>
 // Erreur 404
 router.route('*').get((req, res) =>
 {
-    res.send(components.e404);
+    res.status(404).send(components.e404); //erreur 404
 });
 
 module.exports = router;
