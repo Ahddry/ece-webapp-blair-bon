@@ -30,7 +30,7 @@ git clone https://github.com/Ahddry/ece-webapp-blair-bon
 Pour installer les dépendances via **nmp**, il faut ensuite exécuter la commande suivante :
 
 ```bash
-npm init
+npm install
 ```
 
 ## 3. Utilisation
