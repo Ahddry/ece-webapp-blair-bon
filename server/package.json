@@ -1,0 +1,21 @@
+{
+  "name": "ece-webapp-blair-bon",
+  "version": "0.2.0",
+  "description": "ece-webapp-blair-bon",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "develop": "nodemon index.js",
+    "test": "mocha"
+  },
+  "author": "Adrien BLAIR, Aurelien BON",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "mocha": "^10.0.0",
+    "nodemon": "^2.0.20",
+    "supertest": "^6.3.0"
+  }
+}
