@@ -1,0 +1,19 @@
+{
+  "name": "ece-webapp-blair-bon",
+  "version": "0.3.0",
+  "description": "ece-webapp-blair-bon",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "author": "Aurelien BON, Adrien BLAIR",
+  "license": "ISC",
+  "dependencies": {
+    "next": "^12.3.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
