@@ -2,7 +2,7 @@
 
 ## 1. Introduction
 
-Deuxième laboratoire de Technologies web SI portant sur la découverte et l'utilisation de **Node.js**.
+Troisième laboratoire de Technologies web SI portant sur la découverte et l'utilisation de **express**.
 
 ### État d'avancement
 
@@ -12,7 +12,7 @@ Cette application est actuelement capable de :
 2. Créer un serveur **express** lançant des scripts **Node.js**
 3. Rediriger l'utilisateur vers les bonnes routes pour afficher les pages adéquates
 4. Lire et afficher des fichiers **JSON**
-5. Recvoir des données de requêtes **POST**
+5. Recevoir des données de requêtes **POST**
 6. Tester automatiquement le bon fonctionnement des fonctionalités de l'application avec le framework de tests **Mocha** et le package **SuperTest**
 
 ### Fonctionnalités supplémentaires
