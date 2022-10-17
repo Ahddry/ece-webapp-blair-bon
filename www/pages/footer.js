@@ -20,7 +20,7 @@ function Footer() {
                     </a>
                     <span> ● </span>
                     <a href="https://github.com/adaltas/ece-webtech-2022-fall" >
-                        <FontAwesomeIcon id="icone-footer" icon={faGithub}></FontAwesomeIcon>Consignes
+                        <FontAwesomeIcon id="icone-footer" icon={faGithub}></FontAwesomeIcon> Consignes
                     </a>
                 </p>
             </div>

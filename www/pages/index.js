@@ -12,11 +12,17 @@ function HomePage()
                     <h1>Bienvenue !</h1>
                     <div >
                         <p>
-                            Cette application veut vous dire <b>BONJOUR</b> ! <br></br>
-                            Vous pouvez rester anonyme, auquel cas il suffit d'aller à cette adresse : <a href="http://localhost:8080/hello">localhost:8080/hello</a>,
-                            Pour cela, rien de plus simple, il suffit de rentrer cette adresse <a href="http://localhost:8080/hello?name=">localhost:8080/hello?name=</a>
-                            et de rajouter votre nom à la fin de celle-ci ! <a>test</a>
+                            Bienvenue sur notre site web ! <br></br>
+                            Vous pouvez naviguer à travers les différentes pages en utilisant le menu en haut de la page. <br></br>
+                            Vous pouvez aussi utiliser les liens suivants : <br></br>
                         </p>
+                        <ul>
+                            <li><a href="http://localhost:3000/articles">Liste des articles</a></li>
+                            <li><a href="http://localhost:3000/articles/myarticle">Un article en particulier</a></li>
+                            <li><a href="http://localhost:3000/contacts">Contacts</a></li>
+                            <li><a href="http://localhost:3000/about">À propos</a></li>
+                            <li><a href="http://localhost:3000/fzaifhazfiqs">Une page qui n'existe pas</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>

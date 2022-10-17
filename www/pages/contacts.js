@@ -13,11 +13,11 @@ function Contacts() {
         <div id="body">
             <div className="container">
             <h1>Contacts</h1>
-            <div >
+            <p >
                 Pour nous contacter, rien de plus simple ! <br></br>
                 Vous pouvez envoyer un mail soit à <a href="mailto:adrien.blair@edu.ece.fr"><FontAwesomeIcon icon={faEnvelope}></FontAwesomeIcon> Adrien</a> ou à <a href="mailto:aurelien.bon@edu.ece.fr"><FontAwesomeIcon icon={faEnvelope}></FontAwesomeIcon> Aurélien</a>.<br></br>
                 Vous pouvez aussi nous contacter sur notre <a href="https://github.com/Ahddry/ece-webapp-blair-bon/issues"><FontAwesomeIcon icon={faGithub}></FontAwesomeIcon> GitHub</a>.
-            </div>
+            </p>
             </div>
         </div>
         <Footer />

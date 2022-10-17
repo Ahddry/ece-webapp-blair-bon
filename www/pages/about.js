@@ -28,7 +28,7 @@ function About() {
                         <ol>
                             <li>Afficher des pages écrites en <b>React</b> à l'aide du framework <b>Next.js</b></li>
                             <li>Rediriger l'utilisateur vers les bonnes routes pour afficher les pages adéquates</li>
-                            <li>Lire et afficher des fichiers <b>JSON</b></li>
+                            <li>Rediriger vers des sous-pages de manière dynamique en vérifiant que celles-ci existent bien</li>
                             <li>Inclure des styles CSS variés</li>
                         </ol>
 
@@ -40,9 +40,7 @@ function About() {
 
                         <h3>Fonctionnalités à venir</h3>
                         <p>
-                            Nous développons actuellement les fonctionnalités de la partie 3 du TP : routage dynamique. <br></br>
-                            Nous avons aussi prévu d'ajouter une page de articles, référençant des articles que nous créerons comme exemple. <br></br>
-                            Nous avons aussi prévu d'ajouter des pages nous permettant de retrouver les fonctionnalités des TP précédents, nottament la partie <i>Hello</i>.
+                            Nous avons prévu d'ajouter des pages nous permettant de retrouver les fonctionnalités des TP précédents, nottament la partie <i>Hello</i>.
                         </p>
 
                         <h2>Contributeurs</h2>

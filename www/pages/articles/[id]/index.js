@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import E404 from "../../404";
 import db from "../../../content/db";
 
-
+// Page affichant un article en particulier
 function ArticlePage (){
     const router = useRouter()
     const id = String(router.query.id)
@@ -15,7 +15,7 @@ function ArticlePage (){
                 <Navbar />
                 <div id="body">
                     <div className="container">
-                        <h1>Article: {article.title}</h1>
+                        <h1>Article : {article.title}</h1>
                         <div >
                             <p>
                                 {article.content}
@@ -23,10 +23,10 @@ function ArticlePage (){
                         </div>
                         <div>
                             <p>
-                                <b>Author:</b> {article.author}
+                                <b>Auteur :</b> {article.author}
                             </p>
                             <p>
-                                <b>Date:</b> {article.date}
+                                <b>Date :</b> {article.date}
                             </p>
                         </div>
                     </div>
