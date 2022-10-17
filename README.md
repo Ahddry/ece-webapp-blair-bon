@@ -11,14 +11,15 @@ Le contenu créé pour les TP 1 à 3 est disponible dans le dossier [server](htt
 Cette application est actuelement capable de :
 
 1. Afficher des pages écrites en **React** à l'aide du framework **Next.js**
-2. Rediriger l'utilisateur vers les bonnes routes pour afficher les pages adéquates
-3. Lire et afficher des fichiers **JSON**
-4. Inclure des styles CSS variés
+2. Rediriger dynamiquement l'utilisateur vers les bonnes routes pour afficher les pages adéquates
+3. Inclure des styles CSS variés
 
 ### Fonctionnalités supplémentaires
 
 Pour compléter cette application, nous avons décidé d'y rajouter une couche d'**HTML** et de **CSS** à plusieurs thèmes, s'adaptant ainsi aux préférences de couleurs de l'utilisateur (clair ou sombre) afin d'en améliorer le rendu et la fluidité de navigation.
 Cette application comporte aussi des icônes **Font Awesome** pour améliorer la lisibilité et le rendu final.
+
+>Note : pour le moment le thème ne s'adapte qu'aux préférences du navigateur de l'utilisateur, un bouton permettant le passage d'un thème à l'autre existe dans la barre de navigation de l'application mais est pour le moment inactif.
 
 ## 2. Installation
 
@@ -70,9 +71,19 @@ Le port **3000** est assigné par défaut au serveur mais il se peut que celui-c
 
 ***
 
-A compléter.
+Une fois le serveur lancé, il faut aller à l'URL <http://localhost:3000> pour arriver sur la page d'accueil.
 
-## Contributeurs
+Aller à l'adresse <http://localhost:3000/articles> permet d'afficehr la liste des articles disponibles ainsi qu'un lien pour y accéder.
+
+Ouvrir l'adresse <http://localhost:3000/articles/myarticle> par exemple nous ouvre l'article d'id "myarticle".
+
+La page <http://localhost:3000/contacts> donne toutes les informations nécéssaires pour nous contacter.
+
+La page à l'adresse <http://localhost:3000/about> nous donne des informations sur l'application en elle-même.
+
+Si une adresse inconnue est rentrée, on est alors redirigé vers une page d'*erreur 404* nous indiquant que la page recherchée n'existe pas.
+
+## 4. Contributeurs
 
 - Adrien Blair [@Ahddry](https://github.com/Ahddry)
 - Aurélien Bon [@Aurelien-Bon](https://github.com/Aurelien-Bon)
