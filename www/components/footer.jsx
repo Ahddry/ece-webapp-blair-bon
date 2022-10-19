@@ -3,7 +3,8 @@ import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Pied de page affiché sur toutes les pages
-function Footer() {
+function Footer()
+{
     return (
       <div>
         <div id="vide"></div>
@@ -27,6 +28,6 @@ function Footer() {
         </footer>
       </div>
     );
-    }
+}
 
 export default Footer
