@@ -4,6 +4,7 @@ import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { CgClose } from "react-icons/cg";
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
+import logo from "../public/ECE_LOGO.png";
 
 // Barre de navigation affichée sur toutes les pages
 function Navbar() {
@@ -20,7 +21,7 @@ function Navbar() {
     return (
         <div>
             <nav id="BarrePrincipale" className="bg-background2 dark:bg-dark_background2 flex justify-between gap-10 drop-shadow-lg  md:drop-shadow-xl max-h-20 fixed w-full z-10">
-                <Image src="/ECE_LOGO.png" alt="Logo" width={130} height={100} className="cursor-pointer" />
+                <img src="ECE_LOGO.png" alt="Logo" width={171} height={88.5} className="cursor-pointer max-w-[171px]" />
                 <ul className="hidden md:flex md:items-center md:space-x-5 md:space-x-15 xl:space-x-22 mdfont-medium mx-auto">
                     <li className="hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1 md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl ">
                         <Link href="/#portfolio" className="cursor-pointer ">
@@ -88,7 +89,7 @@ function Navbar() {
                             </div>
                         </div>
                         <p>Développons.</p>
-                        <hr className="mb-2 mr-auto w-64 h-1 bg-gray-100 rounded border-0 dark:bg-gray-700"></hr>
+                        <hr className="mb-2 mr-auto w-64 h-1 bg-gray-300 rounded border-0 dark:bg-gray-700"></hr>
                         <div className="py-4 flex flex-col">
                             <ul className="space-y-4">
                                 <Link href="/#portfolio" className=" cursor-pointer">
@@ -106,7 +107,9 @@ function Navbar() {
                                 <Link href="/#experiences">
                                     <li onClick={(_) => setNav(false)}>Expériences</li>
                                 </Link>
-                                <hr className="my-4 mr-auto w-64 h-1 bg-gray-100 rounded border-0 dark:bg-gray-700"></hr>
+                            </ul>
+                            <hr className="my-4 mr-auto w-64 h-1 bg-gray-300 rounded border-0 dark:bg-gray-700"></hr>
+                            <ul className="space-y-4">
                                 <Link href="/contacts">
                                     <li onClick={(_) => setNav(false)}>Contact</li>
                                 </Link>
