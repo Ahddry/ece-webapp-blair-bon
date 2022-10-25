@@ -10,25 +10,22 @@ function ArticlePage() {
     try {
         let article = db.articles.find((article) => article.id === id);
         return (
-            <div>
-                <div id="body">
-                    <div className="container">
-                        <h1>Article : {article.title}</h1>
-                        <div>
+            <section className="flex items-center justify-between flex-col w-full h-screen  bg-background dark:bg-dark_background">
+                <div className="p-5 mt-12 min-w-[70%] space-y-5">
+                        <h1 className="pt-8 text-3xl font-extralight lg:text-5xl 2xl:text-7xl text-principale" >Article : {article.title}</h1>
+                        <div className="text-xs text-right">
+                            <p>
+                                <b>Auteur :</b> {article.author}   <b>Date :</b> {article.date}
+                            </p>
+                        </div>
+                        <div className="text-xl text-lg">
                             <p>{article.content}</p>
                         </div>
-                        <div>
-                            <p>
-                                <b>Auteur :</b> {article.author}
-                            </p>
-                            <p>
-                                <b>Date :</b> {article.date}
-                            </p>
-                        </div>
-                    </div>
                 </div>
-                <Footer />
-            </div>
+                <div className="bottom-0 mt-auto fixed w-full">
+                    <Footer />
+                </div>
+            </section>
         );
     } catch (e) {
         return <E404 />;
