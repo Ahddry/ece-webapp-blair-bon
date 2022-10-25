@@ -12,14 +12,84 @@ Cette application est actuelement capable de :
 
 1. Afficher des pages écrites en **React** à l'aide du framework **Next.js**
 2. Rediriger dynamiquement l'utilisateur vers les bonnes routes pour afficher les pages adéquates
-3. Inclure des styles CSS variés
+3. Inclure des styles Tailwind CSS variés
+4. Être réactive à la taille des appareils sur lesquels elle est affichée (responsive design)
 
 ### Fonctionnalités supplémentaires
 
-Pour compléter cette application, nous avons décidé d'y rajouter une couche d'**HTML** et de **CSS** à plusieurs thèmes, s'adaptant ainsi aux préférences de couleurs de l'utilisateur (clair ou sombre) afin d'en améliorer le rendu et la fluidité de navigation.
-Cette application comporte aussi des icônes **Font Awesome** pour améliorer la lisibilité et le rendu final.
+Pour compléter cette application, nous avons décidé d'y rajouter le package `next-themes` qui permet ainsi à l'utilisateur de modifier le thème de couleur (clair ou sombre) de l'application à sa guise, afin d'en améliorer le rendu et la fluidité de navigation.
 
->Note : pour le moment le thème ne s'adapte qu'aux préférences du navigateur de l'utilisateur, un bouton permettant le passage d'un thème à l'autre existe dans la barre de navigation de l'application mais est pour le moment inactif.
+Cette application comporte aussi des icônes **React Icons** pour améliorer la lisibilité et le rendu final.
+
+Une barre de navigation est affichée en haut et avec tous les liens vers d'autres pages pour les plus grads écrans, tandis que pour les plus petits ces liens sont regroupés dans un menu latéral à tiroirs.
+
+Les profils des personnes peuvent être modifiés de manières très simples puisqu'ils sont simplement définis dans des objets `JS` dans les fichiers `Adrien.jsx` et `Aurélien.jsx` comme suit :
+
+- Les profils sont définis par :
+
+```js
+const dataPersonne =
+{
+    prenom: "Prénom",
+    nom: "Nom",
+    age: "age",
+    image: "/image.jpg",
+    description: "Description de la personne",
+};
+
+```
+
+- Les compétences par :
+
+```js
+const compPersonne =
+{
+    langages:
+    [
+        ["Langage1", "/languages/LogoLangage1.png"],
+        ["Langage2", "/languages/LogoLangage2.png"],
+    ],
+    description:
+        "Description des compétences de la personne.",
+};
+
+```
+
+- Les projets réalisés par :
+
+```js
+const projPersonne =
+{
+    projets:
+    [
+        ["Nom du projet 1", "Outils utilisés", "/projects/projet1/projet1photo1.jpg"],
+        ["Nom du projet 2", "Outils utilisés", "/projects/projet2/projet2photo1.jpg"],
+    ],
+    description: "Description des projets de la personne.",
+};
+
+```
+
+- Les expériences par :
+
+```js
+const expPersonne =
+{
+    entreprises:
+    [
+        ["Nom de l'entreprise 1", "Date début - Date fin", "Descriptif poste 1", "/entreprises/logo1.png"],
+        ["Nom de l'entreprise 2", "Date début - Date fin", "Descriptif poste 2", "/entreprises/logo2.png"],
+    ],
+    description: "Description des expériences de la personne.",
+};
+
+```
+
+Il est donc très facile de modifier ces données et d'en ajouter, puisqu'elles sont passées en paramètre des éléments à afficher, ces derniers s'adapteront dynamiquement.
+
+### Fonctionnalités à venir
+
+Nous prévoyons de créer une route par projet ayant été réalisés, affichant ainsi une page décrivant en détail le dit projet. Cette page tirera ses données d'un fichier `JSON` avec nottament une liste de captures d'écran du projet, une liste des participants à ce projets, une liste des outils/langages utilisés, une description détaillée du projet et si possible un lien vers le GitHub du projet.
 
 ## 2. Installation
 
@@ -71,11 +141,14 @@ Le port **3000** est assigné par défaut au serveur mais il se peut que celui-c
 
 ***
 
-Une fois le serveur lancé, il faut aller à l'URL <http://localhost:3000> pour arriver sur la page d'accueil.
+Une fois le serveur lancé, il faut aller à l'URL <http://localhost:3000> pour arriver sur les portfolios d'Adrien et d'Aurélien. Cliquer sur l'un ou l'uatre des profils permet de changer le contenu du reste de la page par le portfolio de l'un ou de l'autre, montrant ainsi :
 
-Aller à l'adresse <http://localhost:3000/articles> permet d'afficehr la liste des articles disponibles ainsi qu'un lien pour y accéder.
+- Une brève description de la personne
+- Une présentation de ses compétences (langages de programmation qu'il maîtrise)
+- Une présentation des projets qu'il a pu réalisé
+- Une liste des entreprises où il a pu travailler
 
-Ouvrir l'adresse <http://localhost:3000/articles/myarticle> par exemple nous ouvre l'article d'id "myarticle".
+Aller à l'adresse <http://localhost:3000/articles> permet d'afficher la liste des articles disponibles ainsi qu'un lien pour y accéder.
 
 La page <http://localhost:3000/contacts> donne toutes les informations nécéssaires pour nous contacter.
 
