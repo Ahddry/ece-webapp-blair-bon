@@ -1,6 +1,7 @@
 import Footer from "../components/Footer";
 import db from "../content/db";
 const parse = require("html-react-parser");
+import env from "../next.config";
 
 // Page affichant la liste des articles
 function Articles() {
@@ -16,6 +17,7 @@ function Articles() {
                     {
                         parse(liste)
                     }
+                    <h1 className="pt-8 text-3xl font-extralight lg:text-5xl 2xl:text-7xl text-principale" >coucou {env.profile.login}.</h1>
                 </ul>
             </div>
             <div className="bottom-0 mt-auto fixed w-full">

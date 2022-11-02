@@ -18,6 +18,26 @@ function Navbar() {
     const { theme, setTheme } = useTheme();
     useEffect(() => setMounted(true), []);
 
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        fetch('/api/profile/aurel')
+            .then(
+                (response) => {
+                    if (response.status !== 200) {
+                        console.log('Looks like there was a problem. Status Code: ' + response.status);
+                        setUser(null)
+                        return;
+                    }
+                    else
+                    {
+                        response.json().then((data) => {
+                            setUser(data);
+                        });
+                    }
+                })
+    }, []);
+
     return (
         <div>
             <nav id="BarrePrincipale" className="bg-background2 dark:bg-dark_background2 flex justify-between gap-10 drop-shadow-lg  md:drop-shadow-xl max-h-20 fixed w-full z-10">
@@ -60,6 +80,24 @@ function Navbar() {
                     </li>
                 </ul>
                 <div className="my-auto inline-flex space-x-4 mr-5 ">
+                    <div>
+                    {
+                        user ?
+                        <div className="flex flex-row justify-end items-center">
+                            <div className="flex flex-row justify-center items-center">
+                                <img src="/account.png" alt="account" className="w-6 h-6 mr-2" />
+                                <p className="text-sm">{user.firstname} {user.name}</p>
+                            </div>
+                        </div>
+                        :
+                        <div className="flex flex-row justify-end items-center">
+                            <div className="flex flex-row justify-center items-center">
+                                <img src="/login.png" alt="login" className="w-6 h-6 mr-2" />
+                                <p className="text-sm">Login</p>
+                            </div>
+                        </div>
+                    }
+                    </div>
                     <button
                         title="Changer de thème de couleur"
                         className="shadow-md focus:ring bg-principale hover:bg-principale_V1 focus:bg-principale_V2 focus:ring-principale dark:bg-dark_secondaire hover:dark:bg-dark_secondaire_V1
