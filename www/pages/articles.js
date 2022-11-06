@@ -4,10 +4,13 @@ const parse = require("html-react-parser");
 import env from "../next.config";
 
 // Page affichant la liste des articles
-function Articles() {
+
+
+
+function Articles({listarticles}) {
     let liste = ``;
-    for (var article in db.articles) {
-        liste += `<li><a href=http://localhost:3000/articles/${db.articles[article].id} className=" text-lien visited:text-lien_click cursor-pointer">${db.articles[article].title}</a> par ${db.articles[article].author} le ${db.articles[article].date}</li>`;
+    for (var article in listarticles) {
+        liste += `<li><a href=http://localhost:3000/articles/${listarticles[article].id} className=" text-lien visited:text-lien_click cursor-pointer">${listarticles[article].title}</a> par ${listarticles[article].author} le ${listarticles[article].date}</li>`;
     }
     return (
         <section className="flex items-center justify-between flex-col w-full h-screen  bg-background dark:bg-dark_background">
@@ -17,7 +20,6 @@ function Articles() {
                     {
                         parse(liste)
                     }
-                    <h1 className="pt-8 text-3xl font-extralight lg:text-5xl 2xl:text-7xl text-principale" >coucou {env.profile.login}.</h1>
                 </ul>
             </div>
             <div className="bottom-0 mt-auto fixed w-full">
@@ -25,6 +27,14 @@ function Articles() {
             </div>
         </section>
     );
+}
+export async function getStaticProps() {
+    const listarticles = db.articles
+    return {
+        props: {
+            listarticles,
+        },
+    };
 }
 
 export default Articles;
