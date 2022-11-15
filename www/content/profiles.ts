@@ -10,7 +10,7 @@ export const profile = [
         name:"Blair",
         firstname:"Adrien",
         username:"adri",
-        password:"addrhylebg",
+        password:"azerty",
         mail:"aurel@dac.fr"
     }
 ]

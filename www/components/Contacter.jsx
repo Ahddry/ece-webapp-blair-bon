@@ -50,7 +50,6 @@ function Contacter({ user }) {
         <section className="flex items-center w-full h-screen snap-start flex-col bg-gray-200 dark:bg-[#1d1f23] space-y-16 lg:space-y-24 xl:space-y-32 2xl:space-y-48 " id="contacter">
             <h2 className="my-8 mt-28 ml-[10%] mr-auto text-3xl lg:text-5xl 2xl:text-7xl font-extralight">Me contacter</h2>
             <div className="mr-auto my-auto ml-[10%] lg:ml-[20%] text-lg lg:text-2xl xl:text-3xl w-[80%] lg:w-[60%]">
-                {/* Formulaire ICI */}
                 <form className="p-2 bg-background2 dark:bg-dark_background2 rounded-2xl min-w-min space-y-2 xl:p-4 flex-col" onSubmit={onSubmit}>
                     <p>Votre email</p>
                     <input

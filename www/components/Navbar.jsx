@@ -1,21 +1,23 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import Context from "./UserContext";
+import { useContext, useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { CgClose } from "react-icons/cg";
 import { FaUser } from "react-icons/fa";
 import { FaUserPlus } from "react-icons/fa";
+import { SlLogout } from "react-icons/sl";
 
 import logo from "../public/ECE_LOGO.png";
 
 // Barre de navigation affichée sur toutes les pages
 function Navbar() {
     const [dropdown, setDropdown] = useState(false);
-    const ouvrirDropdown = () => {
-        setDropdown(!dropdown);
-        console.log(dropdown);
-    };
+    const ouvrirDropdown = () => setDropdown(!dropdown);
+
+    const [profil, setProfil] = useState(false);
+    const ouvrirProfil = () => setProfil(!profil);
 
     const [nav, setNav] = useState(false);
 
@@ -25,21 +27,22 @@ function Navbar() {
     const { theme, setTheme } = useTheme();
     useEffect(() => setMounted(true), []);
 
-    const [user, setUser] = useState(null);
-
-    useEffect(() => {
-        fetch("/api/profile/aurel").then((response) => {
-            if (response.status !== 200) {
-                console.log("Looks like there was a problem. Status Code: " + response.status);
-                setUser(null);
-                return;
-            } else {
-                response.json().then((data) => {
-                    setUser(data);
-                });
-            }
-        });
-    }, []);
+    const { user } = useContext(Context);
+    const Deco = () => {
+        const { user, logout } = useContext(Context);
+        return (
+            <button
+                className="flex flex-row "
+                onClick={() => {
+                    ouvrirProfil();
+                    logout();
+                }}
+            >
+                <SlLogout className="w-6 h-6 mr-2" />
+                Se déconnecter
+            </button>
+        );
+    };
 
     return (
         <div>
@@ -133,15 +136,30 @@ function Navbar() {
                 <div className="my-auto inline-flex space-x-4 mr-5 ">
                     <div>
                         {user ? (
-                            <div className="flex flex-row justify-end items-center mt-2">
-                                <Link href="/profile">
+                            <div>
+                                <button className="flex flex-row justify-end items-center mt-2" onClick={ouvrirProfil}>
                                     <div className="flex flex-row justify-center items-center cursor-pointer hover:text-principale dark:hover:text-dark_secondaire">
                                         <FaUser className="w-6 h-6 mr-2" />
                                         <p className="hidden sm:block text-sm">
                                             {user.firstname} {user.name}
                                         </p>
                                     </div>
-                                </Link>
+                                </button>
+                                {profil ? (
+                                    <ul className=" flex-col fixed mt-4 rounded-b-xl -ml-4 bg-background2 dark:bg-dark_background2 space-y-3 shadow-md">
+                                        <li className="p-4 mt-2 sm:hidden flex flex-row">
+                                            <FaUser className="w-6 h-6 mr-2" />
+                                            <p className="text-sm">
+                                                {user.firstname} {user.name}
+                                            </p>
+                                        </li>
+                                        <li className="p-4 text-erreur dark:text-dark_erreur hover:bg-erreur hover:text-dark_on_background dark:hover:bg-dark_erreur dark:hover:text-dark_on_background2 hover:rounded-b-xl">
+                                            <Deco />
+                                        </li>
+                                    </ul>
+                                ) : (
+                                    <div className="hidden" />
+                                )}
                             </div>
                         ) : (
                             <div className="flex flex-row justify-end items-center mt-2">
@@ -184,7 +202,7 @@ function Navbar() {
                         </div>
                         <p>Développons.</p>
                         <hr className="mb-2 mr-auto w-64 h-1 bg-gray-300 rounded border-0 dark:bg-gray-700"></hr>
-                        <div className="py-4 flex flex-col">
+                        <div className="py-4 flex flex-col md:hidden">
                             <ul className="space-y-4">
                                 <Link href="/#portfolio">
                                     <li onClick={(_) => setNav(false)} className="cursor-pointer">
