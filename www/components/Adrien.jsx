@@ -2,7 +2,7 @@ import Presentation from "./Presentation";
 import Competences from "./Competences";
 import Projets from "./Projets";
 import Experiences from "./Experiences";
-import Footer from "./Footer";
+import Contacter from "./Contacter";
 
 // Portfolio d'Adrien
 function Adrien() {
@@ -32,7 +32,7 @@ function Adrien() {
 
     const projAdri = {
         projets: [
-            ["Omnes Santé", "HTML ● CSS ● JS", "/projects/omnes_sante/omnes_sante.jpg"],
+            ["Omnes Santé", "HTML ● CSS ● JS ● PHP", "/projects/omnes_sante/omnes_sante.jpg"],
             ["Netflece", "Java ● JavaFX", "/projects/netflece/netflece.jpg"],
             ["NBM", "C# ● XAML ● WPF", "/projects/nbm/nbm.jpg"],
             ["Touchousse", "C++ ● Allegro", "/projects/touchousse/touchousse.jpg"],
@@ -55,6 +55,7 @@ function Adrien() {
             <Competences {...compAdri} />
             <Projets {...projAdri} />
             <Experiences {...expAdri} />
+            <Contacter user={"Adrien"} />
         </div>
     );
 }

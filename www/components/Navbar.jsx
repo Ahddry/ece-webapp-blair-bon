@@ -1,18 +1,25 @@
 import Image from "next/image";
 import Link from "next/link";
-import { HiOutlineMenuAlt3 } from "react-icons/hi";
-import { CgClose } from "react-icons/cg";
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
+import { HiOutlineMenuAlt3 } from "react-icons/hi";
+import { CgClose } from "react-icons/cg";
+import { FaUser } from "react-icons/fa";
+import { FaUserPlus } from "react-icons/fa";
+
 import logo from "../public/ECE_LOGO.png";
 
 // Barre de navigation affichée sur toutes les pages
 function Navbar() {
+    const [dropdown, setDropdown] = useState(false);
+    const ouvrirDropdown = () => {
+        setDropdown(!dropdown);
+        console.log(dropdown);
+    };
+
     const [nav, setNav] = useState(false);
 
-    const ouvrirNav = () => {
-        setNav(!nav);
-    };
+    const ouvrirNav = () => setNav(!nav);
 
     const [mounted, setMounted] = useState(false);
     const { theme, setTheme } = useTheme();
@@ -21,57 +28,101 @@ function Navbar() {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        fetch('/api/profile/aurel')
-            .then(
-                (response) => {
-                    if (response.status !== 200) {
-                        console.log('Looks like there was a problem. Status Code: ' + response.status);
-                        setUser(null)
-                        return;
-                    }
-                    else
-                    {
-                        response.json().then((data) => {
-                            setUser(data);
-                        });
-                    }
-                })
+        fetch("/api/profile/aurel").then((response) => {
+            if (response.status !== 200) {
+                console.log("Looks like there was a problem. Status Code: " + response.status);
+                setUser(null);
+                return;
+            } else {
+                response.json().then((data) => {
+                    setUser(data);
+                });
+            }
+        });
     }, []);
 
     return (
         <div>
             <nav id="BarrePrincipale" className="bg-background2 dark:bg-dark_background2 flex justify-between gap-10 drop-shadow-lg  md:drop-shadow-xl max-h-20 fixed w-full z-10">
                 <img src="ECE_LOGO.png" alt="Logo" width={171} height={88.5} className="cursor-pointer max-w-[171px]" />
-                <ul className="hidden md:flex md:items-center md:space-x-5 md:space-x-15 xl:space-x-22 mdfont-medium mx-auto">
-                    <li className="hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1 md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl ">
-                        <Link href="/#portfolio" className="cursor-pointer ">
+                <ul className="hidden md:flex md:items-center md:space-x-5 mx-auto">
+                    <li className=" md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl ">
+                        <button className="hidden md:block 2xl:hidden hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1" onClick={ouvrirDropdown}>
+                            Portfolios
+                        </button>
+                        {dropdown ? (
+                            <ul className="hidden md:block 2xl:hidden flex-col fixed mt-4 p-4 rounded-b-xl -ml-4 bg-background2 dark:bg-dark_background2 space-y-3 shadow-md">
+                                <li className="hidden md:block 2xl:hidden hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1" onClick={ouvrirDropdown}>
+                                    <Link href="/#portfolio" className="cursor-pointer">
+                                        Profils
+                                    </Link>
+                                </li>
+                                <li className="hidden md:block 2xl:hidden hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1" onClick={ouvrirDropdown}>
+                                    <Link href="/#presentation" className="cursor-pointer ">
+                                        Présentation
+                                    </Link>
+                                </li>
+                                <li className="hidden md:block 2xl:hidden hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1" onClick={ouvrirDropdown}>
+                                    <Link href="/#competences" className="cursor-pointer ">
+                                        Compétences
+                                    </Link>
+                                </li>
+                                <li className="hidden md:block 2xl:hidden hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1" onClick={ouvrirDropdown}>
+                                    <Link href="/#projets" className="cursor-pointer ">
+                                        Projets
+                                    </Link>
+                                </li>
+                                <li className="hidden md:block 2xl:hidden hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1" onClick={ouvrirDropdown}>
+                                    <Link href="/#experiences" className="cursor-pointer ">
+                                        Expériences
+                                    </Link>
+                                </li>
+                                <li className="hidden md:block 2xl:hidden hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1" onClick={ouvrirDropdown}>
+                                    <Link href="/#contacter" className="cursor-pointer ">
+                                        Me contacter
+                                    </Link>
+                                </li>
+                            </ul>
+                        ) : (
+                            <div className="hidden" />
+                        )}
+                    </li>
+                    <li className="hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1 hidden 2xl:block 2xl:text-4xl ">
+                        <Link href="/#portfolio" className="cursor-pointer">
                             Portfolios
                         </Link>
                     </li>
-                    <li className="hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1 md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl">
+                    <li className="hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1  hidden 2xl:block 2xl:text-4xl">
                         <Link href="/#presentation" className="cursor-pointer ">
                             Présentation
                         </Link>
                     </li>
-                    <li className="hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1 md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl">
+                    <li className="hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1 hidden 2xl:block 2xl:text-4xl">
                         <Link href="/#competences" className="cursor-pointer ">
                             Compétences
                         </Link>
                     </li>
-                    <li className="hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1 md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl">
+                    <li className="hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1 hidden 2xl:block 2xl:text-4xl">
                         <Link href="/#projets" className="cursor-pointer ">
                             Projets
                         </Link>
                     </li>
-                    <li className="hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1 md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl">
+                    <li className="hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1 hidden 2xl:block 2xl:text-4xl">
                         <Link href="/#experiences" className="cursor-pointer ">
                             Expériences
                         </Link>
                     </li>
                     <li className="hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1 md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl">
-                        <Link href="/contacts" className="cursor-pointer ">
-                            Contacts
-                        </Link>
+                        <div className="hidden 2xl:block">
+                            <Link href="/#contacter" className="cursor-pointer">
+                                Contacts
+                            </Link>
+                        </div>
+                        <div className="2xl:hidden">
+                            <Link href="/contacts" className="cursor-pointer 2xl:hidden">
+                                Contacts
+                            </Link>
+                        </div>
                     </li>
                     <li className="hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1 md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl">
                         <Link href="/articles" className="cursor-pointer ">
@@ -81,22 +132,27 @@ function Navbar() {
                 </ul>
                 <div className="my-auto inline-flex space-x-4 mr-5 ">
                     <div>
-                    {
-                        user ?
-                        <div className="flex flex-row justify-end items-center">
-                            <div className="flex flex-row justify-center items-center">
-                                <img src="/account.png" alt="account" className="w-6 h-6 mr-2" />
-                                <p className="text-sm">{user.firstname} {user.name}</p>
+                        {user ? (
+                            <div className="flex flex-row justify-end items-center mt-2">
+                                <Link href="/profile">
+                                    <div className="flex flex-row justify-center items-center cursor-pointer hover:text-principale dark:hover:text-dark_secondaire">
+                                        <FaUser className="w-6 h-6 mr-2" />
+                                        <p className="hidden sm:block text-sm">
+                                            {user.firstname} {user.name}
+                                        </p>
+                                    </div>
+                                </Link>
                             </div>
-                        </div>
-                        :
-                        <div className="flex flex-row justify-end items-center">
-                            <div className="flex flex-row justify-center items-center">
-                                <img src="/login.png" alt="login" className="w-6 h-6 mr-2" />
-                                <p className="text-sm">Login</p>
+                        ) : (
+                            <div className="flex flex-row justify-end items-center mt-2">
+                                <Link href="/login">
+                                    <div className="flex flex-row justify-center items-center cursor-pointer hover:text-principale dark:hover:text-dark_secondaire">
+                                        <FaUserPlus className="w-6 h-6 mr-2" />
+                                        <p className="hidden sm:block text-sm">S'identifier</p>
+                                    </div>
+                                </Link>
                             </div>
-                        </div>
-                    }
+                        )}
                     </div>
                     <button
                         title="Changer de thème de couleur"
@@ -130,32 +186,53 @@ function Navbar() {
                         <hr className="mb-2 mr-auto w-64 h-1 bg-gray-300 rounded border-0 dark:bg-gray-700"></hr>
                         <div className="py-4 flex flex-col">
                             <ul className="space-y-4">
-                                <Link href="/#portfolio" className=" cursor-pointer">
-                                    <li onClick={(_) => setNav(false)}>Portfolios</li>
+                                <Link href="/#portfolio">
+                                    <li onClick={(_) => setNav(false)} className="cursor-pointer">
+                                        Portfolios
+                                    </li>
                                 </Link>
                                 <Link href="/#presentation">
-                                    <li onClick={(_) => setNav(false)}>Présentation</li>
+                                    <li onClick={(_) => setNav(false)} className="cursor-pointer">
+                                        Présentation
+                                    </li>
                                 </Link>
                                 <Link href="/#competences">
-                                    <li onClick={(_) => setNav(false)}>Compétences</li>
+                                    <li onClick={(_) => setNav(false)} className="cursor-pointer">
+                                        Compétences
+                                    </li>
                                 </Link>
                                 <Link href="/#projets">
-                                    <li onClick={(_) => setNav(false)}>Projets</li>
+                                    <li onClick={(_) => setNav(false)} className="cursor-pointer">
+                                        Projets
+                                    </li>
                                 </Link>
                                 <Link href="/#experiences">
-                                    <li onClick={(_) => setNav(false)}>Expériences</li>
+                                    <li onClick={(_) => setNav(false)} className="cursor-pointer">
+                                        Expériences
+                                    </li>
+                                </Link>
+                                <Link href="/#contacter">
+                                    <li onClick={(_) => setNav(false)} className="cursor-pointer">
+                                        Me contacter
+                                    </li>
                                 </Link>
                             </ul>
                             <hr className="my-4 mr-auto w-64 h-1 bg-gray-300 rounded border-0 dark:bg-gray-700"></hr>
                             <ul className="space-y-4">
                                 <Link href="/contacts">
-                                    <li onClick={(_) => setNav(false)}>Contact</li>
+                                    <li onClick={(_) => setNav(false)} className="cursor-pointer">
+                                        Contact
+                                    </li>
                                 </Link>
                                 <Link href="/articles">
-                                    <li onClick={(_) => setNav(false)}>Articles</li>
+                                    <li onClick={(_) => setNav(false)} className="cursor-pointer">
+                                        Articles
+                                    </li>
                                 </Link>
                                 <Link href="/about">
-                                    <li onClick={(_) => setNav(false)}>À propos</li>
+                                    <li onClick={(_) => setNav(false)} className="cursor-pointer">
+                                        À propos
+                                    </li>
                                 </Link>
                             </ul>
                         </div>

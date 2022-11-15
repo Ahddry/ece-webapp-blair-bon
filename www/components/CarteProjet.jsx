@@ -5,7 +5,7 @@ import Link from "next/link";
 function CarteProjet({ nom, outils, lien }) {
     return (
         <div className=" relative flex items-center justify-center h-auto w-full shadow-xl rounded-xl p-4 bg-background2 dark:bg-dark_background2 group hover:bg-gradient-to-r from-dark_secondaire to-principale max-w-2xl">
-            <div className="relative w-[400px] h-[225px]">
+            <div className="relative w-[300px] h-[169px] sm:w-[400px] sm:h-[225px]">
                 <Image src={lien} layout="fill" alt={nom + " logo"} className="rounded-xl group-hover:opacity-10" />
             </div>
             <div className="hidden group-hover:block absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]">

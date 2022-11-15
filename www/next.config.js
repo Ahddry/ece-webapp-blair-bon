@@ -4,4 +4,14 @@ module.exports = {
         locales: ["fr"],
         defaultLocale: "fr",
     },
+
+    async redirects() {
+        return [
+            {
+                source: "/login-native",
+                destination: "/#contacter",
+                permanent: true,
+            },
+        ];
+    },
 };

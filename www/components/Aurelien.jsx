@@ -2,6 +2,7 @@ import Presentation from "./Presentation";
 import Competences from "./Competences";
 import Projets from "./Projets";
 import Experiences from "./Experiences";
+import Contacter from "./Contacter";
 
 // Portfolio d'Aurélien
 function Aurelien() {
@@ -51,6 +52,7 @@ function Aurelien() {
             <Competences {...compAure} />
             <Projets {...projAure} />
             <Experiences {...expAure} />
+            <Contacter user={"Aurelien"} />
         </div>
     );
 }
