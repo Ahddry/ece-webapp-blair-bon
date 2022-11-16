@@ -47,7 +47,7 @@ function Navbar() {
     return (
         <div>
             <nav id="BarrePrincipale" className="bg-background2 dark:bg-dark_background2 flex justify-between gap-10 drop-shadow-lg  md:drop-shadow-xl max-h-20 fixed w-full z-10">
-                <img src="ECE_LOGO.png" alt="Logo" width={171} height={88.5} className="cursor-pointer max-w-[171px]" />
+                <img src="/ECE_LOGO.png" alt="Logo" width={171} height={88.5} className="cursor-pointer max-w-[171px]" />
                 <ul className="hidden md:flex md:items-center md:space-x-5 mx-auto">
                     <li className=" md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl ">
                         <button className="hidden md:block 2xl:hidden hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1" onClick={ouvrirDropdown}>
