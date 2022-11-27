@@ -22,7 +22,7 @@ function SignUp() {
         try {
             setLoading(true);
             let ok = true;
-            email = email.toLowerCase();
+            setEmail(email.toLowerCase());
             async function createCompte() {
                 const { data, error } = await supabase.from("comptes").select("*").eq("username", username).single();
                 if (data !== null) {

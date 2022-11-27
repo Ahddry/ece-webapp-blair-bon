@@ -1,6 +1,6 @@
-import { useEffect } from "react";
-import { useRouter } from "next/router";
-import { supabase } from "../utils/supabase";
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { supabase } from '../utils/supabase';
 
 // Page de déconnexion
 
@@ -9,7 +9,7 @@ function Logout() {
 
     useEffect(() => {
         supabase.auth.signOut();
-        router.push("/");
+        router.push('/');
     }, []);
 
     return <p>Logging out</p>;
