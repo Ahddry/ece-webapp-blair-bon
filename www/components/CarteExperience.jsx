@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 // Une expérience d'une personne
 function CarteLangage({ entreprise, periode, poste, illustration }) {

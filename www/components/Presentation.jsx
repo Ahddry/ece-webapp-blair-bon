@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/legacy/image";
 const parse = require("html-react-parser");
 
 // Présentation d'une personne

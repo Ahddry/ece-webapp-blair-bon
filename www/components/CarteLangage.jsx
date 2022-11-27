@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 // Une compétence d'une personne
 function CarteLangage({ langage, illustration }) {

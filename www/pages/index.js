@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { ImArrowDown2 } from "react-icons/im";
 import { useState } from "react";
 import Adrien from "../components/Adrien";
