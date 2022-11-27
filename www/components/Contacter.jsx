@@ -1,35 +1,34 @@
 import { useState } from "react";
-import { Adrien } from "../content/contacts/Adrien.json";
-import { Aurelien } from "../content/contacts/Aurelien.json";
+import { supabase } from "../utils/supabase.js";
 
 // Formulaire de contact
-function Contacter({ user }) {
+function Contacter({ target }) {
     const [email, setEmail] = useState("");
     const [sujet, setSujet] = useState("");
     const [message, setMessage] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const onSubmit = (data) => {
         data.preventDefault();
-        console.log(email, sujet, message, user);
+        console.log(email, sujet, message, target);
         const data2 = new FormData();
         data2.append("email", email);
         data2.append("sujet", sujet);
         data2.append("message", message);
-        data2.append("user", user);
+        //data2.append("user", target);
         console.log(data2);
         for (const [key, value] of data2) {
             console.log(key, value);
         }
 
-        /*
-        let file;
+        let destinataire = "";
 
-        switch (user) {
+        switch (target) {
             case "Adrien":
-                file = Adrien;
+                destinataire = "Adrien";
                 break;
             case "Aurelien":
-                file = Aurelien;
+                destinataire = "Aurelien";
                 break;
             default:
                 break;
@@ -39,11 +38,31 @@ function Contacter({ user }) {
             email: email,
             sujet: sujet,
             message: message,
-            date: new Date().toLocaleString(),
+            date: new Date().toISOString(),
+            destinataire: destinataire,
         };
-        file.push(contact);
 
-        fs.writeFileSync(`../content/contacts/${user}.json`, JSON.stringify(file));*/
+        insertContact(contact);
+
+        async function insertContact(contact) {
+            try {
+                setLoading(true);
+                let { error } = await supabase.from("contacter").insert({
+                    email: contact.email,
+                    sujet: contact.sujet,
+                    message: contact.message,
+                    date: contact.date,
+                    destinataire: contact.destinataire,
+                });
+                if (error) throw error;
+            } catch (error) {
+                alert("Erreur lors de l'envoi du message");
+                console.log("erreur : ", error);
+                return error;
+            } finally {
+                setLoading(false);
+            }
+        }
     };
 
     return (
@@ -68,7 +87,7 @@ function Contacter({ user }) {
                     <textarea placeholder="Votre message" className="p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full min-h-[42px] max-h-64 lg:h-36" value={message} onChange={(e) => setMessage(e.target.value)} required />
                     <div className="mt-8">
                         <button type="submit" className="bg-gray-200 dark:bg-[#36383c] rounded-full shadow-md hover:bg-gray-300 dark:hover:bg-[#4F4F4F] active:bg-background dark:active:bg-dark_background cursor-pointer p-2 xl:p-3">
-                            Envoyer
+                            {loading ? "Envoi en cours..." : "Envoyer"}
                         </button>
                     </div>
                 </form>

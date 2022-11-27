@@ -1,9 +1,11 @@
 import Footer from "../components/Footer";
 import { useState } from "react";
+import { supabase } from "../utils/supabase";
 
 // Simple compteur de nombre de clics sur un bouton avec la fonction useState()
-function State() {
+function State({ contacts }) {
     const [count, setCount] = useState(0);
+    console.log(contacts);
     return (
         <section className="flex items-center justify-between flex-col w-full h-screen  bg-background dark:bg-dark_background">
             <div className="p-5 mt-12 min-w-[70%]">
@@ -20,6 +22,19 @@ function State() {
                         </button>
                     </div>
                 </div>
+
+                <div className="felx flex-col items-center bg-background2 dark:bg-dark_background2 rounded-3xl mt-8 p-4">
+                    <div className="text-justify flex-wrap">
+                        {contacts.map((contact) => (
+                            <div key={contact.id}>
+                                <p className="text-justify flex-wrap">
+                                    {contact.id} - {contact.firstname} - {contact.lastname} - {contact.email} <br />
+                                    {contact.message}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
             <div className="w-full">
                 <Footer className="mx-auto w-full" />
@@ -29,3 +44,12 @@ function State() {
 }
 
 export default State;
+
+export const getStaticProps = async () => {
+    const { data: contacts } = await supabase.from("contacts").select("*");
+    return {
+        props: {
+            contacts,
+        },
+    };
+};

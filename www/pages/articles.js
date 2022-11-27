@@ -1,25 +1,22 @@
 import Footer from "../components/Footer";
-import db from "../content/db";
-const parse = require("html-react-parser");
-import env from "../next.config";
+import { supabase } from "../utils/supabase";
+import Link from "next/link";
 
 // Page affichant la liste des articles
-
-
-
-function Articles({listarticles}) {
-    let liste = ``;
-    for (var article in listarticles) {
-        liste += `<li><a href=http://localhost:3000/articles/${listarticles[article].id} className=" text-lien visited:text-lien_click cursor-pointer">${listarticles[article].title}</a> par ${listarticles[article].author} le ${listarticles[article].date}</li>`;
-    }
+function Articles({ listarticles }) {
     return (
         <section className="flex items-center justify-between flex-col w-full h-screen  bg-background dark:bg-dark_background">
             <div className="p-5 mt-12 min-w-[70%] space-y-5">
                 <h1 className="pt-8 text-3xl font-extralight lg:text-5xl 2xl:text-7xl text-principale ">Liste des articles</h1>
                 <ul className="ml-5 list-disc">
-                    {
-                        parse(liste)
-                    }
+                    {listarticles.map((article) => (
+                        <li key={article.id}>
+                            <Link href={`/articles/${article.id}`}>
+                                <a className="text-xl text-lien visited:text-lien_click hover:border-b-2 hover:border-lien visited:hover:border-lien_click">{article.title}</a>
+                            </Link>{" "}
+                            par {article.author} le {new Date(article.created_at).toLocaleDateString()}
+                        </li>
+                    ))}
                 </ul>
             </div>
             <div className="bottom-0 mt-auto fixed w-full">
@@ -29,7 +26,7 @@ function Articles({listarticles}) {
     );
 }
 export async function getStaticProps() {
-    const listarticles = db.articles
+    const { data: listarticles } = await supabase.from("articles").select("*");
     return {
         props: {
             listarticles,

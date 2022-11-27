@@ -55,7 +55,7 @@ function Adrien() {
             <Competences {...compAdri} />
             <Projets {...projAdri} />
             <Experiences {...expAdri} />
-            <Contacter user={"Adrien"} />
+            <Contacter target={"Adrien"} />
         </div>
     );
 }

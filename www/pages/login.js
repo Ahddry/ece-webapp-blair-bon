@@ -2,11 +2,14 @@ import Footer from "../components/Footer";
 import Context from "../components/UserContext";
 import { useContext, useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { supabase } from "../utils/supabase";
+import Link from "next/link";
 
 // Page de connexion
 function Login() {
     const [username, setUsername] = useState("");
     const [mdp, setMdp] = useState("");
+    const [loading, setLoading] = useState(false);
 
     let router = useRouter();
     function redirect() {
@@ -18,6 +21,7 @@ function Login() {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(username, mdp);
+        /*
         fetch(`/api/profile/${username}`).then((response) => {
             if (response.status !== 200) {
                 console.log("Looks like there was a problem. Status Code: " + response.status);
@@ -35,6 +39,54 @@ function Login() {
                 });
             }
         });
+        */
+        try {
+            setLoading(true);
+            async function loginSupabase() {
+                let ok = true;
+                let email;
+                const { data, error } = await supabase.from("comptes").select("*").eq("username", username).single();
+                if (data !== null) {
+                    email = data.email;
+                    if (error) throw error;
+                } else {
+                    alert("Utilisateur inconnu");
+                    ok = false;
+                }
+                if (!ok) return;
+                await supabase.auth.signInWithPassword({ email, password: mdp }).then(({ data, error }) => {
+                    if (error) {
+                        console.log(error);
+                        ok = false;
+                        alert("Erreur lors de la connexion");
+                    }
+                });
+                if (!ok) return;
+                let user = (await supabase.auth.getUser()).data.user;
+                if (mdp === data.password) {
+                    await login({
+                        id: user.id,
+                        created_at: user.created_at,
+                        username: username,
+                        firstname: data.firstname,
+                        lastname: data.lastname,
+                        email: email,
+                        password: mdp,
+                        admin: data.is_admin,
+                    });
+                    console.log("Connexion réussie");
+                    redirect();
+                } else {
+                    alert("Mot de passe incorrect");
+                }
+            }
+            loginSupabase();
+        } catch (error) {
+            console.log(error);
+            alert("Erreur lors de la connexion");
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -56,6 +108,12 @@ function Login() {
                         </form>
                     </div>
                 </div>
+                <p>
+                    Vous n'avez pas de compte ?{" "}
+                    <Link href="/signup">
+                        <span className="text-lien visited:text-lien_click hover:border-b hover:border-lien hover:visited:border-lien_click cursor-pointer">Créer un compte</span>
+                    </Link>
+                </p>
             </div>
             <div className="w-full">
                 <Footer className="mx-auto w-full" />

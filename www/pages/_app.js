@@ -12,10 +12,7 @@ function MyApp({ Component, pageProps }) {
 
     return (
         <ThemeProvider attribute="class">
-            <SessionContextProvider
-                supabaseClient={supabase}
-                initialSession={pageProps.initialSession}
-            >
+            <SessionContextProvider supabaseClient={supabase} initialSession={pageProps.initialSession}>
                 <UserContext>
                     <Layout>
                         <Component {...pageProps} />

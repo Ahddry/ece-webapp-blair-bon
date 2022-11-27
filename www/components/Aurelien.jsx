@@ -52,7 +52,7 @@ function Aurelien() {
             <Competences {...compAure} />
             <Projets {...projAure} />
             <Experiences {...expAure} />
-            <Contacter user={"Aurelien"} />
+            <Contacter target={"Aurelien"} />
         </div>
     );
 }
