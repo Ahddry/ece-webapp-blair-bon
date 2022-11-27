@@ -20,7 +20,6 @@ function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(username, mdp);
         /*
         fetch(`/api/profile/${username}`).then((response) => {
             if (response.status !== 200) {

@@ -23,7 +23,6 @@ function SignUp() {
             setLoading(true);
             let ok = true;
             email = email.toLowerCase();
-            console.log(username, mdp, firstname, lastname, email);
             async function createCompte() {
                 const { data, error } = await supabase.from("comptes").select("*").eq("username", username).single();
                 if (data !== null) {
