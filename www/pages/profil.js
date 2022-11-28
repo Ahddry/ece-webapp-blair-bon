@@ -8,7 +8,7 @@ import { supabase } from '../utils/supabase';
 // Page d'informations du profil
 
 function Profil() {
-    const { user } = useContex;
+    const { user } = useContext(Context);
     const [admin, setAdmin] = useState(false);
 
     const Connecte = () => {
