@@ -10,10 +10,12 @@ Le contenu créé pour les TP 1 à 3 est disponible dans le dossier [server](htt
 
 Cette application est actuelement capable de :
 
-1. Afficher des pages écrites en **React** à l'aide du framework **Next.js**
+1. Afficher des pages écrites en **React** à l'aide du framework **Next.js**, maintenant dans sa version **13**
 2. Rediriger dynamiquement l'utilisateur vers les bonnes routes pour afficher les pages adéquates
 3. Inclure des styles Tailwind CSS variés
 4. Être réactive à la taille des appareils sur lesquels elle est affichée (responsive design)
+5. Insérer et collecter des données d'une base de données Supabase
+6. Gérer des accès et des identitées d'utilisateurs
 
 ### Fonctionnalités supplémentaires
 
@@ -147,6 +149,11 @@ Une fois le serveur lancé, il faut aller à l'URL <http://localhost:3000> pour 
 - Une présentation de ses compétences (langages de programmation qu'il maîtrise)
 - Une présentation des projets qu'il a pu réalisé
 - Une liste des entreprises où il a pu travailler
+- Un formulaire de contact enregistrant le message, son sujet ainsi que l'adresse e-mail de l'expéditeur sur la base de données
+
+La page <http://localhost:3000/login> permet de s'authentifier sur l'application avec un compte préalablement créé sur la page <http://localhost:3000/signup>, et d'ainsi accéder au contenu de la page [profil](http://localhost:3000/profil).
+
+La page de <http://localhost:3000/profil> n'est disponible que pour les utilisateurs authentifiés et permets d'accéder aux informations de sson profil ainsi que de lire les messages qui leur ont étés adressés sur le formulaire de contact de la page principale pour les utilisateurs administrateurs.
 
 Aller à l'adresse <http://localhost:3000/articles> permet d'afficher la liste des articles disponibles ainsi qu'un lien pour y accéder.
 
