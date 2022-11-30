@@ -31,9 +31,9 @@ function Aurelien() {
 
     const projAure = {
         projets: [
-            ["HelloCine", "Java ● JavaFX ● MySQL", "/projects/hellocine/HelloCine.jpg"],
-            ["Batailles et coups d'États", "C++ ● Allegro", "/projects/b&ce/b&ce.jpg"],
-            ["Quoridor", "C", "/projects/quoridor/quoridor.jpg"],
+            ["HelloCine", "Java ● JavaFX ● MySQL", "/projects/hellocine/HelloCine.jpg","6"],
+            ["Batailles et coups d'États", "C++ ● Allegro", "/projects/b&ce/b&ce.jpg","5"],
+            ["Quoridor", "C", "/projects/quoridor/quoridor.jpg","7"],
         ],
         description: "Les projets sur lesquels j'ai travaillé récemment.",
     };

@@ -89,7 +89,7 @@ function Projets({ projets, description }) {
                         <h2 className="my-8 ml-[10%] mr-auto text-3xl lg:text-5xl 2xl:text-7xl font-extralight">Les projets que j'ai réalisé</h2>
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8 mx-5">
                             {projets.map((projet) => (
-                                <CarteProjet nom={projet[0]} outils={projet[1]} lien={projet[2]} key={projet[0] + "s"} />
+                                <CarteProjet nom={projet[0]} outils={projet[1]} lien={projet[2]} id={projet[3]} key={projet[0] + "s"} />
                             ))}
                         </div>
                     </div>
@@ -102,7 +102,7 @@ function Projets({ projets, description }) {
                         <h2 className="my-8 ml-[10%] mr-auto text-3xl lg:text-5xl 2xl:text-7xl font-extralight">Les projets que j'ai réalisé</h2>
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8 mx-5">
                             {projets.map((projet) => (
-                                <CarteProjet nom={projet[0]} outils={projet[1]} lien={projet[2]} key={projet[0] + "m"} />
+                                <CarteProjet nom={projet[0]} outils={projet[1]} lien={projet[2]} id={projet[3]} key={projet[0] + "m"} />
                             ))}
                         </div>
                         <div className=" mt-[-500px] mx-5 p-3 rounded-3xl bg-gray-300 md:my-3 dark:bg-dark_background2 md:max-w-5xl 2xl:max-w-7xl">
@@ -118,7 +118,7 @@ function Projets({ projets, description }) {
                         <h2 className="my-8 ml-[10%] mr-auto text-3xl lg:text-5xl 2xl:text-7xl font-extralight">Les projets que j'ai réalisé</h2>
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8 mx-5">
                             {projets.map((projet) => (
-                                <CarteProjet nom={projet[0]} outils={projet[1]} lien={projet[2]} key={projet[0] + "l"} />
+                                <CarteProjet nom={projet[0]} outils={projet[1]} lien={projet[2]} id={projet[3]} key={projet[0] + "l"} />
                             ))}
                         </div>
                         <div className="mb-5 mx-5 p-3 rounded-3xl bg-gray-300 md:my-3 dark:bg-dark_background2 md:max-w-5xl 2xl:max-w-7xl">
@@ -134,7 +134,7 @@ function Projets({ projets, description }) {
                         <h2 className="my-8 ml-[10%] mr-auto text-3xl lg:text-5xl 2xl:text-7xl font-extralight">Les projets que j'ai réalisé</h2>
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8 mx-5">
                             {projets.map((projet) => (
-                                <CarteProjet nom={projet[0]} outils={projet[1]} lien={projet[2]} key={projet[0] + "xl"} />
+                                <CarteProjet nom={projet[0]} outils={projet[1]} lien={projet[2]} id={projet[3]} key={projet[0] + "xl"} />
                             ))}
                         </div>
                         <div className="mb-5 mx-5 p-3 rounded-3xl bg-gray-300 md:my-3 dark:bg-dark_background2 md:max-w-5xl 2xl:max-w-7x">

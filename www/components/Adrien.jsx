@@ -32,11 +32,11 @@ function Adrien() {
 
     const projAdri = {
         projets: [
-            ["Omnes Santé", "HTML ● CSS ● JS ● PHP", "/projects/omnes_sante/omnes_sante.jpg"],
-            ["Netflece", "Java ● JavaFX", "/projects/netflece/netflece.jpg"],
-            ["NBM", "C# ● XAML ● WPF", "/projects/nbm/nbm.jpg"],
-            ["Touchousse", "C++ ● Allegro", "/projects/touchousse/touchousse.jpg"],
-            ["Batailles et coups d'États", "C++ ● Allegro", "/projects/b&ce/b&ce.jpg"],
+            ["Omnes Santé", "HTML ● CSS ● JS ● PHP", "/projects/omnes_sante/omnes_sante.jpg","1"],
+            ["Netflece", "Java ● JavaFX", "/projects/netflece/netflece.jpg","2"],
+            ["NBM", "C# ● XAML ● WPF", "/projects/nbm/nbm.jpg","3"],
+            ["Touchousse", "C++ ● Allegro", "/projects/touchousse/touchousse.jpg","4"],
+            ["Batailles et coups d'États", "C++ ● Allegro", "/projects/b&ce/b&ce.jpg","5"],
         ],
         description: "Voici quelques projets que j'ai pu réaliser au cours de mes études.",
     };
