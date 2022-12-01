@@ -39,9 +39,9 @@ let db =
             ],
             "Image":[
                 "/projects/nbm/nbm.jpg",
-                "/project/nbm/nbm2.jpg",
-                "/project/nbm/nbm3.jpg",
-                "/project/nbm/nbm4.jpg"
+                "/projects/nbm/nbm2.jpg",
+                "/projects/nbm/nbm3.jpg",
+                "/projects/nbm/nbm4.jpg"
             ]
         },
         {

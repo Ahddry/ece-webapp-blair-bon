@@ -9,7 +9,17 @@ function ProjectPage({project})
             <div className="p-5 mt-12 min-w-[70%] space-y-5">
                 <h1 className="pt-8 text-3xl font-extralight lg:text-5xl 2xl:text-7xl text-principale">Project: {project.Name}</h1>
                 <div className="pading-left 2px">
-                    <Image src={project.Image} alt={project.Name} width={480} height={270} />
+                    {
+                        project.Image.map((image, index) => (
+                            <Image
+                                key={index}
+                                src={image}
+                                alt={project.Name + index}
+                                width={500}
+                                height={500}
+                            />
+                        ))
+                    }
                 </div>
                 <div className="text-xl lg:text-lg">
                     <p>{project.Description}</p>
