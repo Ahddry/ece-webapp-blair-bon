@@ -51,13 +51,15 @@ function commentaire({commentaire,isNew,getCloseBoxe})
                         if(response.error!=null) throw response.error;
 
                     });
-                    alert("Commentaire ajouté");
                     setTitre("");
                     setContenue("");
                     setEtoile(0);
                     getCloseBoxe(true);
+                    setLoading(false);
                     router.push('/project/'+commentaire.projets_id);
+                    alert("Commentaire ajouté");
                 }
+
                 else //si modif commmentaire
                 {
                     await supabase.from('commentaire')
@@ -72,6 +74,7 @@ function commentaire({commentaire,isNew,getCloseBoxe})
                         console.log(response);
                         if(response.error!=null) throw response.error;
                     });
+                    setLoading(false);
                     alert("Commentaire modifié");
                     commentaire.titre=titre;
                     commentaire.contenue=contenue;
@@ -80,10 +83,10 @@ function commentaire({commentaire,isNew,getCloseBoxe})
                 }
             } catch (error) {
                 console.log(error);
+                setLoading(false);
                 alert("Erreur lors de l'enregistement du commentaire");
                 return error;
             } finally {
-                setLoading(false);
                 editcomm();
             }
         }
