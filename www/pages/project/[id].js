@@ -4,12 +4,22 @@ import Commentaire from "../../components/Commentaire"
 import { supabase } from "../../utils/supabase";
 import { useState , useContext, useEffect } from "react";
 import Context from '../../components/UserContext';
+import { createContext } from "vm";
 
 
 function ProjectPage({projet , commentaire})
 {
     const { user } = useContext(Context);
-    const [addComm,getAddComm] = useState(false);
+    const [addComm,setAddComm] = useState(false);
+    const [closeBoxe, setCloseBox] = useState(false);
+    const getCloseBoxe = (state)=> {
+        setCloseBox(state);
+    }
+    useEffect(() => {
+        if (closeBoxe) {
+            setAddComm(false);
+        }
+    }, [closeBoxe]);
     return (
         <section className="flex items-center justify-between flex-col w-full h-screen  bg-background dark:bg-dark_background">
             <div className="p-5 mt-12 min-w-[70%] space-y-5">
@@ -50,13 +60,13 @@ function ProjectPage({projet , commentaire})
                         {
                         commentaire.map((comments) => (
                             <li key={comments.id}>
-                                <Commentaire commentaire={comments} isNew={false}/>
+                                <Commentaire commentaire={comments} isNew={false} getCloseBoxe={getCloseBoxe}/>
                             </li>
                         ))
                         }
                         <li key="last">
                         {
-                        user ? <button onClick={() => getAddComm(!addComm)}>Ajouter un commentaire</button>
+                        user ? <button onClick={() => setAddComm(!addComm)}>Ajouter un commentaire</button>
                         : <p>Vous devez être connecter pour ajouter un commentaire</p>
                         }
                         {
@@ -71,7 +81,7 @@ function ProjectPage({projet , commentaire})
                                 contenue: "",
                                 etoile: 0,
                             }
-                        } isNew={true}/>}
+                        } isNew={true} getCloseBoxe={getCloseBoxe}/>}
                         </li>
                     </ul>
 

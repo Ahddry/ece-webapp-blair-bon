@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from "next/router";
 
-function commentaire({commentaire,isNew})
+function commentaire({commentaire,isNew,getCloseBoxe})
 {
     const { user } = useContext(Context);
     const [canuserEdit,getUserEdit] = useState(isNew)
@@ -17,7 +17,7 @@ function commentaire({commentaire,isNew})
     const [loading, setLoading] = useState(false);
     const router = useRouter();
 
-    useEffect(()=>
+    useEffect(()=> //verif si l'utilisateur qui a publier le msg est connecter 
     {
         if(user)
         {
@@ -28,14 +28,14 @@ function commentaire({commentaire,isNew})
         }
     },[])
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e) => { //gestion du form
         e.preventDefault();
         setLoading(true);
         async function updatecomm()
         {
             try
             {
-                if(isNew)
+                if(isNew) //si nouveau commentaire
                 {
                     await supabase.from('commentaire')
                     .insert({
@@ -52,12 +52,13 @@ function commentaire({commentaire,isNew})
 
                     });
                     alert("Commentaire ajouté");
-                    commentaire.titre="";
-                    commentaire.contenue="";
-                    commentaire.etoile=0;
+                    setTitre("");
+                    setContenue("");
+                    setEtoile(0);
+                    getCloseBoxe(true);
                     router.push('/project/'+commentaire.projets_id);
                 }
-                else
+                else //si modif commmentaire
                 {
                     await supabase.from('commentaire')
                     .update({
@@ -141,6 +142,7 @@ function commentaire({commentaire,isNew})
                                 <button onClick={() => supabase.from('commentaire').delete().eq('id', commentaire.id).then((response) => {
                                     console.log(response);
                                     if(response.error!=null) throw response.error;
+                                    alert("Commentaire supprimé");
                                     router.push('/project/'+commentaire.projets_id);
                                     })}>Supprimer</button>
                             </div>
