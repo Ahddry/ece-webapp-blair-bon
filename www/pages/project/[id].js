@@ -21,7 +21,7 @@ function ProjectPage({projet , commentaire})
         }
     }, [closeBoxe]);
     return (
-        <section className="flex items-center justify-between flex-col w-full h-screen  bg-background dark:bg-dark_background">
+        <section className="flex items-center justify-between flex-col w-full min-h-screen  bg-background dark:bg-dark_background">
             <div className="p-5 mt-12 min-w-[70%] space-y-5">
                 <h1 className="pt-8 text-3xl font-extralight lg:text-5xl 2xl:text-7xl text-principale">Project: {projet.name}</h1>
                 <div className="pading-left 2px">
@@ -53,8 +53,8 @@ function ProjectPage({projet , commentaire})
                         ))}
                     </ul>
                 </div>
-                <div>
-                    <h2>Commentaire:</h2>
+                <div className="border-t pt-4 pb-4">
+                    <h1 className="text-2xl font-semibold">Commentaire:</h1>
                     <ul>
                         {
                         commentaire.map((comments) => (
@@ -63,9 +63,9 @@ function ProjectPage({projet , commentaire})
                             </li>
                         ))
                         }
-                        <li key="last">
+                        <li key="last" className="pb-2 mt-4">
                         {
-                        user ? <button onClick={() => setAddComm(!addComm)}>Ajouter un commentaire</button>
+                        user ? <button className="bg-gray-200 dark:bg-[#36383c] rounded-full shadow-md hover:bg-gray-300 dark:hover:bg-[#4F4F4F] active:bg-background dark:active:bg-dark_background cursor-pointer p-2 xl:p-3" onClick={() => setAddComm(!addComm)}>Ajouter un commentaire</button>
                         : <p>Vous devez être connecter pour ajouter un commentaire</p>
                         }
                         {
@@ -86,9 +86,9 @@ function ProjectPage({projet , commentaire})
 
                 </div>
             </div>
-            {/* <div className="bottom-0 mt-auto fixed w-full">
+            <div className="bottom-0 mt-auto w-full">
                 <Footer />
-            </div> */}
+            </div>
         </section>
     );
 }

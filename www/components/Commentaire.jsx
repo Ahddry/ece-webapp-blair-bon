@@ -103,61 +103,84 @@ function commentaire({commentaire,isNew,getCloseBoxe})
     };
 
     return (
-        <div>
+        <div className="dark:bg-dark_background2 bg-background2 rounded-3xl mt-5">
             {edit ? (
                 <div className="commentaire">
-                    <div className="commentaire__titre">
-                        <form onSubmit={handleSubmit}>
-                            <p>Titre</p>
-                            <input type="text" placeholder="Titre" value={titre} onChange={(e) => setTitre(e.target.value)} required />
-                            <p>Contenue</p>
-                            <input type="text" placeholder="contenue" value={contenue} onChange={(e) => setContenue(e.target.value)} required />
-                            <p>nombre d'etoile (1-5)</p>
-                            <input type="number" min="1" max="5" placeholder="etoile" value={etoile} onChange={(e) => setEtoile(e.target.value)} required />
-                            <div className="mt-8">
-                                <button type="submit">
-                                    {loading ? "Chargement..." : "Publier"}
-                                </button>
+                    <form onSubmit={handleSubmit}>
+                        <div className="flex border-b border-b-gray-600 p-3">
+                            <div className="w-[10%]">
+                                {
+                                gravatarurl ? (
+                                    <Image className="rounded-full overflow-hidden w-8 h-8 mt-2"  src={`https://2.gravatar.com/avatar/${gravatarurl}?d=identicon`} alt={'profilepicture ' + commentaire.username} width={38} height={38}></Image>)
+                                    : (<></>)
+                                }
                             </div>
-                        </form>
-                    </div>
+                            <div className="w-[90%]">
+                                <input className="p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full" type="text" placeholder="Titre" value={titre} onChange={(e) => setTitre(e.target.value)} required />
+                            </div>
+                        </div>
+                        <div className="pt-3 pl-4 pr-4">
+                            <textarea className=' bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full h-auto p-2' type="text" placeholder="Contenue du commentaire..." value={contenue} onChange={(e) => setContenue(e.target.value)} required />
+                            <div className="flex pt-4 pb-4 justify-between">
+                                <div className='w-[40%]'>
+                                    <input className=' bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full pl-3 p-2' type="number" min="1" max="5" placeholder="etoile (1-5)" value={etoile} onChange={(e) => setEtoile(e.target.value)} required />
+                                </div>
+                                <div className='w-[60%] p-2 text-right'>
+                                    <button className='pl-2 hover:text-lien' type="submit">
+                                        {loading ? "Chargement..." : "Publier"}
+                                    </button>
+                                    {
+                                        isNew ? (<></>) : (<button className='pl-2 hover:text-lien' type='button' onClick={()=>
+                                            {
+                                                editcomm()
+                                                setTitre(commentaire.titre);
+                                                setContenue(commentaire.contenue);
+                                                setEtoile(commentaire.etoile);
+                                            }
+                                        }>Annuler</button>)
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             ):(
-                <div className="commentaire">
-                    <div>{
-                        gravatarurl ? (
-                            <Image src={`https://2.gravatar.com/avatar/${gravatarurl}?d=identicon`} alt={'profilepicture ' + commentaire.username} width={30} height={30}></Image>)
-                            : (<></>)
-                        }
+                <div className="">
+                    <div className="flex border-b border-b-gray-600 p-3" >
+                        <div className="w-[10%]">
+                            {
+                            gravatarurl ? (
+                                <Image className="rounded-full overflow-hidden w-8 h-8 mt-2"  src={`https://2.gravatar.com/avatar/${gravatarurl}?d=identicon`} alt={'profilepicture ' + commentaire.username} width={38} height={38}></Image>)
+                                : (<></>)
+                            }
+                        </div>
+                        <div className="w-[50%] ">
+                            <h3 className='mt-2 m-3 text-xl text-bold'>
+                                {commentaire.titre}
+                            </h3>
+                        </div>
+                        <div className="text-xs text-right w-[40%]">
+                            <p>
+                                Par <span className="dark:text-amber-400 text-green-700">{commentaire.auteur.username}</span> le {new Date(commentaire.created_at).toLocaleDateString()} à {new Date(commentaire.created_at).toLocaleTimeString()}
+                            </p>
+                        </div>
+                    <div>
                     </div>
-                    <div className="commentaire__titre">
-                        <h3>
-                            {commentaire.titre}
-                        </h3>
                     </div>
-                    <div className="commentaire__auteur">
-                        <p>
-                            par {commentaire.auteur.username}
-                        </p>
-                    </div>
-                    <div className="commentaire__contend">
+                    <div className="pl-4 pt-3">
                         <p>
                             {commentaire.contenue}
                         </p>
                     </div>
-                    <div>
-                        à {commentaire.created_at}
-                    </div>
-                    <div>
-                        Etoile: {commentaire.etoile}
-                    </div>
-                    <div>
+                    <div className='flex justify-between'>
+                        <div className="pl-4 p-3">
+                            Etoile: {commentaire.etoile}
+                        </div>
                     {
                         causerEdit ? (
-                            <div>
-                                <button onClick={editcomm}>Modifier</button>
-                                <br></br>
-                                <button onClick={() => supabase.from('commentaire').delete().eq('id', commentaire.id).then((response) => {
+                            <div className="p-3">
+                                <button className='pl-2 hover:text-lien' onClick={editcomm}>Modifier</button>
+                                <button className='pl-2 hover:text-lien' onClick={() => supabase.from('commentaire').delete().eq('id', commentaire.id).then((response) => {
                                     console.log(response);
                                     if(response.error!=null) throw response.error;
                                     alert("Commentaire supprimé");
