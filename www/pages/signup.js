@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useContext, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
+const md5 = require('md5');
+
 // Page d'inscription
 function SignUp() {
     const [username, setUsername] = useState("");
@@ -46,6 +48,7 @@ function SignUp() {
                     }
                 });
                 let user = await (await supabase.auth.getUser()).data.user;
+                const hash = md5((email.trim()).toLowerCase())
 
                 let { error3 } = await supabase.from("comptes").insert({
                     id: user.id,
@@ -56,6 +59,7 @@ function SignUp() {
                     email: email,
                     password: mdp,
                     is_admin: false,
+                    gravatar_url: hash,
                 });
                 if (error3) throw error3;
                 else if (ok) {
@@ -91,8 +95,9 @@ function SignUp() {
                                 placeholder="E-mail"
                                 className="p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full"
                                 value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
+                                onChange={(e) =>
+                                    setEmail(e.target.value)
+                                }required
                                 title="Veuillez rentrer une adresse mail valide."
                                 pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$"
                             />

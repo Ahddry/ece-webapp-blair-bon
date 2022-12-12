@@ -23,6 +23,12 @@ module.exports = {
                 hostname: 'mldxyasghmmynjxewzuv.supabase.co',
                 port:'',
                 pathname: '/storage/v1/object/public/**',
+            },
+            {
+                protocol: 'https',
+                hostname: '2.gravatar.com',
+                port:'',
+                pathname: '/avatar/**',
             }
         ]
     },

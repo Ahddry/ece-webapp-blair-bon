@@ -2,22 +2,31 @@ import { useContext, useState } from 'react';
 import { supabase } from "../utils/supabase";
 import Context from '../components/UserContext';
 import { useEffect } from 'react';
-import Link from 'next/link';
 import { useRouter } from "next/router";
+import Image from "next/legacy/image";
 
 function commentaire({commentaire,isNew,getCloseBoxe})
 {
     const { user } = useContext(Context);
-    const [canuserEdit,getUserEdit] = useState(isNew)
+    const [causerEdit,getUserEdit] = useState(isNew)
     const[edit,getEdit] = useState(isNew)
     const editcomm = () =>{if(!isNew) getEdit(!edit)}
     const [titre, setTitre] = useState(commentaire.titre);
     const [contenue, setContenue] = useState(commentaire.contenue);
     const [etoile, setEtoile] = useState(commentaire.etoile);
     const [loading, setLoading] = useState(false);
+    const [gravatarurl,setGravatrurl] = useState(null);
     const router = useRouter();
+    async function getgravurl() //recupere le gravatard de l'utilisateur qui a publier le msg
+    {
+        let {data: gravatard_url, error} = await supabase.from('comptes').select('gravatar_url').eq('id', commentaire.userid)
+        if(error) throw error;
+        setGravatrurl(gravatard_url[0].gravatar_url);
+        console.log(gravatarurl);
+    };
+    getgravurl();
 
-    useEffect(()=> //verif si l'utilisateur qui a publier le msg est connecter 
+    useEffect(()=> //verif si l'utilisateur qui a publier le msg est connecter
     {
         if(user)
         {
@@ -115,6 +124,12 @@ function commentaire({commentaire,isNew,getCloseBoxe})
                 </div>
             ):(
                 <div className="commentaire">
+                    <div>{
+                        gravatarurl ? (
+                            <Image src={`https://2.gravatar.com/avatar/${gravatarurl}?d=identicon`} alt={'profilepicture ' + commentaire.username} width={30} height={30}></Image>)
+                            : (<></>)
+                        }
+                    </div>
                     <div className="commentaire__titre">
                         <h3>
                             {commentaire.titre}
@@ -125,7 +140,7 @@ function commentaire({commentaire,isNew,getCloseBoxe})
                             par {commentaire.auteur.username}
                         </p>
                     </div>
-                    <div className="commentaire__contenu">
+                    <div className="commentaire__contend">
                         <p>
                             {commentaire.contenue}
                         </p>
@@ -138,7 +153,7 @@ function commentaire({commentaire,isNew,getCloseBoxe})
                     </div>
                     <div>
                     {
-                        canuserEdit ? (
+                        causerEdit ? (
                             <div>
                                 <button onClick={editcomm}>Modifier</button>
                                 <br></br>
