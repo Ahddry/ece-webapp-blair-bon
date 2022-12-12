@@ -20,25 +20,6 @@ function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        /*
-        fetch(`/api/profile/${username}`).then((response) => {
-            if (response.status !== 200) {
-                console.log("Looks like there was a problem. Status Code: " + response.status);
-                alert("Utilisateur inconnu");
-                return;
-            } else {
-                response.json().then((data) => {
-                    if (data.password === mdp) {
-                        console.log(data);
-                        login(data);
-                        redirect();
-                    } else {
-                        alert("Mot de passe incorrect");
-                    }
-                });
-            }
-        });
-        */
         try {
             setLoading(true);
             async function loginSupabase() {
@@ -96,11 +77,28 @@ function Login() {
                     <div className="space-y-4">
                         <form className="p-2 bg-background2 dark:bg-dark_background2 rounded-2xl min-w-min space-y-2 xl:p-4 flex-col" onSubmit={handleSubmit}>
                             <p>Nom d'utilisateur</p>
-                            <input type="text" placeholder="Nom d'utilisateur" className="p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full" value={username} onChange={(e) => setUsername(e.target.value)} required />
+                            <input
+                                type="text"
+                                placeholder="Nom d'utilisateur"
+                                className="p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                required
+                            />
                             <p>Mot de passe</p>
-                            <input type="password" placeholder="Mot de passe" className="p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full" value={mdp} onChange={(e) => setMdp(e.target.value)} required />
+                            <input
+                                type="password"
+                                placeholder="Mot de passe"
+                                className="p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full"
+                                value={mdp}
+                                onChange={(e) => setMdp(e.target.value)}
+                                required
+                            />
                             <div className="mt-8">
-                                <button type="submit" className="bg-gray-200 dark:bg-[#36383c] rounded-full shadow-md hover:bg-gray-300 dark:hover:bg-[#4F4F4F] active:bg-background dark:active:bg-dark_background cursor-pointer p-2 xl:p-3">
+                                <button
+                                    type="submit"
+                                    className="bg-gray-200 dark:bg-[#36383c] rounded-full shadow-md hover:bg-gray-300 dark:hover:bg-[#4F4F4F] active:bg-background dark:active:bg-dark_background cursor-pointer p-2 xl:p-3"
+                                >
                                     Se connecter
                                 </button>
                             </div>
