@@ -26,17 +26,16 @@ function ProjectPage({projet , commentaire})
                 <h1 className="pt-8 text-3xl font-extralight lg:text-5xl 2xl:text-7xl text-principale">Project: {projet.name}</h1>
                 <div className="pading-left 2px">
                     {
-                    /* {
-                        projet.Image.map((image, index) => (
+                        projet.listeimage.map((image,index)=>
                             <Image
                                 key={index}
                                 src={image}
-                                alt={projet.Name + index}
+                                alt={projet.name + index}
                                 width={500}
-                                height={500}
-                            />
-                        ))
-                    } */
+                                height={300}
+                                />
+                                )
+
                     }
                 </div>
                 <div className="text-xl lg:text-lg">
