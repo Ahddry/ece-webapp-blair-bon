@@ -9,7 +9,7 @@ function CarteProjet({ nom, outils, lien,id }) {
             if(outils[i+1]!=null)
             {
                 languagearray.push(outils[i])
-                languagearray.push("⚫")
+                languagearray.push(" ● ")
             }
             else
             {
