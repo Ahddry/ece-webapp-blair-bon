@@ -55,7 +55,7 @@ function ProjectPage({ projet, commentaire }) {
                         <p className="text-justify text-sm lg:text-xl 2xl:text-3xl w-full h-max select-none">{projet.description}</p>
                     </div>
                     <div className="xl:w-[40%]">
-                        <h2>Language utilisés:</h2>
+                        <h2 className="text-2xl font-semibold mb-2">Language utilisés:</h2>
                         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-2 2xl:grid-cols-3 justify-center gap-4">
                             {projet.language.map((lang) => (
                                 <MiniCarteLangage key={lang} langage={lang} />
