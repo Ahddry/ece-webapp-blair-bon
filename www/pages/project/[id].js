@@ -86,19 +86,19 @@ function ProjectPage({ projet, commentaire }) {
                                 <Commentaire commentaire={comments} isNew={false} getCloseBoxe={getCloseBoxe} />
                             </li>
                         ))}
-                        <li key="last" className="pb-2 mt-4">
+                        <li key="last" className="pb-2 mt-4 bg-background2 dark:bg-dark_background2 rounded shadow-md hover:bg-gray-300 dark:hover:bg-[#4F4F4F] active:bg-background dark:active:bg-dark_background cursor-pointer p-2 xl:p-3">
                             {user ? (
                                 <button
-                                    className="bg-gray-200 dark:bg-[#36383c] rounded-full shadow-md hover:bg-gray-300 dark:hover:bg-[#4F4F4F] active:bg-background dark:active:bg-dark_background cursor-pointer p-2 xl:p-3"
+                                    className="justify-center w-full transition-transform"
                                     onClick={() => setAddComm(!addComm)}
                                 >
                                     Ajouter un commentaire
                                 </button>
                             ) : (
-                                <p>Vous devez être connecter pour ajouter un commentaire</p>
+                                <p className="text-center w-full" >Vous devez être connecter pour ajouter un commentaire</p>
                             )}
                             {addComm && (
-                                <Commentaire
+                                (<Commentaire
                                     commentaire={{
                                         id: null,
                                         created_at: null,
@@ -112,6 +112,8 @@ function ProjectPage({ projet, commentaire }) {
                                     isNew={true}
                                     getCloseBoxe={getCloseBoxe}
                                 />
+                        )
+                        
                             )}
                         </li>
                     </ul>

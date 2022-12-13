@@ -4,8 +4,7 @@ import Context from "../components/UserContext";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/legacy/image";
-import { BsStarFill } from "react-icons/bs";
-import { BsStar } from "react-icons/bs";
+import {BsStarFill, BsStar} from  'react-icons/bs'
 
 function commentaire({ commentaire, isNew, getCloseBoxe }) {
     const { user } = useContext(Context);
@@ -17,7 +16,6 @@ function commentaire({ commentaire, isNew, getCloseBoxe }) {
     const [titre, setTitre] = useState(commentaire.titre);
     const [contenue, setContenue] = useState(commentaire.contenue);
     const [etoile, setEtoile] = useState(commentaire.etoile);
-    const [etoiletab, setEtoiletab] = useState([]);
     const [loading, setLoading] = useState(false);
     const [gravatarurl, setGravatrurl] = useState(null);
     const router = useRouter();
@@ -29,6 +27,18 @@ function commentaire({ commentaire, isNew, getCloseBoxe }) {
         //console.log(gravatarurl);
     }
     getgravurl();
+    let nbEtoile = []
+    for(let i=0;i<5;i++)
+    {
+        if(i<etoile)
+        {
+            nbEtoile.push(<BsStarFill className="text-jaune m-0.5" />)
+        }
+        else
+        {
+            nbEtoile.push(<BsStar className="text-jaune m-0.5" />)
+        }
+    }
 
     useEffect(() =>
         //verif si l'utilisateur qui a publié le msg est connecté
@@ -40,24 +50,13 @@ function commentaire({ commentaire, isNew, getCloseBoxe }) {
             }
         }, []);
 
-    useEffect(() => {
-        //rempli le tableau d'étoiles
-        let etoiletab2 = [];
-        for (let i = 0; i < etoile; i++) {
-            etoiletab2.push(<BsStarFill className="text-yellow-400" />);
-        }
-        for (let i = 0; i < 5 - etoile; i++) {
-            etoiletab2.push(<BsStar className="text-yellow-400" />);
-        }
-        setEtoiletab(etoiletab2);
-    }, [etoile]);
-
     const handleSubmit = (e) => {
         //gestion du formulaire
         e.preventDefault();
         setLoading(true);
         async function updatecomm() {
-            try {
+                    let alertMessage = "NULL"
+    try {
                 if (isNew) {
                     //si nouveau commentaire
                     await supabase
@@ -80,7 +79,7 @@ function commentaire({ commentaire, isNew, getCloseBoxe }) {
                     getCloseBoxe(true);
                     setLoading(false);
                     router.push("/project/" + commentaire.projets_id);
-                    alert("Commentaire ajouté");
+                    alertMessage = "Commentaire ajouté";
                 } //si modif commmentaire
                 else {
                     await supabase
@@ -97,7 +96,7 @@ function commentaire({ commentaire, isNew, getCloseBoxe }) {
                             if (response.error != null) throw response.error;
                         });
                     setLoading(false);
-                    alert("Commentaire modifié");
+                    alertMessage = "Commentaire modifié";
                     commentaire.titre = titre;
                     commentaire.contenue = contenue;
                     commentaire.etoile = etoile;
@@ -106,11 +105,12 @@ function commentaire({ commentaire, isNew, getCloseBoxe }) {
             } catch (error) {
                 console.log(error);
                 setLoading(false);
-                alert("Erreur lors de l'enregistement du commentaire");
+                alertMessage="Erreur lors de l'enregistement du commentaire";
                 return error;
             } finally {
                 editcomm();
             }
+            alert(alertMessage);
         }
         updatecomm();
     };
@@ -225,11 +225,11 @@ function commentaire({ commentaire, isNew, getCloseBoxe }) {
                     <div className="pl-4 pt-3">
                         <p>{commentaire.contenue}</p>
                     </div>
-                    <div className="flex justify-between">
-                        <div className="pl-4 p-3 text-2xl flex gap-1">
-                            {etoiletab.map((etoile, index) => {
-                                return <span key={index}>{etoile}</span>;
-                            })}
+                    <div className='flex justify-between'>
+                        <div className="pl-4 p-3 flex">
+                            {
+                                nbEtoile
+                            }
                         </div>
                         {causerEdit ? (
                             <div className="p-3">
