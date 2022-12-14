@@ -8,8 +8,10 @@ import Context from "../../components/UserContext";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 import { FaGithub } from "react-icons/fa";
+import Context2 from "../../components/ThemeContext";
 
 function ProjectPage({ projet, commentaire }) {
+    const { colour } = useContext(Context2);
     const { user } = useContext(Context);
     const [addComm, setAddComm] = useState(false);
     const [closeBoxe, setCloseBox] = useState(false);
@@ -24,7 +26,7 @@ function ProjectPage({ projet, commentaire }) {
     return (
         <section className="flex items-center justify-between flex-col w-full min-h-screen  bg-background dark:bg-dark_background">
             <div className="p-5 mt-12 space-y-5">
-                <h1 className="pt-8 text-3xl font-extralight lg:text-5xl 2xl:text-7xl text-principale">{projet.name}</h1>
+                <h1 className={"pt-8 text-3xl font-extralight lg:text-5xl 2xl:text-7xl  text-" + colour.principale + " dark:text-" + colour.principaleDark}>{projet.name}</h1>
                 <div className="">
                     <Carousel showThumbs={false} showStatus={false} infiniteLoop={true} autoPlay={true} interval={5000}>
                         {projet.listeimage.map(
@@ -41,7 +43,7 @@ function ProjectPage({ projet, commentaire }) {
                     </Carousel>
                 </div>
                 <h2 className="text-2xl font-semibold">Contributeurs : </h2>
-                <div className="mb-5 mx-5 p-3 rounded-3xl bg-gray-300 md:my-auto lg:mr-8 dark:bg-dark_background2">
+                <div className="mb-5 mx-5 p-3 rounded-3xl bg-background2 md:my-auto lg:mr-8 dark:bg-dark_background2 shadow">
                     <p>
                         {projet.participants.map((contributeur, index) => (
                             <span key={contributeur + index}>
@@ -51,10 +53,10 @@ function ProjectPage({ projet, commentaire }) {
                     </p>
                 </div>
                 <div className="flex flex-col xl:flex-row justify-between ">
-                    <div className="mb-5 mx-5 p-3 rounded-3xl bg-gray-300 md:my-auto lg:mr-8 dark:bg-dark_background2 xl:max-w-[60%] xl:w-full">
+                    <div className="mb-5 mx-5 p-3 rounded-3xl bg-background2 md:my-auto lg:mr-8 dark:bg-dark_background2 shadow xl:max-w-[60%] 2xl:max-w-[55%] xl:w-full">
                         <p className="text-justify text-sm lg:text-xl 2xl:text-3xl w-full h-max select-none">{projet.description}</p>
                     </div>
-                    <div className="xl:w-[40%]">
+                    <div className="xl:w-[40%] 2xl:[45%]">
                         <h2 className="text-2xl font-semibold mb-2">Language utilisés:</h2>
                         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-2 2xl:grid-cols-3 justify-center gap-4">
                             {projet.language.map((lang) => (
@@ -67,7 +69,7 @@ function ProjectPage({ projet, commentaire }) {
                     <>
                         <h2 className="text-2xl font-semibold">Lien vers le dépôt du code source : </h2>
                         <a href={projet.github} target="_blank" rel="noopener noreferrer" className="text-2xl">
-                            <div className="mb-5 mx-5 mt-2 p-3 rounded-3xl bg-gray-300 lg:mr-8 dark:bg-dark_background2 flex">
+                            <div className="mb-5 mx-5 mt-2 p-3 rounded-3xl bg-background2 lg:mr-8 dark:bg-dark_background2 shadow flex">
                                 <FaGithub className="text-5xl" />
                                 <p className="text-lien text-justify text-base md:text-lg lg:text-xl 2xl:text-3xl hover:underline m-3">{projet.github}</p>
                             </div>

@@ -4,11 +4,13 @@ import Link from "next/link";
 import Context from "../components/UserContext";
 import { useContext, useState, useEffect } from "react";
 import { supabase } from "../utils/supabase";
+import Context2 from "../components/ThemeContext";
 
 // Page d'informations du profil
 
 function Profil() {
     const { user } = useContext(Context);
+    const { colour } = useContext(Context2);
     const [admin, setAdmin] = useState(false);
     const [edit, setEdit] = useState(false);
 
@@ -101,7 +103,7 @@ function Profil() {
         setAdmin(user.admin);
         return (
             <div className="p-5 mt-12 min-w-[70%] space-y-5">
-                <h1 className="pt-8 text-3xl font-extralight lg:text-5xl 2xl:text-7xl text-principale">Mon profil</h1>
+                <h1 className={"pt-8 text-3xl font-extralight lg:text-5xl 2xl:text-7xl  text-" + colour.principale + " dark:text-" + colour.principaleDark}>Mon profil</h1>
                 <div className="text-xl lg:text-lg">
                     <p>
                         <span className="font-bold">Nom d'utilisateur : </span> {user.username} <br />
@@ -112,7 +114,21 @@ function Profil() {
                         <br />
                     </p>
                     <button
-                        className="mt-6 p-4 rounded-2xl border-2 border-erreur dark:border-dark_erreur text-erreur dark:text-dark_erreur hover:bg-erreur hover:text-white hover:dark:bg-dark_erreur dark:hover:text-white"
+                        className={
+                            "mt-6 p-4 rounded-2xl border-2 border-" +
+                            colour.principale +
+                            " dark:border-" +
+                            colour.principaleDark +
+                            " text-" +
+                            colour.principale +
+                            " dark:text-" +
+                            colour.principaleDark +
+                            " hover:bg-" +
+                            colour.principale +
+                            " hover:text-white hover:dark:bg-" +
+                            colour.principaleDark +
+                            " dark:hover:text-white"
+                        }
                         onClick={editAccount}
                     >
                         Modifier mes informations
@@ -208,7 +224,7 @@ function Profil() {
 
         return (
             <div>
-                <h1 className="pt-8 text-3xl font-extralight lg:text-5xl 2xl:text-7xl text-principale">Messagerie</h1>
+                <h1 className={"pt-8 text-3xl font-extralight lg:text-5xl 2xl:text-7xl  text-" + colour.principale + " dark:text-" + colour.principaleDark}>Messagerie</h1>
                 <div className="my-8" />
                 <div className="rounded-xl overflow-auto shadow mb-24">
                     <table className="w-full p-3 bg-gray-100 dark:bg-dark_background2">

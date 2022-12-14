@@ -2,14 +2,17 @@ import Footer from "../components/Footer";
 import { FaEnvelope } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import Link from "next/link";
+import { useContext } from "react";
+import Context2 from "../components/ThemeContext";
 
 // Page de contact
 function Contacts() {
+    const { colour } = useContext(Context2);
     return (
         <section className="flex items-center justify-between flex-col w-full h-screen  bg-background dark:bg-dark_background">
             <div className="p-5 mt-12 min-w-[70%]">
                 <div className="space-y-6">
-                    <h1 className="pt-8 text-3xl font-extralight lg:text-5xl 2xl:text-7xl text-principale ">Contacts</h1>
+                    <h1 className={"pt-8 text-3xl font-extralight lg:text-5xl 2xl:text-7xl text-" + colour.principale + " dark:text-" + colour.principaleDark}>Contacts</h1>
                     <div className="space-y-4">
                         <p className="gap-4 text-justify flex-wrap space-x-2">
                             Pour nous contacter, rien de plus simple ! <br></br>

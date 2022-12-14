@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { supabase } from "../utils/supabase";
 import Context from "../components/UserContext";
+import Context2 from "./ThemeContext";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/legacy/image";
@@ -8,6 +9,7 @@ import {BsStarFill, BsStar} from  'react-icons/bs'
 
 function commentaire({ commentaire, isNew, getCloseBoxe }) {
     const { user } = useContext(Context);
+    const { colour } = useContext(Context2);
     const [causerEdit, getUserEdit] = useState(isNew);
     const [edit, getEdit] = useState(isNew);
     const editcomm = () => {
@@ -215,8 +217,8 @@ function commentaire({ commentaire, isNew, getCloseBoxe }) {
                                 </div>
                                 <div className="text-xs text-right">
                                     <p>
-                                        Par <span className="dark:text-amber-400 text-green-700">{commentaire.auteur.username}</span> le {new Date(commentaire.created_at).toLocaleDateString()} à{" "}
-                                        {new Date(commentaire.created_at).toLocaleTimeString()}
+                                        Par <span className={"font-bold text-" + colour.principale + " dark:text-" + colour.principaleDark}>{commentaire.auteur.username}</span> le{" "}
+                                        {new Date(commentaire.created_at).toLocaleDateString()} à {new Date(commentaire.created_at).toLocaleTimeString()}
                                     </p>
                                 </div>
                             </div>

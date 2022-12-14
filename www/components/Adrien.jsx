@@ -16,7 +16,6 @@ function Adrien() {
             "Moi c'est Adrien, j'ai 21 ans et je suis étudiant en 4ème année à l'ECE Paris. Je suis passionné par l'informatique et la programmation, j'éprouve aussi un grand intérêt pour le monde de la sécurité informatique.<br></br> Lorsque je ne programme pas, j'aime jouer à des jeux vidéo et passer du temps avec mes amis.",
     };
 
-
     const compAdri = {
         langages: [
             ["C#", "/languages/csharp.png"],

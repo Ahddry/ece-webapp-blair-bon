@@ -4,9 +4,11 @@ import { useContext, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { supabase } from "../utils/supabase";
 import Link from "next/link";
+import Context2 from "../components/ThemeContext";
 
 // Page de connexion
 function Login() {
+    const { colour } = useContext(Context2);
     const [username, setUsername] = useState("");
     const [mdp, setMdp] = useState("");
     const [loading, setLoading] = useState(false);
@@ -73,7 +75,7 @@ function Login() {
         <section className="flex items-center justify-between flex-col w-full h-screen  bg-gray-200 dark:bg-[#1d1f23]">
             <div className="p-5 mt-12 min-w-[70%]">
                 <div className="space-y-6">
-                    <h1 className="pt-8 text-3xl font-extralight lg:text-5xl 2xl:text-7xl text-principale ">Connexion</h1>
+                    <h1 className={"pt-8 text-3xl font-extralight lg:text-5xl 2xl:text-7xl  text-" + colour.principale + " dark:text-" + colour.principaleDark}>Connexion</h1>
                     <div className="space-y-4">
                         <form className="p-2 bg-background2 dark:bg-dark_background2 rounded-2xl min-w-min space-y-2 xl:p-4 flex-col" onSubmit={handleSubmit}>
                             <p>Nom d'utilisateur</p>

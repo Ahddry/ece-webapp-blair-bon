@@ -1,27 +1,19 @@
 import CarteProjet from "./CarteProjet";
 import { supabase } from "../utils/supabase";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 // Projets réalisé par une personne
 function Projets({ userid }) {
-    const [listprojets, setlistporjets] = useState([])
-    // async function getprojets()
-    // {
-    //     let {data: projets, error} = await supabase.from('projets').select('*').eq('auteur', userid)
-    //     if(error) throw error;
-    //     setlistporjets(projets);
-    // }
-    // getprojets()
+    const [listprojets, setlistporjets] = useState([]);
     useEffect(() => {
         async function getprojets() {
-            let { data: projets, error } = await supabase.from('projets').select('name,language,listeimage,id').eq('auteur', userid)
+            let { data: projets, error } = await supabase.from("projets").select("name,language,listeimage,id").eq("auteur", userid);
             if (error) throw error;
             setlistporjets(projets);
         }
-        getprojets()
-    }, [userid])
-    console.log(listprojets)
+        getprojets();
+    }, [userid]);
+    console.log(listprojets);
     let projetsTel = [];
     let projetsMd = [];
     let projetsLg = [];
@@ -108,7 +100,7 @@ function Projets({ userid }) {
                         <h2 className="my-8 ml-[10%] mr-auto text-3xl lg:text-5xl 2xl:text-7xl font-extralight">Les projets que j'ai réalisé</h2>
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8 mx-5">
                             {projets.map((projet) => (
-                                <CarteProjet nom={projet.name} outils={projet.language} lien={projet.listeimage[0]} id={projet.id} key={projet.id + "s"}/>
+                                <CarteProjet nom={projet.name} outils={projet.language} lien={projet.listeimage[0]} id={projet.id} key={projet.id + "s"} />
                             ))}
                         </div>
                     </div>
@@ -137,7 +129,7 @@ function Projets({ userid }) {
                         <h2 className="my-8 ml-[10%] mr-auto text-3xl lg:text-5xl 2xl:text-7xl font-extralight">Les projets que j'ai réalisé</h2>
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8 mx-5">
                             {projets.map((projet) => (
-                                <CarteProjet nom={projet.name} outils={projet.language} lien={projet.listeimage[0]} id={projet.id} key={projet.id +  "l"} />
+                                <CarteProjet nom={projet.name} outils={projet.language} lien={projet.listeimage[0]} id={projet.id} key={projet.id + "l"} />
                             ))}
                         </div>
                         <div className="mb-5 mx-5 p-3 rounded-3xl bg-gray-300 md:my-3 dark:bg-dark_background2 md:max-w-5xl 2xl:max-w-7xl">

@@ -1,9 +1,20 @@
 import Image from "next/legacy/image";
+import { useContext } from "react";
+import Context2 from "../components/ThemeContext";
 
 // Une expérience d'une personne
 function CarteLangage({ entreprise, periode, poste, illustration }) {
+    const { colour } = useContext(Context2);
     return (
-        <div className="p-6 shadow-md rounded-xl hover:scale-105 ease-in duration-300 md:w-80 xl:w-[300px] 2xl:w-[400px] bg-background2 dark:bg-dark_background2 group hover:bg-gradient-to-r from-dark_secondaire to-principale max-w-2xl">
+        <div
+            className={
+                "p-6 shadow-md rounded-xl hover:scale-105 ease-in duration-300 md:w-80 xl:w-[300px] 2xl:w-[400px] bg-background2 dark:bg-dark_background2 group hover:bg-gradient-to-r from-" +
+                colour.principaleDark +
+                " to-" +
+                colour.principale +
+                " max-w-2xl"
+            }
+        >
             <div className="grid grid-cols-2 gap-4 justify-center items-center my-auto">
                 <div className="relative m-auto w-[64px] h-[64px] lg:w-[80px] lg:h-[80px] 2xl:w-[100px] 2xl:h-[100px] group-hover:opacity-10">
                     <Image src={illustration} className="" layout="fill" alt={entreprise + " logo"} />

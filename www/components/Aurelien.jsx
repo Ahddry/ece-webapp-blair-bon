@@ -7,7 +7,7 @@ import Contacter from "./Contacter";
 // Portfolio d'Aurélien
 function Aurelien() {
     const dataAure = {
-        id:"cbdd2007-e5de-49e4-9c11-ef15c0360c37",
+        id: "cbdd2007-e5de-49e4-9c11-ef15c0360c37",
         prenom: "Aurélien",
         nom: "Bon",
         age: "21 ans",
@@ -29,14 +29,6 @@ function Aurelien() {
         description:
             "J'ai depuis toujours été passioné par la manière dont fonctionne les choses. Je suis donc très intéressé par la programmation, qui permet de créer des choses à partir de rien, plus partoculièrement la partie back-end. J'ai donc eu l'occasion de travailler sur des projets back-end, notamment en C, C++, C#, Python et Java.",
     };
-    // const projAure = {
-    //     projets: [
-    //         ["HelloCine", "Java ● JavaFX ● MySQL", "/projects/hellocine/HelloCine.jpg","6"],
-    //         ["Batailles et coups d'États", "C++ ● Allegro", "/projects/b&ce/b&ce.jpg","5"],
-    //         ["Quoridor", "C", "/projects/quoridor/quoridor.jpg","7"],
-    //     ],
-    //     description: "Les projets sur lesquels j'ai travaillé récemment.",
-    // };
 
     const expAure = {
         entreprises: [

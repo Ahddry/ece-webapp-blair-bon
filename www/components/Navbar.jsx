@@ -1,6 +1,7 @@
 import Image from "next/legacy/image";
 import Link from "next/link";
 import Context from "./UserContext";
+import Context2 from "./ThemeContext";
 import { useContext, useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
@@ -42,43 +43,152 @@ function Navbar() {
         );
     };
 
+    const { colour } = useContext(Context2);
+
+    const { updateColour } = useContext(Context2);
+
+    const [col, setCol] = useState("default");
+
+    useEffect(() => {
+        updateColour(col);
+    }, [col]);
+
     return (
         <div>
-            <nav id="BarrePrincipale" className="bg-background2 dark:bg-dark_background2 flex justify-between gap-10 drop-shadow-lg  md:drop-shadow-xl max-h-20 fixed w-full z-10">
+            <div className={"fixed m-24 w-24 h-52 bg-" + colour.principale}>
+                <form>
+                    <select onChange={(e) => setCol(e.target.value)}>
+                        <option value="default">default</option>
+                        <option value="rouge">rouge</option>
+                        <option value="bleu">bleu</option>
+                        <option value="rose">rose</option>
+                        <option value="vert">vert</option>
+                        <option value="gris">gris</option>
+                    </select>
+                </form>
+                {col == "rouge" ? <div>rouge</div> : <div>default</div>}
+                <div className={" bg-" + colour.tertiaire}>TEST</div>
+            </div>
+
+            <nav id="BarrePrincipale" className={"bg-background2 dark:bg-dark_background2 flex justify-between gap-10 drop-shadow-lg  md:drop-shadow-xl max-h-20 fixed w-full z-10"}>
                 <img src="/ECE_LOGO.png" alt="Logo" width={171} height={88.5} className="cursor-pointer max-w-[171px]" />
                 <ul className="hidden md:flex md:items-center md:space-x-5 mx-auto">
                     <li className=" md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl ">
-                        <button className="hidden md:block 2xl:hidden hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1" onClick={ouvrirDropdown}>
+                        <button
+                            className={
+                                "hidden md:block 2xl:hidden hover:text-" +
+                                colour.principale +
+                                " active:text-" +
+                                colour.secondaire +
+                                " hover:dark:text-" +
+                                colour.principaleDark +
+                                " active:dark:text-" +
+                                colour.secondaireDark
+                            }
+                            onClick={ouvrirDropdown}
+                        >
                             Portfolios
                         </button>
                         {dropdown ? (
                             <ul className="hidden md:block 2xl:hidden flex-col fixed mt-4 p-4 rounded-b-xl -ml-4 bg-background2 dark:bg-dark_background2 space-y-3 shadow-md">
-                                <li className="hidden md:block 2xl:hidden hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1" onClick={ouvrirDropdown}>
+                                <li
+                                    className={
+                                        "hidden md:block 2xl:hidden hover:text-" +
+                                        colour.principale +
+                                        " active:text-" +
+                                        colour.secondaire +
+                                        " hover:dark:text-" +
+                                        colour.principaleDark +
+                                        " active:dark:text-" +
+                                        colour.secondaireDark
+                                    }
+                                    onClick={ouvrirDropdown}
+                                >
                                     <Link href="/#portfolio" className="cursor-pointer">
                                         Profils
                                     </Link>
                                 </li>
-                                <li className="hidden md:block 2xl:hidden hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1" onClick={ouvrirDropdown}>
+                                <li
+                                    className={
+                                        "hidden md:block 2xl:hidden hover:text-" +
+                                        colour.principale +
+                                        " active:text-" +
+                                        colour.secondaire +
+                                        " hover:dark:text-" +
+                                        colour.principaleDark +
+                                        " active:dark:text-" +
+                                        colour.secondaireDark
+                                    }
+                                    onClick={ouvrirDropdown}
+                                >
                                     <Link href="/#presentation" className="cursor-pointer ">
                                         Présentation
                                     </Link>
                                 </li>
-                                <li className="hidden md:block 2xl:hidden hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1" onClick={ouvrirDropdown}>
+                                <li
+                                    className={
+                                        "hidden md:block 2xl:hidden hover:text-" +
+                                        colour.principale +
+                                        " active:text-" +
+                                        colour.secondaire +
+                                        " hover:dark:text-" +
+                                        colour.principaleDark +
+                                        " active:dark:text-" +
+                                        colour.secondaireDark
+                                    }
+                                    onClick={ouvrirDropdown}
+                                >
                                     <Link href="/#competences" className="cursor-pointer ">
                                         Compétences
                                     </Link>
                                 </li>
-                                <li className="hidden md:block 2xl:hidden hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1" onClick={ouvrirDropdown}>
+                                <li
+                                    className={
+                                        "hidden md:block 2xl:hidden hover:text-" +
+                                        colour.principale +
+                                        " active:text-" +
+                                        colour.secondaire +
+                                        " hover:dark:text-" +
+                                        colour.principaleDark +
+                                        " active:dark:text-" +
+                                        colour.secondaireDark
+                                    }
+                                    onClick={ouvrirDropdown}
+                                >
                                     <Link href="/#projets" className="cursor-pointer ">
                                         Projets
                                     </Link>
                                 </li>
-                                <li className="hidden md:block 2xl:hidden hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1" onClick={ouvrirDropdown}>
+                                <li
+                                    className={
+                                        "hidden md:block 2xl:hidden hover:text-" +
+                                        colour.principale +
+                                        " active:text-" +
+                                        colour.secondaire +
+                                        " hover:dark:text-" +
+                                        colour.principaleDark +
+                                        " active:dark:text-" +
+                                        colour.secondaireDark
+                                    }
+                                    onClick={ouvrirDropdown}
+                                >
                                     <Link href="/#experiences" className="cursor-pointer ">
                                         Expériences
                                     </Link>
                                 </li>
-                                <li className="hidden md:block 2xl:hidden hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1" onClick={ouvrirDropdown}>
+                                <li
+                                    className={
+                                        "hidden md:block 2xl:hidden hover:text-" +
+                                        colour.principale +
+                                        " active:text-" +
+                                        colour.secondaire +
+                                        " hover:dark:text-" +
+                                        colour.principaleDark +
+                                        " active:dark:text-" +
+                                        colour.secondaireDark
+                                    }
+                                    onClick={ouvrirDropdown}
+                                >
                                     <Link href="/#contacter" className="cursor-pointer ">
                                         Me contacter
                                     </Link>
@@ -88,32 +198,104 @@ function Navbar() {
                             <div className="hidden" />
                         )}
                     </li>
-                    <li className="hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1 hidden 2xl:block 2xl:text-4xl ">
+                    <li
+                        className={
+                            "hover:text-" +
+                            colour.principale +
+                            " active:text-" +
+                            colour.secondaire +
+                            " hover:dark:text-" +
+                            colour.principaleDark +
+                            " active:dark:text-" +
+                            colour.secondaireDark +
+                            " hidden 2xl:block 2xl:text-4xl "
+                        }
+                    >
                         <Link href="/#portfolio" className="cursor-pointer">
                             Portfolios
                         </Link>
                     </li>
-                    <li className="hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1  hidden 2xl:block 2xl:text-4xl">
+                    <li
+                        className={
+                            "hover:text-" +
+                            colour.principale +
+                            " active:text-" +
+                            colour.secondaire +
+                            " hover:dark:text-" +
+                            colour.principaleDark +
+                            " active:dark:text-" +
+                            colour.secondaireDark +
+                            "  hidden 2xl:block 2xl:text-4xl"
+                        }
+                    >
                         <Link href="/#presentation" className="cursor-pointer ">
                             Présentation
                         </Link>
                     </li>
-                    <li className="hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1 hidden 2xl:block 2xl:text-4xl">
+                    <li
+                        className={
+                            "hover:text-" +
+                            colour.principale +
+                            " active:text-" +
+                            colour.secondaire +
+                            " hover:dark:text-" +
+                            colour.principaleDark +
+                            " active:dark:text-" +
+                            colour.secondaireDark +
+                            " hidden 2xl:block 2xl:text-4xl"
+                        }
+                    >
                         <Link href="/#competences" className="cursor-pointer ">
                             Compétences
                         </Link>
                     </li>
-                    <li className="hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1 hidden 2xl:block 2xl:text-4xl">
+                    <li
+                        className={
+                            "hover:text-" +
+                            colour.principale +
+                            " active:text-" +
+                            colour.secondaire +
+                            " hover:dark:text-" +
+                            colour.principaleDark +
+                            " active:dark:text-" +
+                            colour.secondaireDark +
+                            " hidden 2xl:block 2xl:text-4xl"
+                        }
+                    >
                         <Link href="/#projets" className="cursor-pointer ">
                             Projets
                         </Link>
                     </li>
-                    <li className="hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1 hidden 2xl:block 2xl:text-4xl">
+                    <li
+                        className={
+                            "hover:text-" +
+                            colour.principale +
+                            " active:text-" +
+                            colour.secondaire +
+                            " hover:dark:text-" +
+                            colour.principaleDark +
+                            " active:dark:text-" +
+                            colour.secondaireDark +
+                            " hidden 2xl:block 2xl:text-4xl"
+                        }
+                    >
                         <Link href="/#experiences" className="cursor-pointer ">
                             Expériences
                         </Link>
                     </li>
-                    <li className="hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1 md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl">
+                    <li
+                        className={
+                            "hover:text-" +
+                            colour.principale +
+                            " active:text-" +
+                            colour.secondaire +
+                            " hover:dark:text-" +
+                            colour.principaleDark +
+                            " active:dark:text-" +
+                            colour.secondaireDark +
+                            " md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl"
+                        }
+                    >
                         <div className="hidden 2xl:block">
                             <Link href="/#contacter" className="cursor-pointer">
                                 Contacts
@@ -125,7 +307,19 @@ function Navbar() {
                             </Link>
                         </div>
                     </li>
-                    <li className="hover:text-principale active:text-principale_V1 hover:dark:text-dark_secondaire active:dark:text-dark_secondaire_V1 md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl">
+                    <li
+                        className={
+                            "hover:text-" +
+                            colour.principale +
+                            " active:text-" +
+                            colour.secondaire +
+                            " hover:dark:text-" +
+                            colour.principaleDark +
+                            " active:dark:text-" +
+                            colour.secondaireDark +
+                            " md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl"
+                        }
+                    >
                         <Link href="/articles" className="cursor-pointer ">
                             Articles
                         </Link>
@@ -136,7 +330,7 @@ function Navbar() {
                         {user ? (
                             <div>
                                 <button className="flex flex-row justify-end items-center mt-2" onClick={ouvrirProfil}>
-                                    <div className="flex flex-row justify-center items-center cursor-pointer hover:text-principale dark:hover:text-dark_secondaire">
+                                    <div className={"flex flex-row justify-center items-center cursor-pointer hover:text-" + colour.principale + " hover:dark:text-" + colour.principaleDark + ""}>
                                         <FaUser className="w-6 h-6 mr-2" />
                                         <p className="hidden sm:block text-sm">
                                             {user.firstname} {user.lastname}
@@ -169,7 +363,7 @@ function Navbar() {
                         ) : (
                             <div className="flex flex-row justify-end items-center mt-2">
                                 <Link href="/login">
-                                    <div className="flex flex-row justify-center items-center cursor-pointer hover:text-principale dark:hover:text-dark_secondaire">
+                                    <div className={"flex flex-row justify-center items-center cursor-pointer hover:text-" + colour.principale + " hover:dark:text-" + colour.principaleDark}>
                                         <FaUserPlus className="w-6 h-6 mr-2" />
                                         <p className="hidden sm:block text-sm">S'identifier</p>
                                     </div>
@@ -179,13 +373,33 @@ function Navbar() {
                     </div>
                     <button
                         title="Changer de thème de couleur"
-                        className="shadow-md focus:ring bg-principale hover:bg-principale_V1 focus:bg-principale_V2 focus:ring-principale dark:bg-dark_secondaire hover:dark:bg-dark_secondaire_V1
-                        focus:dark:bg-dark_secondaire_V2 focus:dark:ring-dark_secondaire dark:text-on_background h-10 w-10 m-auto rounded-full text-center cursor-pointer text-2xl"
+                        className={
+                            "shadow-md focus:ring bg-" +
+                            colour.principale +
+                            " hover:bg-" +
+                            colour.secondaire +
+                            " focus:bg-" +
+                            colour.tertiaire +
+                            " focus:ring-" +
+                            colour.principale +
+                            " dark:bg-" +
+                            colour.principaleDark +
+                            " hover:dark:bg-" +
+                            colour.secondaireDark +
+                            "focus:dark:bg-" +
+                            colour.tertiaireDark +
+                            " focus:dark:ring-" +
+                            colour.tertiaireDark +
+                            "  dark:text-on_background h-10 w-10 m-auto rounded-full text-center cursor-pointer text-2xl"
+                        }
                         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
                     >
                         ◐
                     </button>
-                    <div className="md:hidden bg-gray-200 dark:bg-[#36383c] my-auto rounded-full shadow-md hover:bg-gray-300 dark:hover:bg-[#4F4F4F] active:bg-background dark:active:bg-dark_background cursor-pointer p-2" onClick={ouvrirNav}>
+                    <div
+                        className="md:hidden bg-gray-200 dark:bg-[#36383c] my-auto rounded-full shadow-md hover:bg-gray-300 dark:hover:bg-[#4F4F4F] active:bg-background dark:active:bg-dark_background cursor-pointer p-2"
+                        onClick={ouvrirNav}
+                    >
                         <HiOutlineMenuAlt3 className=" " size={"25"} />
                     </div>
                 </div>
@@ -201,7 +415,10 @@ function Navbar() {
                     <div>
                         <div className="flex justify-between w-full items-center">
                             <Image src="/ECE_LOGO.png" alt="Logo" width={130} height={100} className="cursor-pointer" />
-                            <div className="p-3 bg-gray-200 dark:bg-[#36383c] hover:bg-gray-300 dark:hover:bg-[#4F4F4F] active:bg-background dark:active:bg-dark_background rounded-full shadow-md" onClick={ouvrirNav}>
+                            <div
+                                className="p-3 bg-gray-200 dark:bg-[#36383c] hover:bg-gray-300 dark:hover:bg-[#4F4F4F] active:bg-background dark:active:bg-dark_background rounded-full shadow-md"
+                                onClick={ouvrirNav}
+                            >
                                 <CgClose className="cursor-pointer" size={"25"} />
                             </div>
                         </div>

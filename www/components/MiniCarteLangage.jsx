@@ -43,6 +43,9 @@ function MiniCarteLangage({ langage }) {
         case "SQL":
             illustration = "/languages/sql.png";
             break;
+        case "MySQL":
+            illustration = "/languages/sql.png";
+            break;
         case "Tailwind":
             illustration = "/languages/tailwind.png";
             break;
@@ -51,7 +54,7 @@ function MiniCarteLangage({ langage }) {
     }
 
     return (
-        <div className="p-6 shadow-md rounded-xl hover:scale-105 ease-in duration-300 w-full bg-background2 dark:bg-dark_background2">
+        <div className="p-6 shadow-md rounded-xl hover:scale-105 ease-in duration-300 w-full bg-background2 dark:bg-dark_background2 overflow-hidden">
             <div className="grid grid-cols-2 gap-4 justify-center items-center ">
                 <div className="relative m-auto w-[64px] h-[64px] lg:w-[80px] lg:h-[80px]">
                     <Image src={illustration} className="" layout="fill" alt={langage + " logo"} />

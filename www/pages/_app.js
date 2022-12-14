@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import Layout from "../components/Layout";
 import { useState } from "react";
 import { UserContext } from "../components/UserContext";
+import { ColourContext } from "../components/ThemeContext";
 import { ThemeProvider } from "next-themes";
 import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
@@ -14,9 +15,11 @@ function MyApp({ Component, pageProps }) {
         <ThemeProvider attribute="class">
             <SessionContextProvider supabaseClient={supabase} initialSession={pageProps.initialSession}>
                 <UserContext>
-                    <Layout>
-                        <Component {...pageProps} />
-                    </Layout>
+                    <ColourContext>
+                        <Layout>
+                            <Component {...pageProps} />
+                        </Layout>
+                    </ColourContext>
                 </UserContext>
             </SessionContextProvider>
         </ThemeProvider>
