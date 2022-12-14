@@ -13,7 +13,6 @@ function Projets({ userid }) {
         }
         getprojets();
     }, [userid]);
-    console.log(listprojets);
     let projetsTel = [];
     let projetsMd = [];
     let projetsLg = [];

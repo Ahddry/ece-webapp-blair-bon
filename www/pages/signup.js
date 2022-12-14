@@ -84,7 +84,7 @@ function SignUp() {
                 <div className="space-y-6">
                     <h1 className={"pt-8 text-3xl font-extralight lg:text-5xl 2xl:text-7xl  text-" + colour.principale + " dark:text-" + colour.principaleDark}>Inscription</h1>
                     <div className="space-y-4">
-                        <form className="p-2 bg-background2 dark:bg-dark_background2 rounded-2xl min-w-min space-y-2 xl:p-4 flex-col" onSubmit={handleSubmit}>
+                        <form className="p-2 bg-background2 dark:bg-dark_background2 rounded-2xl shadow-lg  min-w-min space-y-2 xl:p-4 flex-col" onSubmit={handleSubmit}>
                             <p>Nom d'utilisateur</p>
                             <input
                                 type="text"

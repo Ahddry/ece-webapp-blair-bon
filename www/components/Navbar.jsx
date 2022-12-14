@@ -12,6 +12,9 @@ import { SlLogout } from "react-icons/sl";
 
 // Barre de navigation affichée sur toutes les pages
 function Navbar() {
+    const { colour } = useContext(Context2);
+    const { updateColour } = useContext(Context2);
+
     const [dropdown, setDropdown] = useState(false);
     const ouvrirDropdown = () => setDropdown(!dropdown);
 
@@ -35,6 +38,7 @@ function Navbar() {
                 onClick={() => {
                     ouvrirProfil();
                     logout();
+                    updateColour("default");
                 }}
             >
                 <SlLogout className="w-6 h-6 mr-2" />
@@ -43,33 +47,8 @@ function Navbar() {
         );
     };
 
-    const { colour } = useContext(Context2);
-
-    const { updateColour } = useContext(Context2);
-
-    const [col, setCol] = useState("default");
-
-    useEffect(() => {
-        updateColour(col);
-    }, [col]);
-
     return (
         <div>
-            <div className={"fixed m-24 w-24 h-52 bg-" + colour.principale}>
-                <form>
-                    <select onChange={(e) => setCol(e.target.value)}>
-                        <option value="default">default</option>
-                        <option value="rouge">rouge</option>
-                        <option value="bleu">bleu</option>
-                        <option value="rose">rose</option>
-                        <option value="vert">vert</option>
-                        <option value="gris">gris</option>
-                    </select>
-                </form>
-                {col == "rouge" ? <div>rouge</div> : <div>default</div>}
-                <div className={" bg-" + colour.tertiaire}>TEST</div>
-            </div>
-
             <nav id="BarrePrincipale" className={"bg-background2 dark:bg-dark_background2 flex justify-between gap-10 drop-shadow-lg  md:drop-shadow-xl max-h-20 fixed w-full z-10"}>
                 <img src="/ECE_LOGO.png" alt="Logo" width={171} height={88.5} className="cursor-pointer max-w-[171px]" />
                 <ul className="hidden md:flex md:items-center md:space-x-5 mx-auto">

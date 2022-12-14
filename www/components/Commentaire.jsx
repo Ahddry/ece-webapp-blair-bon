@@ -5,7 +5,7 @@ import Context2 from "./ThemeContext";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/legacy/image";
-import {BsStarFill, BsStar} from  'react-icons/bs'
+import { BsStarFill, BsStar } from "react-icons/bs";
 
 function commentaire({ commentaire, isNew, getCloseBoxe }) {
     const { user } = useContext(Context);
@@ -29,16 +29,12 @@ function commentaire({ commentaire, isNew, getCloseBoxe }) {
         //console.log(gravatarurl);
     }
     getgravurl();
-    let nbEtoile = []
-    for(let i=0;i<5;i++)
-    {
-        if(i<etoile)
-        {
-            nbEtoile.push(<BsStarFill className="text-jaune m-0.5" />)
-        }
-        else
-        {
-            nbEtoile.push(<BsStar className="text-jaune m-0.5" />)
+    let nbEtoile = [];
+    for (let i = 0; i < 5; i++) {
+        if (i < etoile) {
+            nbEtoile.push(<BsStarFill className="text-jaune m-0.5 " />);
+        } else {
+            nbEtoile.push(<BsStar className="text-jaune m-0.5" />);
         }
     }
 
@@ -57,8 +53,8 @@ function commentaire({ commentaire, isNew, getCloseBoxe }) {
         e.preventDefault();
         setLoading(true);
         async function updatecomm() {
-                    let alertMessage = "NULL"
-    try {
+            let alertMessage = "NULL";
+            try {
                 if (isNew) {
                     //si nouveau commentaire
                     await supabase
@@ -107,7 +103,7 @@ function commentaire({ commentaire, isNew, getCloseBoxe }) {
             } catch (error) {
                 console.log(error);
                 setLoading(false);
-                alertMessage="Erreur lors de l'enregistement du commentaire";
+                alertMessage = "Erreur lors de l'enregistement du commentaire";
                 return error;
             } finally {
                 editcomm();
@@ -118,40 +114,42 @@ function commentaire({ commentaire, isNew, getCloseBoxe }) {
     };
 
     return (
-        <div className="dark:bg-dark_background2 bg-background2 rounded-3xl mt-5">
+        <div className="dark:bg-dark_background2 bg-background2 rounded-3xl shadow-md mt-5">
             {edit ? (
                 <div className="commentaire">
                     <form onSubmit={handleSubmit}>
                         <div className="flex border-b border-b-gray-600 p-3">
-                            <div className="w-[10%]">
-                                {gravatarurl ? (
-                                    <Image
-                                        className="rounded-full overflow-hidden w-8 h-8 mt-2"
-                                        src={`https://2.gravatar.com/avatar/${gravatarurl}?d=identicon`}
-                                        alt={"profilepicture " + commentaire.username}
-                                        width={38}
-                                        height={38}
-                                    ></Image>
-                                ) : (
-                                    <></>
-                                )}
-                            </div>
-                            <div className="w-[90%]">
-                                <input
-                                    className="p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full"
-                                    type="text"
-                                    placeholder="Titre"
-                                    value={titre}
-                                    onChange={(e) => setTitre(e.target.value)}
-                                    required
-                                />
+                            <div className="flex w-full justify-start">
+                                <div className="mr-4">
+                                    {gravatarurl ? (
+                                        <Image
+                                            className="rounded-full overflow-hidden w-8 h-8 mt-2"
+                                            src={`https://2.gravatar.com/avatar/${gravatarurl}?d=identicon`}
+                                            alt={"profilepicture " + commentaire.username}
+                                            width={38}
+                                            height={38}
+                                        ></Image>
+                                    ) : (
+                                        <></>
+                                    )}
+                                </div>
+                                <div className="w-full">
+                                    <input
+                                        className="p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full"
+                                        type="text"
+                                        placeholder="Titre"
+                                        value={titre}
+                                        onChange={(e) => setTitre(e.target.value)}
+                                        required
+                                    />
+                                </div>
                             </div>
                         </div>
                         <div className="pt-3 pl-4 pr-4">
                             <textarea
                                 className=" bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full h-auto p-2"
                                 type="text"
-                                placeholder="Contenue du commentaire..."
+                                placeholder="Contenu du commentaire..."
                                 value={contenue}
                                 onChange={(e) => setContenue(e.target.value)}
                                 required
@@ -227,12 +225,8 @@ function commentaire({ commentaire, isNew, getCloseBoxe }) {
                     <div className="pl-4 pt-3">
                         <p>{commentaire.contenue}</p>
                     </div>
-                    <div className='flex justify-between'>
-                        <div className="pl-4 p-3 flex">
-                            {
-                                nbEtoile
-                            }
-                        </div>
+                    <div className="flex justify-between">
+                        <div className="pl-4 p-3 flex">{nbEtoile}</div>
                         {causerEdit ? (
                             <div className="p-3">
                                 <button className="pl-2 hover:text-lien" onClick={editcomm}>

@@ -9,6 +9,7 @@ import Context2 from "../components/ThemeContext";
 // Page de connexion
 function Login() {
     const { colour } = useContext(Context2);
+    const { updateColour } = useContext(Context2);
     const [username, setUsername] = useState("");
     const [mdp, setMdp] = useState("");
     const [loading, setLoading] = useState(false);
@@ -55,8 +56,10 @@ function Login() {
                         email: email,
                         password: mdp,
                         admin: data.is_admin,
+                        gravatarurl: data.gravatar_url,
+                        colour: data.colour,
                     });
-                    console.log("Connexion réussie");
+                    updateColour(data.colour);
                     redirect();
                 } else {
                     alert("Mot de passe incorrect");
@@ -77,7 +80,7 @@ function Login() {
                 <div className="space-y-6">
                     <h1 className={"pt-8 text-3xl font-extralight lg:text-5xl 2xl:text-7xl  text-" + colour.principale + " dark:text-" + colour.principaleDark}>Connexion</h1>
                     <div className="space-y-4">
-                        <form className="p-2 bg-background2 dark:bg-dark_background2 rounded-2xl min-w-min space-y-2 xl:p-4 flex-col" onSubmit={handleSubmit}>
+                        <form className="p-2 bg-background2 dark:bg-dark_background2 rounded-2xl shadow-lg min-w-min space-y-2 xl:p-4 flex-col" onSubmit={handleSubmit}>
                             <p>Nom d'utilisateur</p>
                             <input
                                 type="text"

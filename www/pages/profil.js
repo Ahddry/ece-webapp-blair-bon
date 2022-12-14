@@ -1,6 +1,7 @@
 import Footer from "../components/Footer";
 import { ImSad2 } from "react-icons/im";
 import Link from "next/link";
+import Image from "next/legacy/image";
 import Context from "../components/UserContext";
 import { useContext, useState, useEffect } from "react";
 import { supabase } from "../utils/supabase";
@@ -11,8 +12,34 @@ import Context2 from "../components/ThemeContext";
 function Profil() {
     const { user } = useContext(Context);
     const { colour } = useContext(Context2);
+    const { updateColour } = useContext(Context2);
     const [admin, setAdmin] = useState(false);
     const [edit, setEdit] = useState(false);
+    const [loading, setLoading] = useState(false);
+
+    const [col, setCol] = useState(user ? user.colour : "default");
+
+    useEffect(() => {
+        updateColour(col);
+        try {
+            setLoading(true);
+            async function editColour() {
+                if (user) {
+                    if (col != user.colour) {
+                        const { data, error } = await supabase.from("comptes").update({ colour: col }).eq("id", user.id);
+                        user.colour = col;
+                        if (error) throw error;
+                    }
+                }
+            }
+            editColour();
+        } catch (error) {
+            console.log(error);
+            console.error("Erreur lors de la modification de la couleur d'accentuation sur la base de données");
+        } finally {
+            setLoading(false);
+        }
+    }, [col]);
 
     const Connecte = () => {
         const role = user.admin ? "Administrateur" : "Visiteur";
@@ -21,7 +48,7 @@ function Profil() {
         const [firstname, setFirstname] = useState("");
         const [lastname, setLastname] = useState("");
         const [email, setEmail] = useState("");
-        const [loading, setLoading] = useState(false);
+
         const [tryMdp, setTryMdp] = useState(false);
 
         function editAccount() {
@@ -104,6 +131,34 @@ function Profil() {
         return (
             <div className="p-5 mt-12 min-w-[70%] space-y-5">
                 <h1 className={"pt-8 text-3xl font-extralight lg:text-5xl 2xl:text-7xl  text-" + colour.principale + " dark:text-" + colour.principaleDark}>Mon profil</h1>
+                <div className="mr-4">
+                    {user.gravatarurl ? (
+                        <div
+                            className={
+                                " relative flex items-center justify-center h-[128px] w-[128px] shadow-xl rounded-full p-4 bg-background2 dark:bg-dark_background2 group hover:bg-gradient-to-r from-" +
+                                colour.principaleDark +
+                                " to-" +
+                                colour.principale +
+                                " max-w-2xl"
+                            }
+                        >
+                            <Image
+                                className="rounded-full overflow-hidden group-hover:opacity-10 w-8 h-8 mt-2"
+                                src={`https://2.gravatar.com/avatar/${user.gravatarurl}?d=identicon`}
+                                alt={"profilepicture " + user.username}
+                                width={128}
+                                height={128}
+                            ></Image>
+                            <div className="hidden group-hover:block absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]">
+                                <a href={"https://fr.gravatar.com"} target="_blank" rel="noopener noreferrer">
+                                    <p className="py-2 text-dark_on_background font-semibold text-center">Modifier mon avatar</p>
+                                </a>
+                            </div>
+                        </div>
+                    ) : (
+                        <></>
+                    )}
+                </div>
                 <div className="text-xl lg:text-lg">
                     <p>
                         <span className="font-bold">Nom d'utilisateur : </span> {user.username} <br />
@@ -113,6 +168,59 @@ function Profil() {
                         <span className="font-bold"> Rôle : </span> {role}
                         <br />
                     </p>
+                    <form>
+                        <div
+                            className={
+                                "mt-6 rounded-2xl border-2 border-" +
+                                colour.principale +
+                                " dark:border-" +
+                                colour.principaleDark +
+                                " text-" +
+                                colour.principale +
+                                " dark:text-" +
+                                colour.principaleDark +
+                                " hover:bg-" +
+                                colour.principale +
+                                " hover:text-white hover:dark:bg-" +
+                                colour.principaleDark +
+                                " dark:hover:text-on_background w-min"
+                            }
+                        >
+                            <fieldset>
+                                <legend className="p-4">Couleur d'accentuation</legend>
+                                <div className="flex flex-col md:flex-row space-x-2 p-4">
+                                    <div className="flex flex-row ">
+                                        {col === "defaut" ? (
+                                            <input type="radio" value={colour.principale} onChange={(e) => setCol("default")} checked />
+                                        ) : (
+                                            <input type="radio" value={colour.principale} onChange={(e) => setCol("default")} />
+                                        )}
+                                        <label className="m-2 text-xl w-full">Par défaut</label>
+                                    </div>
+                                    <div className="flex flex-row ">
+                                        <input type="radio" value={colour.principale} onChange={(e) => setCol("bleu")} />
+                                        <label className="m-2 mt-5 text-xl">Bleu</label>
+                                    </div>
+                                    <div className="flex flex-row ">
+                                        <input type="radio" value={colour.principale} onChange={(e) => setCol("rouge")} />
+                                        <label className="m-2 mt-5 text-xl">Rouge</label>
+                                    </div>
+                                    <div className="flex flex-row ">
+                                        <input type="radio" value={colour.principale} onChange={(e) => setCol("vert")} />
+                                        <label className="m-2 mt-5 text-xl">Vert</label>
+                                    </div>
+                                    <div className="flex flex-row ">
+                                        <input type="radio" value={colour.principale} onChange={(e) => setCol("rose")} />
+                                        <label className="m-2 mt-5 text-xl">Rose</label>
+                                    </div>
+                                    <div className="flex flex-row ">
+                                        <input type="radio" value={colour.principale} onChange={(e) => setCol("gris")} />
+                                        <label className="m-2 mt-5 text-xl">Gris</label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </form>
                     <button
                         className={
                             "mt-6 p-4 rounded-2xl border-2 border-" +
@@ -255,7 +363,7 @@ function Profil() {
             <div className="p-5 mt-12 min-w-[70%] space-y-5 max-w-full">
                 <div>{user ? <Connecte /> : <NonConnecte />}</div>
             </div>
-            <div className="bottom-0 mt-auto fixed w-full">
+            <div className="mt-[10%] w-full">
                 <Footer />
             </div>
         </section>
