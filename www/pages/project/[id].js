@@ -99,7 +99,7 @@ function ProjectPage({ projet, commentaire }) {
                             ) : (
                                 <p className="text-center w-full">Vous devez être connecter pour ajouter un commentaire</p>
                             )}
-                            {addComm && (
+                            {addComm && user && (
                                 <Commentaire
                                     commentaire={{
                                         id: null,

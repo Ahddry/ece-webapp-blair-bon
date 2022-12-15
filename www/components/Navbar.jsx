@@ -9,6 +9,7 @@ import { CgClose } from "react-icons/cg";
 import { FaUser } from "react-icons/fa";
 import { FaUserPlus } from "react-icons/fa";
 import { SlLogout } from "react-icons/sl";
+import { useRouter } from "next/router";
 
 // Barre de navigation affichée sur toutes les pages
 function Navbar() {
@@ -30,6 +31,7 @@ function Navbar() {
     useEffect(() => setMounted(true), []);
 
     const { user } = useContext(Context);
+    const router = useRouter();
     const Deco = () => {
         const { user, logout } = useContext(Context);
         return (
@@ -39,6 +41,7 @@ function Navbar() {
                     ouvrirProfil();
                     logout();
                     updateColour("default");
+                    router.push("/");
                 }}
             >
                 <SlLogout className="w-6 h-6 mr-2" />
