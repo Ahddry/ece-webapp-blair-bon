@@ -20,6 +20,7 @@ function SignUp() {
     const [tryMdp, setTryMdp] = useState(false);
 
     const router = useRouter();
+    const { login } = useContext(Context);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -67,6 +68,20 @@ function SignUp() {
                 if (error3) throw error3;
                 else if (ok) {
                     alert("Inscription réussie");
+                    let user = (await supabase.auth.getUser()).data.user;
+                    await login({
+                        id: user.id,
+                        created_at: user.created_at,
+                        username: username,
+                        firstname: firstname,
+                        lastname: lastname,
+                        email: email,
+                        password: mdp,
+                        admin: false,
+                        gravatarurl: gravatar,
+                        colour: "default",
+                        origin: "username/password",
+                    });
                     router.push("/");
                 }
             }

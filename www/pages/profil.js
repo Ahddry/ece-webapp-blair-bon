@@ -6,6 +6,8 @@ import Context from "../components/UserContext";
 import { useContext, useState, useEffect } from "react";
 import { supabase } from "../utils/supabase";
 import Context2 from "../components/ThemeContext";
+import { FaGithub } from "react-icons/fa";
+import { useRouter } from "next/router";
 
 // Page d'informations du profil
 
@@ -18,6 +20,8 @@ function Profil() {
     const [loading, setLoading] = useState(false);
 
     const [col, setCol] = useState(user ? user.colour : "default");
+
+    const router = useRouter();
 
     useEffect(() => {
         updateColour(col);
@@ -76,32 +80,7 @@ function Profil() {
                             if (error) throw error;
                         }
                     }
-                    if (email != user.email && email != "") {
-                        const { data2, error2 } = await supabase.from("comptes").select("*").eq("email", email).single();
-                        if (!(data2 === null || data2 === undefined)) {
-                            alert("Cette adresse email est déjà utilisée");
-                            ok = false;
-                            if (error2) throw error2;
-                        }
-                    }
                     if (!ok) return;
-
-                    if (email != user.email && email != "") {
-                        //!Ca bug là
-                        const { update, error } = await supabase.auth.updateUser({ email: email });
-                        console.log(update);
-                        await supabase.from("comptes").update({ email: email }).eq("id", user.id);
-                        user.email = email;
-                        if (error) throw error;
-                    }
-
-                    if (mdp != null && mdp != "" && mdp != user.password) {
-                        //!Ca bug là aussi
-                        const { user, error } = await supabase.auth.updateUser({ password: mdp });
-                        await supabase.from("comptes").update({ password: mdp }).eq("id", user.id);
-                        user.password = mdp;
-                        if (error) throw error;
-                    }
                     if (username != user.username && username != "") {
                         await supabase.from("comptes").update({ username: username }).eq("id", user.id);
                         user.username = username;
@@ -117,6 +96,8 @@ function Profil() {
 
                     if (ok) {
                         alert("Vos informations ont bien été modifiées");
+                        setEdit(false);
+                        router.push("/profil");
                     }
                 }
                 createCompte();
@@ -244,46 +225,46 @@ function Profil() {
                 </div>
                 {edit ? (
                     <div>
-                        <form className="p-2 bg-background2 dark:bg-dark_background2 rounded-2xl min-w-min space-y-2 xl:p-4 flex-col" onSubmit={handleSubmit}>
-                            <p>Nouveau Nom d'utilisateur</p>
-                            <input
-                                type="text"
-                                placeholder="Nom d'utilisateur"
-                                className="p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
-                            />
-                            <p>Nouveau Prénom</p>
-                            <input
-                                type="text"
-                                placeholder="Prénom"
-                                className="p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full"
-                                value={firstname}
-                                onChange={(e) => setFirstname(e.target.value)}
-                            />
-                            <p>Nouveau Nom</p>
-                            <input type="text" placeholder="Nom" className="p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full" value={lastname} onChange={(e) => setLastname(e.target.value)} />
-                            <p>Nouvel E-mail</p>
-                            <input
-                                type="email"
-                                placeholder="E-mail"
-                                className="p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                title="Veuillez rentrer une adresse mail valide."
-                                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$"
-                            />
-                            <p>Nouveau Mot de passe</p>
-                            <input type="password" placeholder="Mot de passe" className="p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full" value={mdp} onChange={(e) => setMdp(e.target.value)} />
-                            <div className="mt-8">
-                                <button
-                                    type="submit"
-                                    className="bg-gray-200 dark:bg-[#36383c] rounded-full shadow-md hover:bg-gray-300 dark:hover:bg-[#4F4F4F] active:bg-background dark:active:bg-dark_background cursor-pointer p-2 xl:p-3"
-                                >
-                                    {loading ? "Chargement..." : "Modifier mes informations"}
-                                </button>
+                        {user.origin === "github" ? (
+                            <div className="p-2 bg-background2 dark:bg-dark_background2 rounded-2xl shadow-lg min-w-min space-y-2 xl:p-4 flex-col">
+                                <p>Pour modifier vos informations de connexion, veuillez vous rendre sur votre compte GitHub</p>
+                                <a href="https://github.com/settings/profile" target="_blank" rel="noopener noreferrer">
+                                    <div className="mt-2 text-white bg-black rounded-xl shadow-md hover:bg-gray-800 dark:active:bg-gray-900 dark:active:border-2 dark:active:border-black w-fit cursor-pointer p-2 xl:p-3">
+                                        <FaGithub className="inline-block" />
+                                        <span className="ml-2">Accéder à mon compte GitHub</span>
+                                    </div>
+                                </a>
                             </div>
-                        </form>
+                        ) : (
+                            <form className="p-2 bg-background2 dark:bg-dark_background2 rounded-2xl min-w-min space-y-2 xl:p-4 flex-col" onSubmit={handleSubmit}>
+                                <p>Nouveau Nom d'utilisateur</p>
+                                <input
+                                    type="text"
+                                    placeholder="Nom d'utilisateur"
+                                    className="p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full"
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
+                                />
+                                <p>Nouveau Prénom</p>
+                                <input
+                                    type="text"
+                                    placeholder="Prénom"
+                                    className="p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full"
+                                    value={firstname}
+                                    onChange={(e) => setFirstname(e.target.value)}
+                                />
+                                <p>Nouveau Nom</p>
+                                <input type="text" placeholder="Nom" className="p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full" value={lastname} onChange={(e) => setLastname(e.target.value)} />
+                                <div className="mt-8">
+                                    <button
+                                        type="submit"
+                                        className="bg-gray-200 dark:bg-[#36383c] rounded-full shadow-md hover:bg-gray-300 dark:hover:bg-[#4F4F4F] active:bg-background dark:active:bg-dark_background cursor-pointer p-2 xl:p-3"
+                                    >
+                                        {loading ? "Chargement..." : "Modifier mes informations"}
+                                    </button>
+                                </div>
+                            </form>
+                        )}
                     </div>
                 ) : (
                     <></>

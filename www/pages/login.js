@@ -59,6 +59,7 @@ function Login() {
                         admin: data.is_admin,
                         gravatarurl: data.gravatar_url,
                         colour: data.colour,
+                        origin: "username/password",
                     });
                     updateColour(data.colour);
                     redirect();

@@ -55,6 +55,7 @@ function Github() {
                     admin: data.is_admin,
                     gravatarurl: data.gravatar_url,
                     colour: data.colour,
+                    origin: "github",
                 });
                 updateColour(data.colour);
                 router.push("/");
