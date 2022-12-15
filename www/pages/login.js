@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { supabase } from "../utils/supabase";
 import Link from "next/link";
 import Context2 from "../components/ThemeContext";
+import { FaGithub } from "react-icons/fa";
 
 // Page de connexion
 function Login() {
@@ -74,6 +75,24 @@ function Login() {
         }
     };
 
+    const loginGithub = () => {
+        try {
+            async function checkUser() {
+                let ok = true;
+                await supabase.auth.signInWithOAuth({
+                    provider: "github",
+                    options: {
+                        redirectTo: "http://localhost:3000/github",
+                    },
+                });
+            }
+            checkUser();
+        } catch (error) {
+            console.log(error);
+            alert("Erreur lors de la connexion");
+        }
+    };
+
     return (
         <section className="flex items-center justify-between flex-col w-full h-screen  bg-gray-200 dark:bg-[#1d1f23]">
             <div className="p-5 mt-12 min-w-[70%]">
@@ -116,6 +135,21 @@ function Login() {
                         <span className="text-lien visited:text-lien_click hover:border-b hover:border-lien hover:visited:border-lien_click cursor-pointer">Créer un compte</span>
                     </Link>
                 </p>
+
+                <h1 className={"pt-8 text-3xl font-extralight lg:text-5xl 2xl:text-7xl  text-" + colour.principale + " dark:text-" + colour.principaleDark}>Connexion avec GitHub</h1>
+                <div className="space-y-4 mt-8">
+                    <div className="p-2 bg-background2 dark:bg-dark_background2 rounded-2xl shadow-lg min-w-min space-y-2 xl:p-4 flex-col">
+                        <button
+                            className="text-white bg-black rounded-xl shadow-md hover:bg-gray-800 dark:active:bg-gray-900 dark:active:border-2 dark:active:border-black cursor-pointer p-2 xl:p-3"
+                            onClick={loginGithub}
+                        >
+                            <div>
+                                <FaGithub className="inline-block" />
+                                <span className="ml-2">Se connecter avec GitHub</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
             </div>
             <div className="w-full">
                 <Footer className="mx-auto w-full" />

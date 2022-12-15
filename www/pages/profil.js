@@ -144,7 +144,7 @@ function Profil() {
                         >
                             <Image
                                 className="rounded-full overflow-hidden group-hover:opacity-10 w-8 h-8 mt-2"
-                                src={`https://2.gravatar.com/avatar/${user.gravatarurl}?d=identicon`}
+                                src={`${user.gravatarurl}`}
                                 alt={"profilepicture " + user.username}
                                 width={128}
                                 height={128}

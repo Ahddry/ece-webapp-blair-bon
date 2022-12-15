@@ -1,6 +1,6 @@
 import Image from "next/legacy/image";
 import { ImArrowDown2 } from "react-icons/im";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import Adrien from "../components/Adrien";
 import Aurelien from "../components/Aurelien";
 import Context2 from "../components/ThemeContext";
@@ -31,7 +31,7 @@ function HomePage() {
                                     colour.principale +
                                     " peer-checked:text-" +
                                     colour.principale +
-                                    " hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-dark_background2 dark:hover:bg-dark_principale gap-10 overflow-hidden max-h-28 lg:max-h-52 2xl:max-h-64"
+                                    " peer-checked:border-2 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-dark_background2 dark:hover:bg-dark_principale gap-10 overflow-hidden max-h-28 lg:max-h-52 2xl:max-h-64"
                                 }
                             >
                                 <div className="block">
@@ -54,7 +54,7 @@ function HomePage() {
                                     colour.principale +
                                     " peer-checked:text-" +
                                     colour.principale +
-                                    " hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-dark_background2 dark:hover:bg-dark_principale gap-10 overflow-hidden max-h-28 lg:max-h-52 2xl:max-h-64"
+                                    " peer-checked:border-2 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-dark_background2 dark:hover:bg-dark_principale gap-10 overflow-hidden max-h-28 lg:max-h-52 2xl:max-h-64"
                                 }
                             >
                                 <div className="block">

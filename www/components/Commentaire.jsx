@@ -18,6 +18,7 @@ function commentaire({ commentaire, isNew, getCloseBoxe }) {
     const [titre, setTitre] = useState(commentaire.titre);
     const [contenue, setContenue] = useState(commentaire.contenue);
     const [etoile, setEtoile] = useState(commentaire.etoile);
+    const [etoiletab, setEtoiletab] = useState([]);
     const [loading, setLoading] = useState(false);
     const [gravatarurl, setGravatrurl] = useState(null);
     const router = useRouter();
@@ -26,17 +27,8 @@ function commentaire({ commentaire, isNew, getCloseBoxe }) {
         let { data: gravatard_url, error } = await supabase.from("comptes").select("gravatar_url").eq("id", commentaire.userid);
         if (error) throw error;
         setGravatrurl(gravatard_url[0].gravatar_url);
-        //console.log(gravatarurl);
     }
     getgravurl();
-    let nbEtoile = [];
-    for (let i = 0; i < 5; i++) {
-        if (i < etoile) {
-            nbEtoile.push(<BsStarFill className="text-jaune m-0.5 " />);
-        } else {
-            nbEtoile.push(<BsStar className="text-jaune m-0.5" />);
-        }
-    }
 
     useEffect(() =>
         //verif si l'utilisateur qui a publié le msg est connecté
@@ -47,6 +39,18 @@ function commentaire({ commentaire, isNew, getCloseBoxe }) {
                 }
             }
         }, []);
+
+    useEffect(() => {
+        //rempli le tableau d'étoiles
+        let etoiletab2 = [];
+        for (let i = 0; i < etoile; i++) {
+            etoiletab2.push(<BsStarFill className="text-yellow-400" />);
+        }
+        for (let i = 0; i < 5 - etoile; i++) {
+            etoiletab2.push(<BsStar className="text-yellow-400" />);
+        }
+        setEtoiletab(etoiletab2);
+    }, [etoile]);
 
     const handleSubmit = (e) => {
         //gestion du formulaire
@@ -124,7 +128,7 @@ function commentaire({ commentaire, isNew, getCloseBoxe }) {
                                     {gravatarurl ? (
                                         <Image
                                             className="rounded-full overflow-hidden w-8 h-8 mt-2"
-                                            src={`https://2.gravatar.com/avatar/${gravatarurl}?d=identicon`}
+                                            src={`${gravatarurl}`}
                                             alt={"profilepicture " + commentaire.username}
                                             width={38}
                                             height={38}
@@ -198,13 +202,7 @@ function commentaire({ commentaire, isNew, getCloseBoxe }) {
                         <div className="flex w-full justify-start">
                             <div className="">
                                 {gravatarurl ? (
-                                    <Image
-                                        className="rounded-full overflow-hidden w-8 h-8 mt-2"
-                                        src={`https://2.gravatar.com/avatar/${gravatarurl}?d=identicon`}
-                                        alt={"profilepicture " + commentaire.username}
-                                        width={38}
-                                        height={38}
-                                    ></Image>
+                                    <Image className="rounded-full overflow-hidden w-8 h-8 mt-2" src={`${gravatarurl}`} alt={"profilepicture " + commentaire.username} width={38} height={38}></Image>
                                 ) : (
                                     <></>
                                 )}
@@ -226,7 +224,11 @@ function commentaire({ commentaire, isNew, getCloseBoxe }) {
                         <p>{commentaire.contenue}</p>
                     </div>
                     <div className="flex justify-between">
-                        <div className="pl-4 p-3 flex">{nbEtoile}</div>
+                        <div className="pl-4 p-3 text-2xl flex gap-1">
+                            {etoiletab.map((etoile, index) => {
+                                return <span key={index}>{etoile}</span>;
+                            })}
+                        </div>
                         {causerEdit ? (
                             <div className="p-3">
                                 <button className="pl-2 hover:text-lien" onClick={editcomm}>

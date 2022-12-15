@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import { supabase } from "../utils/supabase";
 
 // Contexte de l'utilisateur
 
@@ -14,6 +15,10 @@ export const UserContext = ({ children }) => {
                     setUser(user);
                 },
                 logout: () => {
+                    async function supalogout() {
+                        await supabase.auth.signOut();
+                    }
+                    supalogout();
                     setUser(null);
                 },
             }}

@@ -51,6 +51,7 @@ function SignUp() {
                 });
                 let user = await (await supabase.auth.getUser()).data.user;
                 const hash = md5(email.trim().toLowerCase());
+                const gravatar = `https://2.gravatar.com/avatar/${hash}?d=identicon`;
 
                 let { error3 } = await supabase.from("comptes").insert({
                     id: user.id,
@@ -61,7 +62,7 @@ function SignUp() {
                     email: email,
                     password: mdp,
                     is_admin: false,
-                    gravatar_url: hash,
+                    gravatar_url: gravatar,
                 });
                 if (error3) throw error3;
                 else if (ok) {

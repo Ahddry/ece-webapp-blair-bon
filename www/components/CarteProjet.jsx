@@ -31,8 +31,8 @@ function CarteProjet({ nom, outils, lien, id }) {
             <div className="hidden group-hover:block absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]">
                 <h3 className="text-2xl text-white font-bold tracking-wider text-center">{nom}</h3>
                 <p className="pb-4 pt-2 text-white text-center">
-                    {languagearray.map((language) => (
-                        <span>{language}</span>
+                    {languagearray.map((language, index) => (
+                        <span key={language + index}>{language}</span>
                     ))}
                 </p>
                 <Link href={"/project/" + id}>
