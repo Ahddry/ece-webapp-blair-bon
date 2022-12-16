@@ -53,7 +53,7 @@ function Adrien() {
         <div>
             <Presentation {...dataAdri} />
             <Competences {...compAdri} />
-            <Projets userid={dataAdri.id} />
+            <Projets userid={dataAdri.id} target={"Adrien"} />
             <Experiences {...expAdri} />
             <Contacter target={"Adrien"} />
         </div>

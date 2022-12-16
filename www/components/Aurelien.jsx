@@ -42,7 +42,7 @@ function Aurelien() {
         <div>
             <Presentation {...dataAure} />
             <Competences {...compAure} />
-            <Projets userid={dataAure.id} />
+            <Projets userid={dataAure.id} target={"Aurelien"} />
             <Experiences {...expAure} />
             <Contacter target={"Aurelien"} />
         </div>
