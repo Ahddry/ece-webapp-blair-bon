@@ -105,7 +105,7 @@ function Login() {
                             <input
                                 type="text"
                                 placeholder="Nom d'utilisateur"
-                                className="p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full"
+                                className={"p-2 bg-[#f9fafb] dark:bg-[#4e5359] shadow-md rounded-2xl w-full border-none focus:ring-" + colour.principale + " dark:focus:ring-" + colour.principaleDark}
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                                 required
@@ -114,7 +114,7 @@ function Login() {
                             <input
                                 type="password"
                                 placeholder="Mot de passe"
-                                className="p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full"
+                                className={"p-2 bg-[#f9fafb] dark:bg-[#4e5359] shadow-md rounded-2xl w-full border-none focus:ring-" + colour.principale + " dark:focus:ring-" + colour.principaleDark}
                                 value={mdp}
                                 onChange={(e) => setMdp(e.target.value)}
                                 required

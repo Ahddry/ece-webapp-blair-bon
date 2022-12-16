@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { supabase } from "../utils/supabase.js";
+import Context2 from "./ThemeContext.jsx";
 
 // Formulaire de contact
 function Contacter({ target }) {
+    const { colour } = useContext(Context2);
     const [email, setEmail] = useState("");
     const [sujet, setSujet] = useState("");
     const [message, setMessage] = useState("");
@@ -74,7 +76,7 @@ function Contacter({ target }) {
                     <input
                         type="text"
                         placeholder="email@exemple.fr"
-                        className="p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full"
+                        className={"p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full  border-none focus:ring-" + colour.principale + " dark:focus:ring-" + colour.principaleDark}
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
@@ -82,11 +84,23 @@ function Contacter({ target }) {
                         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                     />
                     <p>Sujet de votre message </p>
-                    <input type="text" placeholder="Sujet" className="p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full" value={sujet} onChange={(e) => setSujet(e.target.value)} required />
+                    <input
+                        type="text"
+                        placeholder="Sujet"
+                        className={"p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full border-none focus:ring-" + colour.principale + " dark:focus:ring-" + colour.principaleDark}
+                        value={sujet}
+                        onChange={(e) => setSujet(e.target.value)}
+                        required
+                    />
                     <p>Votre message</p>
                     <textarea
                         placeholder="Votre message"
-                        className="p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full min-h-[42px] max-h-64 lg:h-36"
+                        className={
+                            "p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full min-h-[42px] max-h-64 lg:h-36 border-none focus:ring-" +
+                            colour.principale +
+                            " dark:focus:ring-" +
+                            colour.principaleDark
+                        }
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         required

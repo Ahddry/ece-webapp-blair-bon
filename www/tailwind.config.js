@@ -42,7 +42,7 @@ module.exports = {
             },
         },
     },
-    plugins: [],
+    plugins: [require("@tailwindcss/forms")()],
 };
 
 // principale: "#F7CF47",

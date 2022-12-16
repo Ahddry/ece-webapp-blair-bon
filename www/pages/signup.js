@@ -105,7 +105,7 @@ function SignUp() {
                             <input
                                 type="text"
                                 placeholder="Nom d'utilisateur"
-                                className="p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full"
+                                className={"p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full shadow-md  border-none focus:ring-" + colour.principale + " dark:focus:ring-" + colour.principaleDark}
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                                 required
@@ -114,7 +114,7 @@ function SignUp() {
                             <input
                                 type="text"
                                 placeholder="Prénom"
-                                className="p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full"
+                                className={"p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full shadow-md  border-none focus:ring-" + colour.principale + " dark:focus:ring-" + colour.principaleDark}
                                 value={firstname}
                                 onChange={(e) => setFirstname(e.target.value)}
                                 required
@@ -123,7 +123,7 @@ function SignUp() {
                             <input
                                 type="text"
                                 placeholder="Nom"
-                                className="p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full"
+                                className={"p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full shadow-md  border-none focus:ring-" + colour.principale + " dark:focus:ring-" + colour.principaleDark}
                                 value={lastname}
                                 onChange={(e) => setLastname(e.target.value)}
                                 required
@@ -132,7 +132,7 @@ function SignUp() {
                             <input
                                 type="email"
                                 placeholder="E-mail"
-                                className="p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full"
+                                className={"p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full shadow-md  border-none focus:ring-" + colour.principale + " dark:focus:ring-" + colour.principaleDark}
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
@@ -143,7 +143,7 @@ function SignUp() {
                             <input
                                 type="password"
                                 placeholder="Mot de passe"
-                                className="p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full"
+                                className={"p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full shadow-md  border-none focus:ring-" + colour.principale + " dark:focus:ring-" + colour.principaleDark}
                                 value={mdp}
                                 onChange={(e) => setMdp(e.target.value)}
                                 required

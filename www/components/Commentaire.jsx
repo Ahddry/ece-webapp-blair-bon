@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/legacy/image";
 import { BsStarFill, BsStar } from "react-icons/bs";
-import ReactStars from 'react-stars'
+import ReactStars from "react-stars";
 
 function commentaire({ commentaire, isNew, getCloseBoxe }) {
     const { user } = useContext(Context);
@@ -125,7 +125,9 @@ function commentaire({ commentaire, isNew, getCloseBoxe }) {
                                 </div>
                                 <div className="w-full">
                                     <input
-                                        className="p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full"
+                                        className={
+                                            "p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full shadow-md  border-none focus:ring-" + colour.principale + " dark:focus:ring-" + colour.principaleDark
+                                        }
                                         type="text"
                                         placeholder="Titre"
                                         value={titre}
@@ -137,7 +139,9 @@ function commentaire({ commentaire, isNew, getCloseBoxe }) {
                         </div>
                         <div className="pt-3 pl-4 pr-4">
                             <textarea
-                                className=" bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full h-auto p-2"
+                                className={
+                                    " bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full h-auto p-2 shadow-md border-none focus:ring-" + colour.principale + " dark:focus:ring-" + colour.principaleDark
+                                }
                                 type="text"
                                 placeholder="Contenu du commentaire..."
                                 value={contenue}
@@ -146,7 +150,7 @@ function commentaire({ commentaire, isNew, getCloseBoxe }) {
                             />
                             <div className="flex pt-4 pb-4 justify-between">
                                 <div className="w-[40%]">
-                                    <ReactStars count={5} size={24} color2={'#ffd700'} onChange={(e) => setEtoile(e)} value={etoile} />
+                                    <ReactStars count={5} size={24} color2={"#ffd700"} onChange={(e) => setEtoile(e)} value={etoile} />
                                 </div>
                                 <div className="w-[60%] p-2 text-right">
                                     <button className="pl-2 hover:text-lien" type="submit">
@@ -202,7 +206,7 @@ function commentaire({ commentaire, isNew, getCloseBoxe }) {
                     </div>
                     <div className="flex justify-between">
                         <div className="pl-4 p-3 text-2xl flex gap-1">
-                            <ReactStars count={5} size={24} color2={'#ffd700'} value={etoile} edit={false}/>
+                            <ReactStars count={5} size={24} color2={"#ffd700"} value={etoile} edit={false} />
                         </div>
                         {causerEdit ? (
                             <div className="p-3">

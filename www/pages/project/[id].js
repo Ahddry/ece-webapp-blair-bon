@@ -9,7 +9,8 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from "react-responsive-carousel";
 import { FaGithub } from "react-icons/fa";
 import Context2 from "../../components/ThemeContext";
-import { Router } from "next/router";
+import { useRouter } from "next/router";
+import { BsUpload } from "react-icons/bs";
 
 function ProjectPage({ projet, commentaire }) {
     const { colour } = useContext(Context2);
@@ -30,15 +31,15 @@ function ProjectPage({ projet, commentaire }) {
         setTest(!test);
     };
 
+    const router = useRouter();
+
     const onChangePicture = (e) => {
         for (const file of e.target.files) {
             const fileType = file["type"];
-            console.log(fileType);
             const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
             if (validImageTypes.includes(fileType)) {
                 let urlfile = URL.createObjectURL(file);
                 setUploadImage([...uploadImage, file]);
-                console.log(uploadImage);
                 setImages([...images, urlfile]);
             } else {
                 alert("only images accepted");
@@ -52,13 +53,9 @@ function ProjectPage({ projet, commentaire }) {
         let modifiUploadImage = uploadImage;
         modifiUploadImage.splice(i, 1);
         setUploadImage(modifiUploadImage);
-        console.log(modifiUploadImage);
         setImages(modifiImage);
         handleTest();
     };
-    useEffect(() => {
-        console.log(images);
-    }, [images]);
 
     const listLanguage = ["C", "C++", "C#", "CSS", "HTML", "Java", "JavaFX", "JavaScript", "PHP", "Python", "React", "SQL", "Tailwind"];
     const setprojetLanguage = () => {
@@ -67,7 +64,6 @@ function ProjectPage({ projet, commentaire }) {
             for (let i = 0; i < listLanguage.length; i++) {
                 if (listLanguage[i] === projet.language[j]) {
                     newLangages[i] = true;
-                    console.log("true");
                 }
             }
         }
@@ -82,7 +78,6 @@ function ProjectPage({ projet, commentaire }) {
                 newLangages.push(listLanguage[i]);
             }
         }
-        console.log(newLangages);
         setLangages(newLangages);
     };
     const handleOnChange = (position) => {
@@ -90,7 +85,6 @@ function ProjectPage({ projet, commentaire }) {
         setCheckedState(updatedCheckedState);
         //update total
         updateLanguage(updatedCheckedState);
-        console.log(updatedCheckedState);
     };
     useEffect(() => {
         if (user !== null) {
@@ -101,27 +95,20 @@ function ProjectPage({ projet, commentaire }) {
     }, [user]);
 
     const handleEdit = () => {
-        console.log(checkedState);
         setEdit(!edit);
     };
     const handleDelete = () => {
-        if(confirm("Voulez-vous supprimer votre projet ?"))
-        {
+        if (confirm("Voulez-vous supprimer votre projet ?")) {
             async function deleteProjet() {
                 try {
-                    await supabase.from("projets").delete().match({ id: projet.id }).then((data) => {console.log(data);});
+                    await supabase.from("projets").delete().match({ id: projet.id });
                     if (error) throw error;
-                    console.log(data);
                 } catch (error) {
                     console.log(error);
                 }
             }
             deleteProjet();
-            Router.push("/");
-        }
-        else
-        {
-            console.log("not delete");
+            router.push("/");
         }
     };
     const handleSubmit = (e) => {
@@ -129,18 +116,16 @@ function ProjectPage({ projet, commentaire }) {
         async function updateProjet() {
             try {
                 let listimagetupush = [];
-                console.log(uploadImage);
                 for (let i = 0; i < images.length; i++) {
                     if (uploadImage[i] === true) {
-                        console.log("image deja en ligne");
+                        console.log("Image deja en ligne");
                         listimagetupush.push(images[i]);
                     } else {
-                        console.log("image pas en ligne", images[i]);
+                        console.log("Image pas en ligne", images[i]);
                         await supabase.storage
                             .from("projetsimage")
                             .upload(`${projet.id}/${uploadImage[i].name}`, uploadImage[i])
                             .then((response) => {
-                                console.log(response);
                                 if (response.error != null) throw response.error;
                             });
                         listimagetupush.push(`https://mldxyasghmmynjxewzuv.supabase.co/storage/v1/object/public/projetsimage/${projet.id}/${uploadImage[i].name}`);
@@ -157,7 +142,6 @@ function ProjectPage({ projet, commentaire }) {
                     .update({ name: titre, description: description, language: listlangueuseinprj, listeimage: listimagetupush, github: github, participants: contributeur })
                     .match({ id: projet.id })
                     .then((response) => {
-                        console.log(response);
                         if (response.error != null) throw response.error;
                     });
                 projet.name = titre;
@@ -198,59 +182,161 @@ function ProjectPage({ projet, commentaire }) {
     return (
         <section className="flex items-center justify-between flex-col w-full min-h-screen  bg-background dark:bg-dark_background">
             {edit ? (
-                <div className=" mt-20 space-y-5 border w-[80%] ">
-                    <form onSubmit={handleSubmit}>
-                        <div className="flex flex-col w-full h-full space-y-5">
-                            <div className="flex flex-col items-center justify-center w-full h-full">
-                                <input type="text" placeholder="Titre" value={titre} onChange={(e) => setTitre(e.target.value)}></input>
-                            </div>
-                            <div className="flex flex-col items-center justify-center w-full h-full">
-                                <textarea type="text" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
-                            </div>
-                            <div className="flex flex-col items-center justify-center w-full h-full">
-                                <input type="text" placeholder="Contributeur" value={contributeur} onChange={(e) => setContributeur(e.target.value)}></input>
-                            </div>
-                            <div>
-                                <div className="flex flex-col items-center justify-center w-full h-full">
-                                    <input type="file" onChange={onChangePicture} className="" multiple="multiple" name="files[]" />
-                                </div>
-                                <div className="flex flex-col items-center justify-center w-full h-full">
-                                    {images.map((file, key) => {
-                                        return (
-                                            <div key={key} className="overflow-hidden relative">
-                                                <i
-                                                    onClick={() => {
-                                                        removeImage(key);
-                                                    }}
-                                                    className="mdi mdi-close absolute right-1 hover:text-white cursor-pointer"
-                                                >
-                                                    X
-                                                </i>
-                                                <img className="h-20 w-20 rounded-md" src={file} />
-                                            </div>
-                                        );
-                                    })}
-                                </div>
-                            </div>
-                            <div className="flex flex-col items-center justify-center w-full h-full">
-                                <input type="text" placeholder="Github" value={github} onChange={(e) => setGithub(e.target.value)}></input>
-                            </div>
-                            <div className="flex flex-col items-center justify-center w-full h-full">
-                                {listLanguage.map((langage, index) => (
-                                    <div key={index}>
-                                        <input type="checkbox" placeholder="Langage" value={langage} checked={checkedState[index]} onChange={() => handleOnChange(index)}></input>
-                                        <label htmlFor={langage}>{langage}</label>
+                <div className="p-5 mt-12">
+                    <div className="space-y-6">
+                        <h1 className={"pt-8 text-3xl font-extralight lg:text-5xl 2xl:text-7xl  text-" + colour.principale + " dark:text-" + colour.principaleDark}>Modification du projet</h1>
+                        <div className=" mt-20 space-y-5">
+                            <form
+                                onSubmit={handleSubmit}
+                                className="p-4 bg-background2 dark:bg-dark_background2 text-on_background dark:text-dark_on_background rounded-2xl shadow-lg  min-w-min space-y-2 xl:p-4 flex-col"
+                            >
+                                <div className="flex flex-col w-full h-full space-y-5">
+                                    <div className="flex flex-col justify-center w-full h-full">
+                                        <label className="text-lg xl:text-2xl font-bold dark:text-dark_text">Titre du projet</label>
+                                        <input
+                                            type="text"
+                                            placeholder="Titre"
+                                            value={titre}
+                                            onChange={(e) => setTitre(e.target.value)}
+                                            className={
+                                                "p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full shadow-md  border-none focus:ring-" +
+                                                colour.principale +
+                                                " dark:focus:ring-" +
+                                                colour.principaleDark
+                                            }
+                                            required
+                                        />
                                     </div>
-                                ))}
-                            </div>
-                            <div>
-                                <button type="submit">Enregister</button>
-                                <button type="reset" onClick={handleCancel}>
-                                    Cancel
-                                </button>
-                            </div>
+                                    <div className="flex flex-col justify-center w-full h-full">
+                                        <label className="text-lg xl:text-2xl font-bold dark:text-dark_text">Description du projet</label>
+                                        <textarea
+                                            type="text"
+                                            placeholder="Description"
+                                            value={description}
+                                            onChange={(e) => setDescription(e.target.value)}
+                                            className={
+                                                "p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full min-h-[42px] max-h-96 h-36 lg:h-64 shadow-md border-none focus:ring-" +
+                                                colour.principale +
+                                                " dark:focus:ring-" +
+                                                colour.principaleDark
+                                            }
+                                            required
+                                        />
+                                    </div>
+                                    <div className="flex flex-col  justify-center w-full h-full">
+                                        <label className="text-lg xl:text-2xl font-bold dark:text-dark_text">Contributeurs au projet</label>
+                                        <input
+                                            type="text"
+                                            placeholder="Contributeur"
+                                            value={contributeur}
+                                            onChange={(e) => setContributeur(e.target.value)}
+                                            className={
+                                                "p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full shadow-md border-none focus:ring-" +
+                                                colour.principale +
+                                                " dark:focus:ring-" +
+                                                colour.principaleDark
+                                            }
+                                            required
+                                        />
+                                    </div>
+                                    <div>
+                                        <div className="grid lg:grid-cols-2 2xl:grid-cols-3 items-center justify-center w-full h-full gap-4">
+                                            {images.map((file, key) => {
+                                                return (
+                                                    <div key={key} className="overflow-hidden relative">
+                                                        <button
+                                                            title="Supprimer l'image"
+                                                            onClick={() => {
+                                                                removeImage(key);
+                                                            }}
+                                                            className="mr-2 text-3xl font-bold text-red-600 hover:text-red-400 z-10 absolute left-3 cursor-pointer"
+                                                        >
+                                                            X
+                                                        </button>
+                                                        <div className="relative w-[300px] h-[169px] sm:w-[400px] sm:h-[225px] border-4 border-[#f9fafb] dark:border-[#4e5359] bg-[#f9fafb] dark:bg-[#4e5359] rounded-xl shadow-2xl">
+                                                            <Image className="rounded-xl r" src={file} layout="fill" />
+                                                        </div>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                        <div className="flex flex-col h-12 max-w-md mx-auto my-5 relative border-2 items-center cursor-pointer p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full shadow-md">
+                                            <input
+                                                type="file"
+                                                onChange={onChangePicture}
+                                                multiple="multiple"
+                                                name="files[]"
+                                                title="Ajouter une image"
+                                                className="h-full w-full opacity-0 absolute hover:bg-red-500"
+                                            />
+
+                                            <div className="flex space-x-4 my-auto hover:text-gray-300 hover:bg-red-500">
+                                                <BsUpload className="text-2xl text-gray-600 dark:text-gray-400" /> <p>Ajouter une image</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-col  justify-center w-full h-full">
+                                        <label className="text-lg xl:text-2xl font-bold dark:text-dark_text">Lien vers le dépôt GitHub du projet</label>
+                                        <input
+                                            type="text"
+                                            placeholder="Github"
+                                            value={github}
+                                            onChange={(e) => setGithub(e.target.value)}
+                                            className={
+                                                "p-2 bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full shadow-md  border-none focus:ring-" +
+                                                colour.principale +
+                                                " dark:focus:ring-" +
+                                                colour.principaleDark
+                                            }
+                                        />
+                                    </div>
+                                    <label className="text-lg xl:text-2xl font-bold dark:text-dark_text">Langages utilisés</label>
+                                    <div className="flex flex-col lg:flex-row justify-center w-full h-full">
+                                        {listLanguage.map((langage, index) => (
+                                            <div key={index}>
+                                                <input
+                                                    type="checkbox"
+                                                    placeholder="Langage"
+                                                    value={langage}
+                                                    checked={checkedState[index]}
+                                                    onChange={() => handleOnChange(index)}
+                                                    className={
+                                                        "w-4 h-4 text-" +
+                                                        colour.principale +
+                                                        " dark:text-" +
+                                                        colour.principaleDark +
+                                                        " bg-gray-100 rounded-xl border-gray-300 focus:ring-" +
+                                                        colour.secondaire +
+                                                        " dark:focus:ring-" +
+                                                        colour.secondaireDark +
+                                                        "dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                                    }
+                                                />
+                                                <label htmlFor={langage} className="mx-2 mb-5">
+                                                    {langage}
+                                                </label>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div>
+                                        <button
+                                            type="submit"
+                                            className="bg-gray-200 dark:bg-[#36383c] rounded-full shadow-md hover:bg-gray-300 dark:hover:bg-[#4F4F4F] active:bg-background dark:active:bg-dark_background cursor-pointer p-2 xl:p-3"
+                                        >
+                                            Enregister
+                                        </button>
+                                        <button
+                                            type="reset"
+                                            onClick={handleCancel}
+                                            className="mx-2 bg-gray-200 dark:bg-[#36383c] rounded-full shadow-md hover:bg-gray-300 dark:hover:bg-[#4F4F4F] active:bg-background dark:active:bg-dark_background cursor-pointer p-2 xl:p-3"
+                                        >
+                                            Annuler
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                    </form>
+                    </div>
                 </div>
             ) : (
                 <div className="p-5 mt-12 space-y-5">
