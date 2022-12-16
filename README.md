@@ -109,7 +109,7 @@ Le port **3000** est assigné par défaut au serveur mais il se peut que celui-c
 
 ***
 
-Une fois le serveur lancé, il faut aller à l'URL <http://localhost:3000> pour arriver sur les portfolios d'Adrien et d'Aurélien. Cliquer sur l'un ou l'autre des profils permet de changer le contenu du reste de la page par le portfolio de l'un ou de l'autre, montrant ainsi :
+Une fois le serveur lancé, il faut aller à l'URL <https://ece-webapp-blair-bon.vercel.app> pour arriver sur les portfolios d'Adrien et d'Aurélien. Cliquer sur l'un ou l'autre des profils permet de changer le contenu du reste de la page par le portfolio de l'un ou de l'autre, montrant ainsi :
 
 - Une brève description de la personne
 - Une présentation de ses compétences (langages de programmation qu'il maîtrise)
@@ -117,9 +117,11 @@ Une fois le serveur lancé, il faut aller à l'URL <http://localhost:3000> pour 
 - Une liste des entreprises où il a pu travailler
 - Un formulaire de contact enregistrant le message, son sujet ainsi que l'adresse e-mail de l'expéditeur sur la base de données
 
-La page <http://localhost:3000/login> permet de s'authentifier sur l'application avec un compte préalablement créé sur la page <http://localhost:3000/signup>, et d'ainsi accéder au contenu de la page [profil](http://localhost:3000/profil).
+La page <https://ece-webapp-blair-bon.vercel.app/login> permet de s'authentifier sur l'application avec un compte préalablement créé sur la page <https://ece-webapp-blair-bon.vercel.app/signup>, et d'ainsi accéder au contenu de la page [profil](https://ece-webapp-blair-bon.vercel.app/profil).
 
-La page de <http://localhost:3000/profil> n'est disponible que pour les utilisateurs authentifiés et permets d'accéder aux informations de son profil, de le modifier et de choisir sa couleur favorite pour le site, ainsi que de lire les messages qui leur ont étés adressés sur le formulaire de contact de la page principale pour les utilisateurs administrateurs.
+La page de <https://ece-webapp-blair-bon.vercel.app/profil> n'est disponible que pour les utilisateurs authentifiés et permets d'accéder aux informations de son profil, de le modifier et de choisir sa couleur favorite pour le site, ainsi que de lire les messages qui leur ont étés adressés sur le formulaire de contact de la page principale pour les utilisateurs administrateurs.
+
+La page <https://ece-webapp-blair-bon.vercel.app/project/1> permet d'accéder à la page d'un projet en particulier, et d'y laisser un commentaire avec une note sur 5 étoiles. Les utilisateurs authentifiés peuvent aussi modifier ou supprimer leurs commentaires. Les administrateurs peuvent aussi modifier ou supprimer leurs projets.
 
 Si une adresse inconnue est rentrée, on est alors redirigé vers une page d'*erreur 404* nous indiquant que la page recherchée n'existe pas.
 
