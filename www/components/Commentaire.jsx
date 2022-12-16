@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/legacy/image";
 import { BsStarFill, BsStar } from "react-icons/bs";
+import ReactStars from 'react-stars'
 
 function commentaire({ commentaire, isNew, getCloseBoxe }) {
     const { user } = useContext(Context);
@@ -18,7 +19,6 @@ function commentaire({ commentaire, isNew, getCloseBoxe }) {
     const [titre, setTitre] = useState(commentaire.titre);
     const [contenue, setContenue] = useState(commentaire.contenue);
     const [etoile, setEtoile] = useState(commentaire.etoile);
-    const [etoiletab, setEtoiletab] = useState([]);
     const [loading, setLoading] = useState(false);
     const [gravatarurl, setGravatrurl] = useState(null);
     const router = useRouter();
@@ -40,18 +40,6 @@ function commentaire({ commentaire, isNew, getCloseBoxe }) {
             }
         }, []);
 
-    useEffect(() => {
-        //rempli le tableau d'étoiles
-        let etoiletab2 = [];
-        for (let i = 0; i < etoile; i++) {
-            etoiletab2.push(<BsStarFill className="text-yellow-400" />);
-        }
-        for (let i = 0; i < 5 - etoile; i++) {
-            etoiletab2.push(<BsStar className="text-yellow-400" />);
-        }
-        setEtoiletab(etoiletab2);
-    }, [etoile]);
-
     const handleSubmit = (e) => {
         //gestion du formulaire
         e.preventDefault();
@@ -72,7 +60,6 @@ function commentaire({ commentaire, isNew, getCloseBoxe }) {
                             projets_id: commentaire.projets_id,
                         })
                         .then((response) => {
-                            console.log(response);
                             if (response.error != null) throw response.error;
                         });
                     setTitre("");
@@ -94,7 +81,6 @@ function commentaire({ commentaire, isNew, getCloseBoxe }) {
                         })
                         .eq("id", commentaire.id)
                         .then((response) => {
-                            console.log(response);
                             if (response.error != null) throw response.error;
                         });
                     setLoading(false);
@@ -160,16 +146,7 @@ function commentaire({ commentaire, isNew, getCloseBoxe }) {
                             />
                             <div className="flex pt-4 pb-4 justify-between">
                                 <div className="w-[40%]">
-                                    <input
-                                        className=" bg-[#f9fafb] dark:bg-[#4e5359] rounded-2xl w-full pl-3 p-2"
-                                        type="number"
-                                        min="1"
-                                        max="5"
-                                        placeholder="Étoiles (1-5)"
-                                        value={etoile}
-                                        onChange={(e) => setEtoile(e.target.value)}
-                                        required
-                                    />
+                                    <ReactStars count={5} size={24} color2={'#ffd700'} onChange={(e) => setEtoile(e)} value={etoile} />
                                 </div>
                                 <div className="w-[60%] p-2 text-right">
                                     <button className="pl-2 hover:text-lien" type="submit">
@@ -225,9 +202,7 @@ function commentaire({ commentaire, isNew, getCloseBoxe }) {
                     </div>
                     <div className="flex justify-between">
                         <div className="pl-4 p-3 text-2xl flex gap-1">
-                            {etoiletab.map((etoile, index) => {
-                                return <span key={index}>{etoile}</span>;
-                            })}
+                            <ReactStars count={5} size={24} color2={'#ffd700'} value={etoile} edit={false}/>
                         </div>
                         {causerEdit ? (
                             <div className="p-3">
@@ -242,7 +217,6 @@ function commentaire({ commentaire, isNew, getCloseBoxe }) {
                                             .delete()
                                             .eq("id", commentaire.id)
                                             .then((response) => {
-                                                console.log(response);
                                                 if (response.error != null) throw response.error;
                                                 alert("Commentaire supprimé");
                                                 router.push("/project/" + commentaire.projets_id);
