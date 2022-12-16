@@ -61,9 +61,8 @@ function NouveauProjet() {
                 return;
             }
             async function pulishProjet() {
-                await supabase
-                    .from("projets")
-                    .insert([
+                try {
+                    await supabase.from("projets").insert([
                         {
                             name: titre,
                             description: description,
@@ -72,26 +71,26 @@ function NouveauProjet() {
                             participants: contributeur,
                             auteur: user.id,
                         },
-                    ])
-                    .catch((error) => {
+                    ]);
+                    const { data, error } = await supabase.from("projets").select("id").match({ name: titre, auteur: user.id });
+                    if (error) {
                         console.log(error);
-                    });
-                const { data, error } = await supabase.from("projets").select("id").match({ name: titre, auteur: user.id });
-                if (error) {
-                    console.log(error);
-                } else {
-                    let listimagetupush = [];
-                    for (let i = 0; i < images.length; i++) {
-                        const file = images[i];
-                        const { data1, error } = await supabase.storage.from("projetsimage").upload(`${data[0].id}/${images[i].name}`, images[i]);
-                        if (error) {
-                            console.log(error);
-                        } else {
-                            listimagetupush.push(`https://mldxyasghmmynjxewzuv.supabase.co/storage/v1/object/public/projetsimage/${data[0].id}/${images[i].name}`);
+                    } else {
+                        let listimagetupush = [];
+                        for (let i = 0; i < images.length; i++) {
+                            const file = images[i];
+                            const { data1, error } = await supabase.storage.from("projetsimage").upload(`${data[0].id}/${images[i].name}`, images[i]);
+                            if (error) {
+                                console.log(error);
+                            } else {
+                                listimagetupush.push(`https://mldxyasghmmynjxewzuv.supabase.co/storage/v1/object/public/projetsimage/${data[0].id}/${images[i].name}`);
+                            }
                         }
+                        await supabase.from("projets").update({ listeimage: listimagetupush }).match({ id: data[0].id });
+                        router.push("/");
                     }
-                    await supabase.from("projets").update({ listeimage: listimagetupush }).match({ id: data[0].id });
-                    router.push("/");
+                } catch (error) {
+                    console.error(error);
                 }
             }
             pulishProjet();
@@ -299,3 +298,12 @@ function NouveauProjet() {
 }
 
 export default NouveauProjet;
+
+export async function getServerSideProps() {
+    const { data: projet } = await supabase.from("projets").select("*");
+    return {
+        props: {
+            projet,
+        },
+    };
+}
