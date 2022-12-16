@@ -453,14 +453,7 @@ function ProjectPage({ projet, commentaire }) {
     );
 }
 
-export async function getStaticPaths() {
-    const { data: listprojet } = await supabase.from("projets").select("id");
-    const paths = listprojet.map((projet) => ({
-        params: { id: projet.id.toString() },
-    }));
-    return { paths, fallback: false };
-}
-export async function getStaticProps({ params: { id } }) {
+export async function getServerSideProps({ params: { id } }) {
     const { data: projet } = await supabase.from("projets").select("*").eq("id", id).single();
     const { data: commentaire, error } = await supabase.from("commentaire").select("id,created_at,projets_id,userid,auteur:userid(username),titre,contenue,etoile").eq("projets_id", id);
     return {
@@ -470,4 +463,5 @@ export async function getStaticProps({ params: { id } }) {
         },
     };
 }
+
 export default ProjectPage;
