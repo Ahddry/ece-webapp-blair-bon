@@ -53,7 +53,11 @@ function Navbar() {
     return (
         <div>
             <nav id="BarrePrincipale" className={"bg-background2 dark:bg-dark_background2 flex justify-between gap-10 drop-shadow-lg  md:drop-shadow-xl max-h-20 fixed w-full z-10"}>
-                <img src="/ECE_LOGO.png" alt="Logo" width={171} height={88.5} className="cursor-pointer max-w-[171px]" />
+                <div>
+                    <Link href="/">
+                        <Image src="/ECE_LOGO.png" alt="Logo" width={171} height={88.5} className="cursor-pointer max-w-[171px]" />
+                    </Link>
+                </div>
                 <ul className="hidden md:flex md:items-center md:space-x-5 mx-auto">
                     <li className=" md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl ">
                         <button
@@ -311,10 +315,10 @@ function Navbar() {
                     <div>
                         {user ? (
                             <div>
-                                <button className="flex flex-row justify-end items-center mt-2" onClick={ouvrirProfil}>
+                                <button className="flex flex-row justify-end items-center" onClick={ouvrirProfil}>
                                     <div className={"flex flex-row justify-center items-center cursor-pointer hover:text-" + colour.principale + " hover:dark:text-" + colour.principaleDark + ""}>
-                                        <FaUser className="w-6 h-6 mr-2" />
-                                        <p className="hidden sm:block text-sm">
+                                        {user.gravatarurl ? <Image src={user.gravatarurl} width={40} height={40} className="my-auto rounded-full" /> : <FaUser className="w-6 h-6 mr-2 mt-3" />}
+                                        <p className="mt-1 ml-2 hidden sm:block text-sm">
                                             {user.firstname} {user.lastname}
                                         </p>
                                     </div>
@@ -322,8 +326,8 @@ function Navbar() {
                                 {profil ? (
                                     <ul className=" flex-col fixed mt-4 rounded-b-xl -ml-4 bg-background2 dark:bg-dark_background2 space-y-3 shadow-md">
                                         <li className="p-4 mt-2 sm:hidden flex flex-row">
-                                            <FaUser className="w-6 h-6 mr-2" />
-                                            <p className="text-sm">
+                                            {user.gravatarurl ? <Image src={user.gravatarurl} width={25} height={25} className="mt-2 rounded-full" /> : <FaUser className="w-6 h-6 mx-auto" />}
+                                            <p className="mt-1 ml-2 text-sm">
                                                 {user.firstname} {user.lastname}
                                             </p>
                                         </li>
@@ -331,7 +335,7 @@ function Navbar() {
                                             <li className="p-4 mt-2 flex flex-row cursor-pointer hover:bg-gray-300 dark:hover:bg-[#4F4F4F]">
                                                 <FaUser className="w-6 h-6 mr-2" />
 
-                                                <p className="text-sm"> Mon profil </p>
+                                                <p className="mt-1 ml-2 text-sm"> Mon profil </p>
                                             </li>
                                         </Link>
                                         <li className="p-4 text-erreur dark:text-dark_erreur hover:bg-erreur hover:text-dark_on_background dark:hover:bg-dark_erreur dark:hover:text-dark_on_background2 hover:rounded-b-xl">
@@ -449,11 +453,6 @@ function Navbar() {
                                 <Link href="/articles">
                                     <li onClick={(_) => setNav(false)} className="cursor-pointer">
                                         Articles
-                                    </li>
-                                </Link>
-                                <Link href="/about">
-                                    <li onClick={(_) => setNav(false)} className="cursor-pointer">
-                                        À propos
                                     </li>
                                 </Link>
                             </ul>

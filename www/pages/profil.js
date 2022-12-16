@@ -131,9 +131,15 @@ function Profil() {
                                 height={128}
                             ></Image>
                             <div className="hidden group-hover:block absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]">
-                                <a href={"https://fr.gravatar.com"} target="_blank" rel="noopener noreferrer">
-                                    <p className="py-2 text-dark_on_background font-semibold text-center">Modifier mon avatar</p>
-                                </a>
+                                {user.origin === "github" ? (
+                                    <a href={"https://github.com/settings/profile"} target="_blank" rel="noopener noreferrer">
+                                        <p className="py-2 text-dark_on_background font-semibold text-center">Modifier mon avatar</p>
+                                    </a>
+                                ) : (
+                                    <a href={"https://fr.gravatar.com"} target="_blank" rel="noopener noreferrer">
+                                        <p className="py-2 text-dark_on_background font-semibold text-center">Modifier mon avatar</p>
+                                    </a>
+                                )}
                             </div>
                         </div>
                     ) : (

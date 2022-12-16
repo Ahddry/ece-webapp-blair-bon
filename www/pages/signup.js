@@ -147,6 +147,7 @@ function SignUp() {
                                 value={mdp}
                                 onChange={(e) => setMdp(e.target.value)}
                                 required
+                                minLength={6}
                             />
                             <div className="mt-8">
                                 <button

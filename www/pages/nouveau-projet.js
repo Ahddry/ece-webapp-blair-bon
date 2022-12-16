@@ -73,9 +73,6 @@ function NouveauProjet() {
                             auteur: user.id,
                         },
                     ])
-                    .then((data) => {
-                        console.log(data);
-                    })
                     .catch((error) => {
                         console.log(error);
                     });
@@ -83,7 +80,6 @@ function NouveauProjet() {
                 if (error) {
                     console.log(error);
                 } else {
-                    console.log(data);
                     let listimagetupush = [];
                     for (let i = 0; i < images.length; i++) {
                         const file = images[i];
@@ -91,7 +87,6 @@ function NouveauProjet() {
                         if (error) {
                             console.log(error);
                         } else {
-                            console.log(data);
                             listimagetupush.push(`https://mldxyasghmmynjxewzuv.supabase.co/storage/v1/object/public/projetsimage/${data[0].id}/${images[i].name}`);
                         }
                     }
@@ -117,7 +112,6 @@ function NouveauProjet() {
         const handleOnChange = (position) => {
             const updatedCheckedState = checkedState.map((item, index) => (index === position ? !item : item));
             setCheckedState(updatedCheckedState);
-            //update total
             updateLanguage(updatedCheckedState);
         };
         const handleCancel = () => {
