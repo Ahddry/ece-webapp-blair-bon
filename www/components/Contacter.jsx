@@ -17,7 +17,6 @@ function Contacter({ target }) {
         data2.append("email", email);
         data2.append("sujet", sujet);
         data2.append("message", message);
-        //data2.append("user", target);
         console.log(data2);
         for (const [key, value] of data2) {
             console.log(key, value);

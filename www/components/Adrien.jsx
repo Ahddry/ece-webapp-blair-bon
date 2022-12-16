@@ -30,16 +30,6 @@ function Adrien() {
         description:
             "J'adore créer des applications web et mobiles, que ce soit la partie back-end ou front-end. Lors de mes projets passés, j'ai de nombreuses fois été amené à m'occuper de la partie front-end, ce qui m'a permis d'acquérir de solides connaissances en JavaScript, CSS, React et Tailwind. J'ai également eu l'occasion de travailler sur des projets back-end, notamment en C# et Java.",
     };
-    //     const projAdri = {
-    //     projets: [
-    //         ["Omnes Santé", "HTML ● CSS ● JS ● PHP", "/projects/omnes_sante/omnes_sante.jpg","1"],
-    //         ["Netflece", "Java ● JavaFX", "/projects/netflece/netflece.jpg","2"],
-    //         ["NBM", "C# ● XAML ● WPF", "/projects/nbm/nbm.jpg","3"],
-    //         ["Touchousse", "C++ ● Allegro", "/projects/touchousse/touchousse.jpg","4"],
-    //         ["Batailles et coups d'États", "C++ ● Allegro", "/projects/b&ce/b&ce.jpg","5"],
-    //     ],
-    //     description: "Voici quelques projets que j'ai pu réaliser au cours de mes études.",
-    // };
 
     const expAdri = {
         entreprises: [

@@ -15,23 +15,23 @@ function Footer() {
                         © Adrien BLAIR - Aurélien BON<br></br>
                     </p>
                     <div className="inline-flex gap-4">
-                        <Link href="http://localhost:3000/">
+                        <Link href="/">
                             <div className={"inline-flex gap-1 cursor-pointer text-white dark:text-dark_on_background hover:underline"}>
                                 <FaHome className={"my-auto text-" + colour.secondaire + " dark:text-" + colour.secondaireDark}></FaHome> Accueil
                             </div>
                         </Link>
                         <span> ● </span>
-                        <Link href="https://github.com/Ahddry/ece-webapp-blair-bon">
+                        <a href="https://github.com/Ahddry/ece-webapp-blair-bon" target="_blank" rel="noopener noreferrer">
                             <div className="inline-flex gap-1 cursor-pointer text-white dark:text-dark_on_background hover:underline">
                                 <FaGithub className={"my-auto text-" + colour.secondaire + " dark:text-" + colour.secondaireDark}></FaGithub> GitHub
                             </div>
-                        </Link>
+                        </a>
                         <span> ● </span>
-                        <Link href="https://github.com/adaltas/ece-webtech-2022-fall">
+                        <a href="https://github.com/adaltas/ece-webtech-2022-fall" target="_blank" rel="noopener noreferrer">
                             <div className="inline-flex gap-1 cursor-pointer text-white dark:text-dark_on_background hover:underline">
                                 <FaGithub className={"my-auto text-" + colour.secondaire + " dark:text-" + colour.secondaireDark}></FaGithub> Consignes
                             </div>
-                        </Link>
+                        </a>
                     </div>
                 </div>
             </footer>

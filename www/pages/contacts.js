@@ -26,7 +26,7 @@ function Contacts() {
                             </a>
                             .<br></br>
                             Vous pouvez aussi nous contacter sur notre
-                            <a href="https://github.com/Ahddry/ece-webapp-blair-bon/issues" className=" text-lien visited:text-lien_click cursor-pointer">
+                            <a href="https://github.com/Ahddry/ece-webapp-blair-bon/issues" target="_blank" rel="noopener noreferrer" className=" text-lien visited:text-lien_click cursor-pointer">
                                 <FaGithub className="mb-1 inline-block" /> GitHub
                             </a>
                             .

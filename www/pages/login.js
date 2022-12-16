@@ -83,7 +83,7 @@ function Login() {
                 await supabase.auth.signInWithOAuth({
                     provider: "github",
                     options: {
-                        redirectTo: "http://localhost:3000/github",
+                        redirectTo: "http://localhost:3000/github", //! A changer en fonction de l'adresse du site
                     },
                 });
             }
