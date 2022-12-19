@@ -24,7 +24,16 @@ function Github() {
 
                 // Creation du compte si c'est sa première connexion
                 if (premiereConnexion) {
-                    const [first, last] = user.user_metadata.full_name.split(" ");
+                    let [first, last] = ["", ""];
+                    if (user.user_metadata.full_name !== undefined) {
+                        try {
+                            [first, last] = user.user_metadata.full_name.split(" ");
+                        } catch (e) {
+                            [first, last] = [user.user_metadata.preferred_username, ""];
+                        }
+                    } else {
+                        [first, last] = [user.user_metadata.preferred_username, ""];
+                    }
                     const { data, error } = await supabase.from("comptes").insert([
                         {
                             id: user.id,
