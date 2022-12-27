@@ -19,7 +19,7 @@ function HomePage() {
                     <h1 className={"pt-8 text-5xl lg:text-7xl 2xl:text-8xl text-" + colour.principale + " dark:text-" + colour.principaleDark + " font-thin"}>Nous sommes des développeurs web.</h1>
                 </div>
                 <div className="my-auto">
-                    <ul className="grid gap-6 w-full md:grid-cols-2 xl:gap-10 2xl:gap-16">
+                    <ul className="grid gap-3 md:gap-6 w-full md:grid-cols-2 xl:gap-10 2xl:gap-16">
                         <li>
                             <input type="radio" id="adrien" name="profil" className="hidden peer" required defaultChecked={true} onClick={() => setChecked(true)} />
                             <label

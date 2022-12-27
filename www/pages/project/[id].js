@@ -341,7 +341,7 @@ function ProjectPage({ projet, commentaire }) {
             ) : (
                 <div className="p-5 mt-12 space-y-5">
                     <h1 className={"pt-8 text-3xl font-extralight lg:text-5xl 2xl:text-7xl  text-" + colour.principale + " dark:text-" + colour.principaleDark}>{projet.name}</h1>
-                    <div className="">
+                    <div>
                         <Carousel showThumbs={false} showStatus={false} infiniteLoop={true} autoPlay={true} interval={5000}>
                             {projet.listeimage.map(
                                 (image, index) => (
@@ -374,15 +374,16 @@ function ProjectPage({ projet, commentaire }) {
                         </div>
                     </div>
                     {projet.github ? (
-                        <>
+                        <div className="max-w-full">
                             <h2 className="text-2xl font-semibold">Lien vers le dépôt du code source : </h2>
                             <a href={projet.github} target="_blank" rel="noopener noreferrer" className="text-2xl">
-                                <div className="mb-5 mx-5 mt-2 p-3 rounded-3xl bg-background2 lg:mr-8 dark:bg-dark_background2 shadow flex">
+                                <div className="mb-5 mx-5 mt-2 p-3 rounded-3xl bg-background2 lg:mr-8 dark:bg-dark_background2 shadow flex ">
                                     <FaGithub className="text-5xl" />
-                                    <p className="text-lien text-justify text-base md:text-lg lg:text-xl 2xl:text-3xl hover:underline m-3">{projet.github}</p>
+                                    <p className="text-lien text-justify text-base md:hidden hover:underline m-3">GitHub</p>
+                                    <p className="text-lien text-justify hidden md:block md:text-lg lg:text-xl 2xl:text-3xl hover:underline m-3 truncate">{projet.github}</p>
                                 </div>
                             </a>
-                        </>
+                        </div>
                     ) : (
                         <></>
                     )}

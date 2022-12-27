@@ -23,11 +23,11 @@ function CarteLangage({ entreprise, periode, poste, illustration }) {
                     <h3 className=" font-semibold md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl">{entreprise}</h3>
                 </div>
             </div>
-            <div className=" hidden group-hover:block absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]">
+            <div className=" hidden group-hover:block group-hover:overflow-hidden absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]  w-[90%]">
                 <h3 className="lg:text-lg 2xl:text-2xl text-white font-bold tracking-wider text-center w-full">{entreprise}</h3>
-                <hr className=" w-48 lg:w-64 2xl:w-80 rounded border-1 my-1 h-1 bg-gradient-to-r from-gray-300 to-gray-200 border-transparent" />
+                <hr className=" w-[80%]] mx-auto rounded border-1 my-1 h-1 bg-gradient-to-r from-gray-300 to-gray-200 border-transparent" />
                 <p className="text-xs lg:text-base 2xl:text-xl text-white text-center  w-full">{periode}</p>
-                <hr className=" w-48 lg:w-64 2xl:w-80 rounded border-1 my-1 h-1  bg-gradient-to-r from-gray-300 to-gray-200 border-transparent" />
+                <hr className=" w-[80%]] mx-auto rounded border-1 my-1 h-1  bg-gradient-to-r from-gray-300 to-gray-200 border-transparent" />
                 <p className="text-xs lg:text-base 2xl:text-xl text-white text-center  w-full">{poste}</p>
             </div>
         </div>

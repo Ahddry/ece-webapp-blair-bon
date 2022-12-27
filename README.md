@@ -6,13 +6,15 @@ Projet du premier semestre de quatrième année à l'ECE en Technologies web SI.
 
 Le contenu créé pour les TP 1 à 3 est disponible dans le dossier [server](https://github.com/Ahddry/ece-webapp-blair-bon/tree/main/server), la suite dont nous parlons dans cette documentation est quant à elle dispnible dans le dossier [www](https://github.com/Ahddry/ece-webapp-blair-bon/tree/main/www).
 
+Rendu le 21/12/2022.
+
 ## A propos
 
 Il s'agit d'un site web présentant les portfolios de deux étudiants de l'ECE, Adrien Blair et Aurélien Bon, ainsi que leurs compétences, leurs projets et leurs expériences professionnelles. Il a été créé à l'aide du framework pour **React** **Next.js 13**, de la base de données **Supabase** et a été stylisé avec **TailwindCSS**. Il est hébergé sur **Vercel**. Il est disponible à l'adresse suivante : <https://ece-webapp-blair-bon.vercel.app/>. Il est également possible de lancer le serveur en local en suivant les instructions de la section [Installation](#installation) et [Utilisation](#utilisation).
 
 ## Cahier des charges
 
-Le cahier des charges du projet est disponible dans son intégralité [ici](https://github.com/adaltas/ece-webtech-2022-fall/blob/main/project-instructions.md). En résumé, il nous été demandé de créer une application web (blog, forum ou portfolio) incluant au moins les fonctionnalités suivantes :
+Le cahier des charges du projet est disponible dans son intégralité [ici](https://github.com/adaltas/ece-webtech-2022-fall/blob/main/project-instructions.md). En résumé, il nous a été demandé de créer une application web (blog, forum ou portfolio) incluant au moins les fonctionnalités suivantes :
 
 - Authentifier les utilisateurs à l'aide d'un fournisseur externe avec **OAuth2**.
 - Parcourir les articles et les commentaires des utilisateurs authentifiés et les gérer.
@@ -25,7 +27,7 @@ Le cahier des charges du projet est disponible dans son intégralité [ici](http
 
 Il est à noter que pour ce projet, nous avons décidé de créer une application web de type portfolio, ainsi, toutes les fonctionnalités demandées pour des "*articles*" ont été remplacées par des "*projets*", que tous peuvent consulter, mais seulement les [administrateurs](#comptes-administrateurs) **Adrien** ou **Aurélien** peuvent modifier ou supprimer. Tout autre utilisateur authentifié peut commenter les projets et modifier ses commentaires.
 
-Pour la base de données, nous avons come demandé utilisé **Supabase** mais dans sa version en ligne et non dans sa version locale.
+Pour la base de données, nous avons comme demandé utilisé **Supabase** mais dans sa version en ligne et non dans sa version locale.
 
 Pour les comptes d'utilisateurs, nous avons comme demandé utilisé **Github** comme fournisseur externe d'authentification, mais les utilisateurs peuvent aussi se connecter avec leur nom d'utilisateur et mot de passe, après avoir créé un compte avec leurs noms d'utilisateur, email, prénom, nom et mot de passe.
 
@@ -58,6 +60,37 @@ Tous les changements apportés aux profils, aux projets et aux commentaires sont
 Les utilisateurs peuvent se connecter avec **Github** ou bien en avec leur nom d'utilisateur et mot de passe.
 
 La version de **Next.js** utilisée est la toute nouvelle version **13**.
+
+## Auto-évaluation
+
+### Management de projet
+
+| Sujet                 | Note maximale | Auto-evaluation | Commentaires                                                                           |
+|:----------------------|:-------------:|:---------------:|:--------------------------------------------------------------------------------------:|
+| Convention de nommage |       2       |        2        | Nous avons respecté les conventions, telles que montrées en cours.                     |
+| Structure du projet   |       2       |        2        | Notre structure est simple et claire.                                                  |
+| Utilisation de Git    |       2       |        2        | Nous avons utilisé Git pour versionner notre projet.                                   |
+| Qualité du code       |       4       |        4        | Notre code est propre et bien indenté.                                                 |
+| Design, UX et contenu |       4       |        4        | Nous pensons avoir une appliction très agréable à utiliser, en plus d'être responsive. |
+
+### Développement applicatif
+
+| Sujet                              | Note maximale | Auto-evaluation | Commentaires                                                                                                                                                                               |
+|:-----------------------------------|:-------------:|:---------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| Page d'accueil                     |       2       |        2        | Notre page d'accueil est simple et claire.                                                                                                                                                 |
+| Pages de login et de profil        |       4       |        4        | Nos pages de login et de profil sont simples et claires, et n'utilisent pas les éléments préfaits de supabase.                                                                             |
+| Nouvel article (projet)            |       6       |        6        | Nous avons implémenté la fonctionnalité de création d'un projet, qui est persistée dans la base de données.                                                                                |
+| Nouveau Commentaire                |       4       |        4        | Nous avons implémenté la fonctionnalité de création d'un commentaire, qui est persistée dans la base de données.                                                                           |
+| Contrôle de l'accès aux ressources |       6       |        6        | Tous les éléments accessibles dans la BDD ne le sont que par les personnes autorisées.                                                                                                     |
+| Modification d'un article (projet) |       4       |        4        | Nous avons implémenté la fonctionnalité de modification d'un projet, qui est persistée dans la base de données.                                                                            |
+| Suppression d'un article (projet)  |       2       |        2        | Nous avons implémenté la fonctionnalité de suppression d'un projet, qui est persistée dans la base de données.                                                                             |
+| Modification d'un commentaire      |       2       |        2        | Nous avons implémenté la fonctionnalité de modification d'un commentaire, qui est persistée dans la base de données.                                                                       |
+| Suppression d'un commentaire       |       2       |        2        | Nous avons implémenté la fonctionnalité de suppression d'un commentaire, qui est persistée dans la base de données.                                                                        |
+| Paramètres de compte               |       4       |        4        | Nous avons implémenté les modifications de paramètres de compte, un utilisateur peut changer son nom d'utilisateur, son nom et prénom, son avatar, son thème et sa couleur d'accentuation. |
+| WYSIWYG                            |       2       |        2        | Le rendu entre les pages d'édition de projets et le rendu final est très similaire.                                                                                                        |
+| Intégration Gravatar               |       2       |        2        | Nous avons implémenté l'intégration de Gravatar, qui permet d'afficher une image de profil.                                                                                                |
+| Thèmes clairs et sombres           |       2       |        2        | Nous avons implémenté la fonctionnalité de changement de thème clair/sombre, avec un bouton pour passer de l'un à l'autre dans la barre de navigation.                                     |
+| Couleurs d'accentuation            |       4       |        4        | Nous avons implémenté la fonctionnalité de changement de couleur d'accentuation, qui est persistée dans la base de données.                                                                |
 
 ## Installation
 

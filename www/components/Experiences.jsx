@@ -5,7 +5,7 @@ function Experiences({ entreprises, description }) {
     return (
         <section className="flex items-center w-full h-screen snap-start flex-col bg-background dark:bg-dark_background space-y-16 lg:space-y-24 xl:space-y-32 2xl:space-y-48" id="experiences">
             <h2 className="my-8 mt-28 ml-[10%] mr-auto text-3xl lg:text-5xl 2xl:text-7xl font-extralight">Les entreprises où j'ai travaillé</h2>
-            <div className="mx-5 my-auto grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8 ">
+            <div className="mx-5 my-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-2 md:gap-8 ">
                 {entreprises.map((entreprise) => (
                     <CarteExperience entreprise={entreprise[0]} periode={entreprise[1]} poste={entreprise[2]} illustration={entreprise[3]} key={entreprise[0]} /> // entreprise[0] = nom de l'entreprise, entreprise[1] = logo de l'entreprise
                 ))}

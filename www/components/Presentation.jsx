@@ -20,7 +20,7 @@ function Presentation({ prenom, nom, age, image, description }) {
                             <h4 className="text-2xl lg:text-3xl 2xl:text-5xl font-medium">{age}</h4>
                         </div>
                         <div className="mb-5 mx-5 p-3 rounded-3xl bg-gray-300 md:my-auto lg:mr-8 dark:bg-dark_background2 md:max-w-xl 2xl:max-w-screen-2xl">
-                            <p className="text-justify text-sm lg:text-xl 2xl:text-3xl">{parse(description)}</p>
+                            <p className="text-justify text-xs md:text-sm lg:text-xl 2xl:text-3xl">{parse(description)}</p>
                         </div>
                     </div>
                 </div>
