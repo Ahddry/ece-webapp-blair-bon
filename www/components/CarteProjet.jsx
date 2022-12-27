@@ -28,7 +28,7 @@ function CarteProjet({ nom, outils, lien, id }) {
             <div className="relative w-[300px] h-[169px] sm:w-[400px] sm:h-[225px]">
                 <Image src={lien} layout="fill" alt={nom + " logo"} className="rounded-xl group-hover:opacity-10" />
             </div>
-            <div className="hidden group-hover:block absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]">
+            <div className="hidden group-hover:block absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] w-[80%]">
                 <h3 className="text-2xl text-white font-bold tracking-wider text-center">{nom}</h3>
                 <p className="pb-4 pt-2 text-white text-center">
                     {languagearray.map((language, index) => (
